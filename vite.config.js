@@ -13,5 +13,13 @@ export default defineConfig({
   server: {
     port: 3000,
     open: true,
-  }
+  },
+  // Add clear error overlay
+  build: {
+    sourcemap: true,
+  },
+  // Add better error handling
+  optimizeDeps: {
+    include: ['react', 'react-dom', 'react-router-dom'],
+  },
 })
