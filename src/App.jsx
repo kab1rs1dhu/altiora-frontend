@@ -5,7 +5,7 @@ import Footer from './components/Footer'
 import Home from './pages/Home'
 import SEO from './pages/SEO'
 import PPC from './pages/PPC'
-//import WebDevelopment from './pages/WebDevelopment'
+import WebDevelopment from './pages/WebDevelopment'
 import MobileDevelopment from './pages/MobileDevelopment'
 import LeadGeneration from './pages/LeadGeneration'
 import AppointmentSetting from './pages/AppointmentSetting'
@@ -80,11 +80,11 @@ function App() {
               <PPC />
             </MainLayout>
           } />
-          {/* <Route path="/web-development" element={
+          <Route path="/web-development" element={
             <MainLayout>
               <WebDevelopment />
             </MainLayout>
-          } /> */}
+          } />
           <Route path="/mobile-development" element={
             <MainLayout>
               <MobileDevelopment />
