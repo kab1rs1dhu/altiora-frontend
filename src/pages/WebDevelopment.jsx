@@ -1,16 +1,147 @@
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { useContent } from '../context/ContentContext'
 import '../styles/ServicePage.css'
+import '../styles/LoadingStates.css'
 
 const WebDevelopment = () => {
+  const { fetchPageContent, getContentSection, loading, error } = useContent()
+  const [pageContent, setPageContent] = useState(null)
+  
+  useEffect(() => {
+    const loadContent = async () => {
+      const content = await fetchPageContent('web-development')
+      setPageContent(content)
+    }
+    
+    loadContent()
+  }, [fetchPageContent])
+  
+  // If content is still loading, show a loading spinner
+  if (loading && !pageContent) {
+    return (
+      <div className="loading-container">
+        <div className="loading-spinner"></div>
+        <p>Loading content...</p>
+      </div>
+    )
+  }
+  
+  // If there was an error loading content, show an error message
+  if (error && !pageContent) {
+    return (
+      <div className="error-container">
+        <h2>Error Loading Content</h2>
+        <p>{error}</p>
+        <button onClick={() => fetchPageContent('web-development')} className="btn btn-primary">
+          Try Again
+        </button>
+      </div>
+    )
+  }
+  
+  // Use default content if API data not available yet
+  const heroTitle = getContentSection('web-development', 'heroTitle', 'Web Development')
+  const heroDescription = getContentSection('web-development', 'heroDescription', 'Create stunning, high-performing websites that convert visitors into customers.')
+  const overviewTitle = getContentSection('web-development', 'overviewTitle', 'Custom Web Solutions for Your Business')
+  const overviewContent = getContentSection('web-development', 'overviewContent', 'In today\'s digital world, your website is often the first interaction customers have with your brand. Our web development services ensure that this first impression is not just good, but exceptional.\n\nAt Altiora, we build custom websites that are designed with both users and search engines in mind. From sleek marketing sites to robust e-commerce platforms, we create digital experiences that drive results.')
+  const servicesTitle = getContentSection('web-development', 'servicesTitle', 'Our Web Development Services')
+  const processTitle = getContentSection('web-development', 'processTitle', 'Our Web Development Process')
+  const technologiesTitle = getContentSection('web-development', 'technologiesTitle', 'Technologies We Work With')
+  const technologiesDescription = getContentSection('web-development', 'technologiesDescription', 'We use the latest technologies and frameworks to build modern, scalable web applications')
+  const whyChooseTitle = getContentSection('web-development', 'whyChooseTitle', 'Why Choose Us for Web Development')
+  const faqTitle = getContentSection('web-development', 'faqTitle', 'Frequently Asked Questions')
+  const ctaTitle = getContentSection('web-development', 'ctaTitle', 'Ready to Build Your Dream Website?')
+  const ctaDescription = getContentSection('web-development', 'ctaDescription', 'Let\'s discuss how we can create a website that drives results for your business.')
+  
+  // Parse services from the API response, or use default services
+  let services = []
+  try {
+    services = JSON.parse(getContentSection('web-development', 'services', '[]'))
+  } catch (err) {
+    console.error('Error parsing services:', err)
+    // Default services
+    services = [
+      {
+        icon: '💻',
+        title: 'Custom Website Development',
+        description: 'We build tailored websites from scratch that align with your brand, business goals, and user needs.'
+      },
+      {
+        icon: '🛒',
+        title: 'E-commerce Development',
+        description: 'Create powerful online stores with secure payment processing, inventory management, and a seamless shopping experience.'
+      },
+      {
+        icon: '🎨',
+        title: 'UI/UX Design',
+        description: 'Craft intuitive, engaging user experiences with thoughtful information architecture and visually appealing designs.'
+      },
+      {
+        icon: '📱',
+        title: 'Responsive Web Design',
+        description: 'Ensure your website looks and performs perfectly on all devices, from desktops to smartphones.'
+      },
+      {
+        icon: '⚡',
+        title: 'Web Performance Optimization',
+        description: 'Improve page load times, optimize images, and enhance server response for a faster, smoother user experience.'
+      },
+      {
+        icon: '⚙️',
+        title: 'CMS Integration',
+        description: 'Implement user-friendly content management systems like WordPress that make it easy to update your website.'
+      }
+    ]
+  }
+  
+  // Parse process steps from the API response, or use default steps
+  let processSteps = []
+  try {
+    processSteps = JSON.parse(getContentSection('web-development', 'processSteps', '[]'))
+  } catch (err) {
+    console.error('Error parsing process steps:', err)
+    // Default process steps
+    processSteps = [
+      {
+        number: 1,
+        title: 'Discovery & Planning',
+        description: 'We analyze your business goals, target audience, and competition to develop a strategic website plan.'
+      },
+      {
+        number: 2,
+        title: 'Design & Wireframing',
+        description: 'We create wireframes and visual designs that focus on user experience, aesthetics, and conversion optimization.'
+      },
+      {
+        number: 3,
+        title: 'Development',
+        description: 'Our developers bring the designs to life with clean, efficient code and modern development practices.'
+      },
+      {
+        number: 4,
+        title: 'Testing & Quality Assurance',
+        description: 'We thoroughly test your website across devices and browsers to ensure everything works flawlessly.'
+      },
+      {
+        number: 5,
+        title: 'Launch & Maintenance',
+        description: 'After launch, we provide ongoing support, updates, and performance monitoring to keep your site running smoothly.'
+      }
+    ]
+  }
+  
+  // Other content parsing would follow a similar pattern...
+  
   return (
     <>
       {/* Hero Section */}
       <section className="service-hero">
         <div className="container">
           <div className="service-hero-content">
-            <h1>Web Development</h1>
+            <h1>{heroTitle}</h1>
             <p className="service-hero-description">
-              Create stunning, high-performing websites that convert visitors into customers.
+              {heroDescription}
             </p>
             <Link to="/contact" className="btn btn-primary">Get a Free Consultation</Link>
           </div>
@@ -22,13 +153,10 @@ const WebDevelopment = () => {
         <div className="container">
           <div className="overview-grid">
             <div className="overview-content">
-              <h2>Custom Web Solutions for Your Business</h2>
-              <p>
-                In today's digital world, your website is often the first interaction customers have with your brand. Our web development services ensure that this first impression is not just good, but exceptional.
-              </p>
-              <p>
-                At Altiora, we build custom websites that are designed with both users and search engines in mind. From sleek marketing sites to robust e-commerce platforms, we create digital experiences that drive results.
-              </p>
+              <h2>{overviewTitle}</h2>
+              {overviewContent.split('\n\n').map((paragraph, index) => (
+                <p key={index}>{paragraph}</p>
+              ))}
               <div className="overview-stats">
                 <div className="stat">
                   <h3>94%</h3>
@@ -54,67 +182,17 @@ const WebDevelopment = () => {
       {/* Services Section */}
       <section className="section service-details-section">
         <div className="container">
-          <h2 className="section-title text-center">Our Web Development Services</h2>
+          <h2 className="section-title text-center">{servicesTitle}</h2>
           <div className="service-details-grid">
-            <div className="service-detail-card">
-              <div className="service-detail-icon">
-                <i className="icon">💻</i>
+            {services.map((service, index) => (
+              <div className="service-detail-card" key={index}>
+                <div className="service-detail-icon">
+                  <i className="icon">{service.icon}</i>
+                </div>
+                <h3>{service.title}</h3>
+                <p>{service.description}</p>
               </div>
-              <h3>Custom Website Development</h3>
-              <p>
-                We build tailored websites from scratch that align with your brand, business goals, and user needs.
-              </p>
-            </div>
-
-            <div className="service-detail-card">
-              <div className="service-detail-icon">
-                <i className="icon">🛒</i>
-              </div>
-              <h3>E-commerce Development</h3>
-              <p>
-                Create powerful online stores with secure payment processing, inventory management, and a seamless shopping experience.
-              </p>
-            </div>
-
-            <div className="service-detail-card">
-              <div className="service-detail-icon">
-                <i className="icon">🎨</i>
-              </div>
-              <h3>UI/UX Design</h3>
-              <p>
-                Craft intuitive, engaging user experiences with thoughtful information architecture and visually appealing designs.
-              </p>
-            </div>
-
-            <div className="service-detail-card">
-              <div className="service-detail-icon">
-                <i className="icon">📱</i>
-              </div>
-              <h3>Responsive Web Design</h3>
-              <p>
-                Ensure your website looks and performs perfectly on all devices, from desktops to smartphones.
-              </p>
-            </div>
-
-            <div className="service-detail-card">
-              <div className="service-detail-icon">
-                <i className="icon">⚡</i>
-              </div>
-              <h3>Web Performance Optimization</h3>
-              <p>
-                Improve page load times, optimize images, and enhance server response for a faster, smoother user experience.
-              </p>
-            </div>
-
-            <div className="service-detail-card">
-              <div className="service-detail-icon">
-                <i className="icon">⚙️</i>
-              </div>
-              <h3>CMS Integration</h3>
-              <p>
-                Implement user-friendly content management systems like WordPress that make it easy to update your website.
-              </p>
-            </div>
+            ))}
           </div>
         </div>
       </section>
@@ -122,57 +200,17 @@ const WebDevelopment = () => {
       {/* Process Section */}
       <section className="section process-section">
         <div className="container">
-          <h2 className="section-title text-center">Our Web Development Process</h2>
+          <h2 className="section-title text-center">{processTitle}</h2>
           <div className="process-steps">
-            <div className="process-step">
-              <div className="process-step-number">1</div>
-              <div className="process-step-content">
-                <h3>Discovery & Planning</h3>
-                <p>
-                  We analyze your business goals, target audience, and competition to develop a strategic website plan.
-                </p>
+            {processSteps.map((step, index) => (
+              <div className="process-step" key={index}>
+                <div className="process-step-number">{step.number}</div>
+                <div className="process-step-content">
+                  <h3>{step.title}</h3>
+                  <p>{step.description}</p>
+                </div>
               </div>
-            </div>
-
-            <div className="process-step">
-              <div className="process-step-number">2</div>
-              <div className="process-step-content">
-                <h3>Design & Wireframing</h3>
-                <p>
-                  We create wireframes and visual designs that focus on user experience, aesthetics, and conversion optimization.
-                </p>
-              </div>
-            </div>
-
-            <div className="process-step">
-              <div className="process-step-number">3</div>
-              <div className="process-step-content">
-                <h3>Development</h3>
-                <p>
-                  Our developers bring the designs to life with clean, efficient code and modern development practices.
-                </p>
-              </div>
-            </div>
-
-            <div className="process-step">
-              <div className="process-step-number">4</div>
-              <div className="process-step-content">
-                <h3>Testing & Quality Assurance</h3>
-                <p>
-                  We thoroughly test your website across devices and browsers to ensure everything works flawlessly.
-                </p>
-              </div>
-            </div>
-
-            <div className="process-step">
-              <div className="process-step-number">5</div>
-              <div className="process-step-content">
-                <h3>Launch & Maintenance</h3>
-                <p>
-                  After launch, we provide ongoing support, updates, and performance monitoring to keep your site running smoothly.
-                </p>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </section>
@@ -180,9 +218,9 @@ const WebDevelopment = () => {
       {/* Technology Section */}
       <section className="section technology-section">
         <div className="container">
-          <h2 className="section-title text-center">Technologies We Work With</h2>
+          <h2 className="section-title text-center">{technologiesTitle}</h2>
           <p className="section-description text-center">
-            We use the latest technologies and frameworks to build modern, scalable web applications
+            {technologiesDescription}
           </p>
           
           <div className="technology-grid">
@@ -240,7 +278,7 @@ const WebDevelopment = () => {
       {/* Why Choose Us Section */}
       <section className="section why-choose-section">
         <div className="container">
-          <h2 className="section-title text-center">Why Choose Us for Web Development</h2>
+          <h2 className="section-title text-center">{whyChooseTitle}</h2>
           
           <div className="why-choose-grid">
             <div className="why-choose-card">
@@ -309,7 +347,7 @@ const WebDevelopment = () => {
       {/* FAQ Section */}
       <section className="section faq-section">
         <div className="container">
-          <h2 className="section-title text-center">Frequently Asked Questions</h2>
+          <h2 className="section-title text-center">{faqTitle}</h2>
           <div className="faq-grid">
             <div className="faq-item">
               <h3>How long does it take to develop a website?</h3>
@@ -353,8 +391,8 @@ const WebDevelopment = () => {
       <section className="section service-cta-section">
         <div className="container">
           <div className="service-cta-content">
-            <h2>Ready to Build Your Dream Website?</h2>
-            <p>Let's discuss how we can create a website that drives results for your business.</p>
+            <h2>{ctaTitle}</h2>
+            <p>{ctaDescription}</p>
             <Link to="/contact" className="btn btn-primary">Get Started</Link>
           </div>
         </div>
