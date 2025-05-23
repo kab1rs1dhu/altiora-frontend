@@ -10,7 +10,7 @@ const Footer = () => {
         <div className="footer-content">
           <div className="footer-company">
             <Link to="/" className="footer-logo">
-              <span className="logo-text">Altiora</span>
+              <span className="logo-text">ALTIORA</span>
             </Link>
             <p className="company-description">
               Altiora helps businesses grow through digital marketing, web development, and lead generation services tailored to your needs.

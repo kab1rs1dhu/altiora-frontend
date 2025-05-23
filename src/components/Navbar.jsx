@@ -35,7 +35,7 @@ const Navbar = () => {
     <header className={`navbar ${scrolled ? 'scrolled' : ''}`}>
       <div className="container navbar-container">
         <Link to="/" className="logo">
-          <span className="logo-text">Altiora</span>
+          <span className="logo-text">ALTIORA</span>
         </Link>
 
         <button 
