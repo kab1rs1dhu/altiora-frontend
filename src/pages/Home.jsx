@@ -142,6 +142,30 @@ const Home = () => {
   
   return (
     <>
+    {/* Partner Brands Section */}
+<section className="partner-brands-section">
+  <div className="container">
+    <p className="trusted-by-text">Trusted by leading brands worldwide</p>
+    <div className="brand-logos">
+      <div className="brand-logo">
+        <img src="/images/brands/athos.png" alt="Athos" />
+      </div>
+      <div className="brand-logo">
+        <img src="/images/brands/b2.webp" alt="Core" />
+      </div>
+      <div className="brand-logo">
+        <img src="/images/brands/b4.webp" alt="Eikon" />
+      </div>
+      <div className="brand-logo">
+        <img src="/images/brands/b5.webp" alt="Onward Resources" />
+      </div>
+      <div className="brand-logo">
+        <img src="/images/brands/b6.webp" alt="United" />
+      </div>
+    </div>
+  </div>
+</section>
+
       {/* Hero Section */}
       <section className="hero">
         <div className="container hero-container">
@@ -157,7 +181,7 @@ const Home = () => {
             </div>
           </div>
           <div className="hero-image">
-            <img src="/images/hero-illustration.svg" alt="Altiora Marketing" />
+            <img src="/images/hero-illustration.jpg" alt="Altiora Marketing" />
           </div>
         </div>
       </section>
@@ -215,6 +239,139 @@ const Home = () => {
           </div>
         </div>
       </section>
+
+      {/* Why Choose Altiora Section */}
+<section className="section why-choose-section">
+  <div className="container">
+    <div className="section-heading">
+      <h2 className="section-title">Why Choose Altiora</h2>
+      <p className="section-description">
+        We combine technical excellence with strategic thinking to deliver exceptional results
+      </p>
+    </div>
+
+    <div className="why-choose-content">
+      <div className="why-choose-grid">
+        <div className="why-choose-card">
+          <div className="why-choose-icon">
+            <i className="fa-solid fa-code"></i>
+          </div>
+          <h3>Custom Development</h3>
+          <p>No templates or cookie-cutter solutions. We build tailored digital assets aligned perfectly with your brand and business objectives.</p>
+        </div>
+
+        <div className="why-choose-card">
+          <div className="why-choose-icon">
+            <i className="fa-solid fa-gauge-high"></i>
+          </div>
+          <h3>Performance Optimization</h3>
+          <p>Our websites achieve 90+ PageSpeed scores with optimized core web vitals, ensuring fast loading times and excellent user experiences.</p>
+        </div>
+
+        <div className="why-choose-card">
+          <div className="why-choose-icon">
+            <i className="fa-solid fa-mobile-screen"></i>
+          </div>
+          <h3>Mobile-First Approach</h3>
+          <p>We prioritize responsive design from the ground up, ensuring flawless experiences across all devices and screen sizes.</p>
+        </div>
+
+        <div className="why-choose-card">
+          <div className="why-choose-icon">
+            <i className="fa-solid fa-shield-halved"></i>
+          </div>
+          <h3>Security Focus</h3>
+          <p>We implement robust security measures including SSL, regular updates, vulnerability scanning, and secure coding practices.</p>
+        </div>
+      </div>
+
+      {/* Admin Dashboard Feature */}
+      <div className="dashboard-feature">
+        <div className="dashboard-content">
+          <h3>Exclusive Client Dashboard</h3>
+          <p>Every Altiora client receives access to our proprietary analytics and management dashboard.</p>
+          
+          <ul className="dashboard-features-list">
+            <li>
+              <i className="fa-solid fa-chart-line"></i>
+              <div>
+                <h4>Real-time Analytics</h4>
+                <p>Monitor website traffic, user behavior, and conversion metrics with intuitive visualizations updated in real-time.</p>
+              </div>
+            </li>
+            <li>
+              <i className="fa-solid fa-bullseye"></i>
+              <div>
+                <h4>Performance Tracking</h4>
+                <p>Track key performance indicators including page load times, bounce rates, and engagement metrics across devices.</p>
+              </div>
+            </li>
+            <li>
+              <i className="fa-solid fa-pen-to-square"></i>
+              <div>
+                <h4>Content Management</h4>
+                <p>Make quick updates to your website content, images, and promotions without technical knowledge or developer assistance.</p>
+              </div>
+            </li>
+            <li>
+              <i className="fa-solid fa-lightbulb"></i>
+              <div>
+                <h4>AI-Powered Insights</h4>
+                <p>Receive automated recommendations to improve SEO, user experience, and conversion rates based on your site's performance data.</p>
+              </div>
+            </li>
+          </ul>
+          
+          <div className="dashboard-cta">
+            <Link to="/contact" className="btn btn-primary">Request Dashboard Demo</Link>
+          </div>
+        </div>
+        <div className="dashboard-image">
+          <img src="/images/admin-dashboard.png" alt="Altiora Admin Dashboard" />
+        </div>
+      </div>
+
+      {/* Technical Excellence Section */}
+      <div className="technical-excellence">
+        <h3>Technical Excellence</h3>
+        <div className="tech-grid">
+          <div className="tech-card">
+            <h4>Modern Tech Stack</h4>
+            <p>We leverage Next.js, React, and headless CMS solutions for blazing-fast, scalable applications with excellent developer experience.</p>
+          </div>
+          <div className="tech-card">
+            <h4>API-First Architecture</h4>
+            <p>Our applications are built with RESTful and GraphQL APIs, enabling seamless integration with your existing systems and third-party services.</p>
+          </div>
+          <div className="tech-card">
+            <h4>CI/CD Implementation</h4>
+            <p>Automated testing and deployment pipelines ensure code quality and enable rapid, risk-free updates to your digital platforms.</p>
+          </div>
+          <div className="tech-card">
+            <h4>Microservices Approach</h4>
+            <p>We build scalable, maintainable systems using microservices architecture that can grow with your business needs.</p>
+          </div>
+          <div className="tech-card">
+            <h4>Progressive Web Apps</h4>
+            <p>Deliver app-like experiences with offline capabilities, push notifications, and home screen installation for maximum user engagement.</p>
+          </div>
+          <div className="tech-card">
+            <h4>Serverless Computing</h4>
+            <p>Utilize AWS Lambda and Azure Functions for cost-effective, automatically scaling backend solutions without server management overhead.</p>
+          </div>
+          <div className="tech-card">
+            <h4>Advanced Analytics Integration</h4>
+            <p>Implement Google Analytics 4, heatmapping, and conversion tracking with custom event monitoring for comprehensive data insights.</p>
+          </div>
+          <div className="tech-card">
+            <h4>Infrastructure as Code</h4>
+            <p>Deploy and manage your infrastructure using Terraform and AWS CloudFormation for consistent, version-controlled environments.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
       {/* Testimonials Section */}
       <section className="section testimonials-section">

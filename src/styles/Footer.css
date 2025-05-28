@@ -30,13 +30,13 @@
 }
 
 .footer-logo .logo-text {
-  background: linear-gradient(135deg, #D4AF37 0%, #FFD700 50%, #B8860B 100%);
+  background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
   font-weight: 700;
   letter-spacing: 0.15em;
-  text-shadow: 0 2px 4px rgba(212, 175, 55, 0.3);
+  text-shadow: 0 2px 4px rgba(26, 115, 232, 0.3);
 }
 
 .company-description {

@@ -971,3 +971,338 @@
     border: 2px solid var(--primary-blue);
   }
 }
+
+/* Partner Brands Section */
+.partner-brands-section {
+  padding: 30px 0;
+  background-color: var(--white);
+  border-bottom: 10px solid rgba(0, 0, 0, 0.05);
+}
+
+.trusted-by-text {
+  text-align: center;
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 500;
+}
+
+.brand-logos {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 40px;
+}
+
+.brand-logo {
+  height: 40px;
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+
+.brand-logo:hover {
+  opacity: 1;
+}
+
+.brand-logo img {
+  height: 140%;
+  width: auto;
+  object-fit: contain;
+}
+
+@media (max-width: 768px) {
+  .brand-logos {
+    gap: 30px;
+  }
+  
+  .brand-logo {
+    height: 50px;
+  }
+}
+
+@media (max-width: 576px) {
+  .brand-logos {
+    gap: 20px;
+  }
+  
+  .brand-logo {
+    height: 25px;
+  }
+}
+
+/* Why Choose Altiora Section */
+.why-choose-section {
+  padding: 100px 0;
+  background: linear-gradient(180deg, var(--white) 0%, rgba(232, 240, 254, 0.3) 100%);
+  position: relative;
+}
+
+.why-choose-content {
+  display: flex;
+  flex-direction: column;
+  gap: 80px;
+}
+
+.why-choose-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+  margin-top: 20px;
+}
+
+.why-choose-card {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 20px;
+  padding: 30px;
+  box-shadow: 0 10px 30px rgba(26, 115, 232, 0.08);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  text-align: center;
+  position: relative;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  height: 100%;
+}
+
+.why-choose-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 40px rgba(26, 115, 232, 0.15);
+}
+
+.why-choose-icon {
+  width: 70px;
+  height: 70px;
+  background: linear-gradient(135deg, var(--light-blue) 0%, rgba(26, 115, 232, 0.1) 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.why-choose-icon i {
+  font-size: 1.8rem;
+  color: var(--primary-blue);
+  transition: all 0.3s ease;
+}
+
+.why-choose-card:hover .why-choose-icon {
+  background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
+}
+
+.why-choose-card:hover .why-choose-icon i {
+  color: var(--white);
+}
+
+.why-choose-card h3 {
+  font-size: 1.3rem;
+  margin-bottom: 15px;
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.why-choose-card p {
+  color: var(--text-secondary);
+  margin: 0;
+  font-size: 1rem;
+}
+
+/* Dashboard Feature */
+.dashboard-feature {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 50px;
+  align-items: center;
+  background: var(--white);
+  border-radius: 20px;
+  padding: 50px;
+  box-shadow: 0 15px 50px rgba(26, 115, 232, 0.1);
+  margin-top: 40px;
+}
+
+.dashboard-content h3 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: var(--text-primary);
+}
+
+.dashboard-content > p {
+  font-size: 1.1rem;
+  margin-bottom: 30px;
+  color: var(--text-secondary);
+}
+
+.dashboard-features-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 30px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.dashboard-features-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 15px;
+}
+
+.dashboard-features-list li i {
+  font-size: 1.3rem;
+  color: var(--primary-blue);
+  margin-top: 5px;
+}
+
+.dashboard-features-list li h4 {
+  font-size: 1.2rem;
+  margin: 0 0 5px 0;
+  color: var(--text-primary);
+}
+
+.dashboard-features-list li p {
+  margin: 0;
+  color: var(--text-secondary);
+}
+
+.dashboard-image {
+  position: relative;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 20px 50px rgba(26, 115, 232, 0.2);
+}
+
+.dashboard-image img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 15px;
+  transition: transform 0.5s ease;
+}
+
+.dashboard-image:hover img {
+  transform: scale(1.03);
+}
+
+.dashboard-cta {
+  margin-top: 30px;
+}
+
+/* Technical Excellence Section */
+.technical-excellence {
+  margin-top: 40px;
+}
+
+.technical-excellence h3 {
+  font-size: 2rem;
+  margin-bottom: 30px;
+  text-align: center;
+  color: var(--text-primary);
+}
+
+.tech-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 25px;
+}
+
+.tech-card {
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 15px;
+  padding: 25px;
+  box-shadow: 0 10px 30px rgba(26, 115, 232, 0.05);
+  transition: all 0.3s ease;
+  height: 100%;
+}
+
+.tech-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 35px rgba(26, 115, 232, 0.1);
+}
+
+.tech-card h4 {
+  font-size: 1.2rem;
+  margin-bottom: 12px;
+  color: var(--primary-blue);
+  position: relative;
+  padding-bottom: 10px;
+}
+
+.tech-card h4::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 40px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--primary-blue), var(--secondary-blue));
+  border-radius: 3px;
+}
+
+.tech-card p {
+  color: var(--text-secondary);
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+/* Responsive Styles */
+@media (max-width: 1200px) {
+  .dashboard-feature {
+    padding: 40px;
+    gap: 30px;
+  }
+}
+
+@media (max-width: 992px) {
+  .dashboard-feature {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  
+  .dashboard-content {
+    order: 1;
+  }
+  
+  .dashboard-image {
+    order: 0;
+  }
+  
+  .tech-grid {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .why-choose-section {
+    padding: 80px 0;
+  }
+  
+  .dashboard-feature {
+    padding: 30px;
+  }
+  
+  .dashboard-content h3 {
+    font-size: 1.8rem;
+  }
+  
+  .tech-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 576px) {
+  .why-choose-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .dashboard-feature {
+    padding: 25px;
+  }
+  
+  .tech-grid {
+    grid-template-columns: 1fr;
+  }
+}
