@@ -209,7 +209,7 @@ const SEO = () => {
             {services.map((service, index) => (
               <div className="service-detail-card" key={index}>
                 <div className="service-detail-icon">
-                  <i className="icon">{service.icon}</i>
+                <i className={service.icon}></i>
                 </div>
                 <h3>{service.title}</h3>
                 <p>{service.description}</p>

@@ -81,12 +81,11 @@ const Footer = () => {
               <h4 className="footer-heading">Contact</h4>
               <ul className="footer-list contact-list">
                 <li>
-                  <i className="fa-solid fa-location-dot"></i>
-                  <span>123 Marketing Street, Suite 100<br />Digital City, DC 10101</span>
-                </li>
-                <li>
                   <i className="fa-solid fa-phone"></i>
-                  <span><a href="tel:+1234567890">(123) 456-7890</a></span>
+                  <div className="contact-numbers">
+                    <div><a href="tel:+7789651284">+1 (778) 965-1284</a></div>
+                    <div><a href="tel:+9501770159">+91 9501770159</a></div>
+                  </div>
                 </li>
                 <li>
                   <i className="fa-solid fa-envelope"></i>
