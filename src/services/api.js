@@ -2,7 +2,7 @@ import axios from 'axios';
 
 // Configure the base URL for the API, using environment variable or default
 // Use Vite's import.meta.env syntax
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8080/api';
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://altiora-backend-zz9t.onrender.com/api';
 
 // Maximum number of retries for API calls
 const MAX_RETRIES = 2;
