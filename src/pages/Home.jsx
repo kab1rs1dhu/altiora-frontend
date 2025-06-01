@@ -1,24 +1,95 @@
-import { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
-import { useContent } from '../context/ContentContext'
-import '../styles/Home.css'
-import '../styles/LoadingStates.css'
+import { useState, useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
+import { useContent } from '../context/ContentContext';
+import '../styles/Home.css';
+import '../styles/LoadingStates.css';
 
 const Home = () => {
-  const { fetchPageContent, getContentSection, loading, error } = useContent()
-  const [pageContent, setPageContent] = useState(null)
-  const [currentTestimonial, setCurrentTestimonial] = useState(0)
+  const { fetchPageContent, getContentSection, loading, error } = useContent();
+  const [pageContent, setPageContent] = useState(null);
+  const [currentTestimonial, setCurrentTestimonial] = useState(0);
+  const [isHeroVisible, setIsHeroVisible] = useState(false);
+  const [animatedServices, setAnimatedServices] = useState([]);
+  const [scrollPosition, setScrollPosition] = useState(0);
+  const heroRef = useRef(null);
+  const servicesRef = useRef(null);
+  const partnershipsRef = useRef(null);
+  const mouseRef = useRef({ x: 0, y: 0 });
+  const heroImageRef = useRef(null);
   
+  // Mouse move effect for hero section
+  useEffect(() => {
+    const handleMouseMove = (e) => {
+      mouseRef.current = {
+        x: e.clientX / window.innerWidth - 0.5,
+        y: e.clientY / window.innerHeight - 0.5
+      };
+      
+      if (heroImageRef.current) {
+        const strength = 20;
+        const rotateX = mouseRef.current.y * strength;
+        const rotateY = mouseRef.current.x * strength;
+        
+        heroImageRef.current.style.transform = `
+          perspective(1000px) 
+          rotateX(${-rotateX}deg) 
+          rotateY(${rotateY}deg)
+          translateZ(10px)
+          scale3d(1.05, 1.05, 1.05)
+        `;
+      }
+    };
+    
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, []);
+  
+  // Handle scroll animations
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrollPosition(window.scrollY);
+      
+      // Animate services on scroll
+      if (servicesRef.current) {
+        const rect = servicesRef.current.getBoundingClientRect();
+        if (rect.top < window.innerHeight * 0.75) {
+          const serviceElements = servicesRef.current.querySelectorAll('.service-card');
+          const newAnimatedServices = [];
+          
+          serviceElements.forEach((el, index) => {
+            setTimeout(() => {
+              newAnimatedServices.push(index);
+              setAnimatedServices([...newAnimatedServices]);
+            }, 150 * index);
+          });
+        }
+      }
+    };
+    
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+  
+  // Reveal hero section on initial load
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsHeroVisible(true);
+    }, 300);
+    
+    return () => clearTimeout(timer);
+  }, []);
+  
+  // Load content from API
   useEffect(() => {
     const loadContent = async () => {
-      const content = await fetchPageContent('home')
-      setPageContent(content)
-    }
+      const content = await fetchPageContent('home');
+      setPageContent(content);
+    };
     
-    loadContent()
-  }, [fetchPageContent])
-
-  // Default testimonials data
+    loadContent();
+  }, [fetchPageContent]);
+  
+  // Auto-slide testimonials
   const testimonials = [
     {
       name: "Sarah Johnson",
@@ -55,16 +126,15 @@ const Home = () => {
       image: "/images/testimonial-5.jpg",
       text: "From web development to mobile apps, Altiora delivered exceptional quality. Their technical expertise combined with marketing insights created solutions that truly drive business growth."
     }
-  ]
+  ];
 
-  // Auto-slide testimonials
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentTestimonial((prev) => (prev + 1) % testimonials.length)
-    }, 5000)
+      setCurrentTestimonial((prev) => (prev + 1) % testimonials.length);
+    }, 5000);
     
-    return () => clearInterval(interval)
-  }, [testimonials.length])
+    return () => clearInterval(interval);
+  }, [testimonials.length]);
 
   // Services data
   const services = [
@@ -72,150 +142,219 @@ const Home = () => {
       icon: 'fa-solid fa-magnifying-glass',
       title: 'Search Engine Optimization',
       description: 'Improve your online visibility and drive organic traffic with our data-driven SEO strategies.',
-      link: '/seo'
+      link: '/seo',
+      color: '#6C63FF'
     },
     {
       icon: 'fa-solid fa-rectangle-ad',
       title: 'PPC Advertising',
       description: 'Generate immediate results with targeted pay-per-click campaigns optimized for ROI.',
-      link: '/ppc'
+      link: '/ppc',
+      color: '#4285F4'
     },
     {
       icon: 'fa-solid fa-laptop-code',
       title: 'Web Development',
       description: 'Create stunning, high-performing websites that convert visitors into customers.',
-      link: '/web-development'
+      link: '/web-development',
+      color: '#0D47A1'
     },
     {
       icon: 'fa-solid fa-mobile-screen',
       title: 'Mobile App Development',
       description: 'Build innovative mobile applications that engage users and drive business growth.',
-      link: '/mobile-development'
+      link: '/mobile-development',
+      color: '#1A73E8'
     },
     {
       icon: 'fa-solid fa-chart-line',
       title: 'Lead Generation',
       description: 'Capture high-quality leads with proven strategies that fill your sales pipeline.',
-      link: '/lead-generation'
+      link: '/lead-generation',
+      color: '#34A853'
     },
     {
       icon: 'fa-solid fa-calendar-check',
       title: 'Appointment Setting',
       description: 'Fill your calendar with qualified prospects through our appointment setting services.',
-      link: '/appointment-setting'
+      link: '/appointment-setting',
+      color: '#EA4335'
     }
-  ]
+  ];
 
   // Partnership benefits
   const partnershipBenefits = [
     {
       icon: 'fa-solid fa-lightbulb',
       title: 'Strategic Guidance & Expertise',
-      description: 'Get access to our team of seasoned marketing professionals who bring years of industry experience and proven strategies. We provide strategic insights that help you make informed decisions and stay ahead of market trends.'
+      description: 'Get access to our team of seasoned marketing professionals who bring years of industry experience and proven strategies.',
+      color: '#FBBC05'
     },
     {
       icon: 'fa-solid fa-chart-line',
       title: 'Personalized Growth Strategies',
-      description: 'Every business is unique, and so should be your marketing approach. We develop customized growth strategies tailored specifically to your industry, target audience, and business objectives to maximize your success potential.'
+      description: 'Every business is unique, and so should be your marketing approach. We develop customized growth strategies tailored specifically to your industry.',
+      color: '#34A853'
     },
     {
       icon: 'fa-solid fa-dollar-sign',
       title: 'Cost-Effective Solutions',
-      description: 'Maximize your marketing ROI with our efficient, results-driven approach. We help you allocate your budget wisely across channels that deliver the highest returns, ensuring every dollar spent contributes to your growth.'
+      description: 'Maximize your marketing ROI with our efficient, results-driven approach. We help you allocate your budget wisely across channels.',
+      color: '#4285F4'
     },
     {
       icon: 'fa-solid fa-handshake',
       title: 'Collaborative Success',
-      description: 'We believe in true partnership. Our collaborative approach means we work closely with your team, sharing knowledge, insights, and strategies to ensure long-term success and sustainable growth for your business.'
+      description: 'We believe in true partnership. Our collaborative approach means we work closely with your team, sharing knowledge and insights.',
+      color: '#EA4335'
     }
-  ]
+  ];
   
-  // If we're still loading initial content and have no backup data yet, show a loading spinner
+  // Loading spinner if needed
   if (loading && !pageContent && services.length === 0) {
     return (
       <div className="loading-container">
         <div className="loading-spinner"></div>
         <p>Loading content...</p>
       </div>
-    )
+    );
   }
+
+  // Parallax calculations
+  const heroParallax = scrollPosition * 0.5;
+  const partnershipsParallax = (scrollPosition - 800) * 0.2;
   
   return (
     <>
-    {/* Partner Brands Section */}
-<section className="partner-brands-section">
-  <div className="container">
-    <p className="trusted-by-text">Trusted by leading brands worldwide</p>
-    <div className="brand-logos">
-      <div className="brand-logo">
-        <img src="/images/brands/athos.png" alt="Athos" />
+      {/* Floating UI Elements - Interactive Decoration */}
+      <div className="floating-elements">
+        <div className="floating-element el-1"></div>
+        <div className="floating-element el-2"></div>
+        <div className="floating-element el-3"></div>
+        <div className="floating-element el-4"></div>
+        <div className="floating-element el-5"></div>
       </div>
-      <div className="brand-logo">
-        <img src="/images/brands/b2.webp" alt="Core" />
-      </div>
-      <div className="brand-logo">
-        <img src="/images/brands/b4.webp" alt="Eikon" />
-      </div>
-      <div className="brand-logo">
-        <img src="/images/brands/b5.webp" alt="Onward Resources" />
-      </div>
-      <div className="brand-logo">
-        <img src="/images/brands/b6.webp" alt="United" />
-      </div>
-    </div>
-  </div>
-</section>
-
-      {/* Hero Section */}
-      <section className="hero">
+      
+      {/* Hero Section with Futuristic Design */}
+      <section className={`hero futuristic-hero ${isHeroVisible ? 'visible' : ''}`} ref={heroRef}>
+        <div className="hero-particles">
+          {[...Array(20)].map((_, i) => (
+            <div key={i} className="particle"></div>
+          ))}
+        </div>
+        
+        <div className="hero-gradient-overlay"></div>
+        
         <div className="container hero-container">
           <div className="hero-content">
-            <h1 className="hero-title">Welcome to Altiora Marketing</h1>
+            <div className="hero-badge">
+              <span>Next-Gen Digital Marketing</span>
+            </div>
+            <h1 className="hero-title futuristic-title">
+              <span className="text-gradient">Altiora Marketing</span>
+              <span className="title-accent"></span>
+            </h1>
             <p className="hero-subtitle">
-              At Altiora Marketing, we specialize in transforming businesses through innovative digital marketing strategies, 
-              cutting-edge web development, and data-driven solutions. Our expert team is dedicated to helping your business 
-              reach new heights in the digital landscape, delivering measurable results that drive growth and success.
+              We specialize in transforming businesses through innovative digital marketing strategies, 
+              cutting-edge web development, and data-driven solutions that deliver measurable results.
             </p>
             <div className="hero-cta">
-              <Link to="/contact" className="btn btn-primary">Request a Quote</Link>
+              <Link to="/contact" className="btn btn-primary btn-glow">
+                <span>Request a Quote</span>
+                <i className="fa-solid fa-arrow-right"></i>
+              </Link>
+              <Link to="/services" className="btn btn-outline btn-outline-modern">
+                <span>Explore Services</span>
+              </Link>
+            </div>
+            
+            <div className="hero-stats">
+              <div className="stat-item">
+                <div className="stat-number"><span className="counter">500</span>+</div>
+                <div className="stat-label">Projects Completed</div>
+              </div>
+              <div className="stat-item">
+                <div className="stat-number"><span className="counter">97</span>%</div>
+                <div className="stat-label">Client Satisfaction</div>
+              </div>
+              <div className="stat-item">
+                <div className="stat-number"><span className="counter">10</span>+</div>
+                <div className="stat-label">Years Experience</div>
+              </div>
             </div>
           </div>
+          
           <div className="hero-image">
-            <img src="/images/hero-illustration.jpg" alt="Altiora Marketing" />
+            <div className="image-wrapper" ref={heroImageRef}>
+              <img src="/images/hero-illustration.jpg" alt="Altiora Marketing" />
+              <div className="image-glow"></div>
+            </div>
+            <div className="image-decoration">
+              <div className="deco-circle circle-1"></div>
+              <div className="deco-circle circle-2"></div>
+              <div className="deco-line line-1"></div>
+              <div className="deco-line line-2"></div>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Partnership Benefits Section */}
-      <section className="section partnership-section">
+      {/* Partner Brands with Smooth Scroll */}
+      <section className="partner-brands-section">
+        <div className="brands-blur-overlay"></div>
         <div className="container">
-          <div className="section-heading">
-            <h2 className="section-title">Exclusive Partnership Benefits</h2>
-            <p className="section-description">
-              When you partner with Altiora Marketing, you gain access to exclusive benefits designed to accelerate 
-              your business growth and maximize your success in the digital marketplace.
-            </p>
-          </div>
-
-          <div className="benefits-grid">
-            {partnershipBenefits.map((benefit, index) => (
-              <div className="benefit-card" key={index}>
-                <div className="benefit-icon">
-                  <i className={benefit.icon}></i>
-                </div>
-                <h3 className="benefit-title">{benefit.title}</h3>
-                <p className="benefit-description">{benefit.description}</p>
+          <p className="trusted-by-text">Trusted by leading brands worldwide</p>
+          <div className="brand-logos-container">
+            <div className="brand-logos scrolling">
+              <div className="brand-logo">
+                <img src="/images/brands/athos.png" alt="Athos" />
               </div>
-            ))}
+              <div className="brand-logo">
+                <img src="/images/brands/b2.webp" alt="Core" />
+              </div>
+              <div className="brand-logo">
+                <img src="/images/brands/b4.webp" alt="Eikon" />
+              </div>
+              <div className="brand-logo">
+                <img src="/images/brands/b5.webp" alt="Onward Resources" />
+              </div>
+              <div className="brand-logo">
+                <img src="/images/brands/b6.webp" alt="United" />
+              </div>
+              
+              {/* Duplicate logos for infinite scroll effect */}
+              <div className="brand-logo">
+                <img src="/images/brands/athos.png" alt="Athos" />
+              </div>
+              <div className="brand-logo">
+                <img src="/images/brands/b2.webp" alt="Core" />
+              </div>
+              <div className="brand-logo">
+                <img src="/images/brands/b4.webp" alt="Eikon" />
+              </div>
+              <div className="brand-logo">
+                <img src="/images/brands/b5.webp" alt="Onward Resources" />
+              </div>
+              <div className="brand-logo">
+                <img src="/images/brands/b6.webp" alt="United" />
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Services Section */}
-      <section className="section services-section">
+      {/* Services Section with Interactive Cards */}
+      <section className="section services-section futuristic-section" ref={servicesRef}
+        style={{ transform: `translateY(${Math.min(scrollPosition * 0.05, 30)}px)` }}>
+        <div className="services-blob blob-1"></div>
+        <div className="services-blob blob-2"></div>
+        
         <div className="container">
           <div className="section-heading">
-            <h2 className="section-title">Our Services</h2>
+            <span className="section-subtitle">What We Offer</span>
+            <h2 className="section-title">
+              <span className="text-gradient">Our Services</span>
+            </h2>
             <p className="section-description">
               Comprehensive digital marketing solutions tailored to your business needs
             </p>
@@ -223,7 +362,12 @@ const Home = () => {
 
           <div className="services-grid">
             {services.map((service, index) => (
-              <div className="service-card" key={index}>
+              <div className={`service-card futuristic-card ${animatedServices.includes(index) ? 'animated' : ''}`} 
+                key={index}
+                style={{ 
+                  '--card-color': service.color,
+                  transitionDelay: `${index * 0.1}s`
+                }}>
                 <div className="service-icon">
                   <i className={service.icon}></i>
                 </div>
@@ -234,150 +378,157 @@ const Home = () => {
                 <Link to={service.link} className="service-link">
                   Learn More <i className="fa-solid fa-arrow-right"></i>
                 </Link>
+                <div className="card-glow"></div>
+                <div className="card-border"></div>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Why Choose Altiora Section */}
-<section className="section why-choose-section">
-  <div className="container">
-    <div className="section-heading">
-      <h2 className="section-title">Why Choose Altiora</h2>
-      <p className="section-description">
-        We combine technical excellence with strategic thinking to deliver exceptional results
-      </p>
-    </div>
-
-    <div className="why-choose-content">
-      <div className="why-choose-grid">
-        <div className="why-choose-card">
-          <div className="why-choose-icon">
-            <i className="fa-solid fa-code"></i>
-          </div>
-          <h3>Custom Development</h3>
-          <p>No templates or cookie-cutter solutions. We build tailored digital assets aligned perfectly with your brand and business objectives.</p>
-        </div>
-
-        <div className="why-choose-card">
-          <div className="why-choose-icon">
-            <i className="fa-solid fa-gauge-high"></i>
-          </div>
-          <h3>Performance Optimization</h3>
-          <p>Our websites achieve 90+ PageSpeed scores with optimized core web vitals, ensuring fast loading times and excellent user experiences.</p>
-        </div>
-
-        <div className="why-choose-card">
-          <div className="why-choose-icon">
-            <i className="fa-solid fa-mobile-screen"></i>
-          </div>
-          <h3>Mobile-First Approach</h3>
-          <p>We prioritize responsive design from the ground up, ensuring flawless experiences across all devices and screen sizes.</p>
-        </div>
-
-        <div className="why-choose-card">
-          <div className="why-choose-icon">
-            <i className="fa-solid fa-shield-halved"></i>
-          </div>
-          <h3>Security Focus</h3>
-          <p>We implement robust security measures including SSL, regular updates, vulnerability scanning, and secure coding practices.</p>
-        </div>
-      </div>
-
-      {/* Admin Dashboard Feature */}
-      <div className="dashboard-feature">
-        <div className="dashboard-content">
-          <h3>Exclusive Client Dashboard</h3>
-          <p>Every Altiora client receives access to our proprietary analytics and management dashboard.</p>
-          
-          <ul className="dashboard-features-list">
-            <li>
-              <i className="fa-solid fa-chart-line"></i>
-              <div>
-                <h4>Real-time Analytics</h4>
-                <p>Monitor website traffic, user behavior, and conversion metrics with intuitive visualizations updated in real-time.</p>
-              </div>
-            </li>
-            <li>
-              <i className="fa-solid fa-bullseye"></i>
-              <div>
-                <h4>Performance Tracking</h4>
-                <p>Track key performance indicators including page load times, bounce rates, and engagement metrics across devices.</p>
-              </div>
-            </li>
-            <li>
-              <i className="fa-solid fa-pen-to-square"></i>
-              <div>
-                <h4>Content Management</h4>
-                <p>Make quick updates to your website content, images, and promotions without technical knowledge or developer assistance.</p>
-              </div>
-            </li>
-            <li>
-              <i className="fa-solid fa-lightbulb"></i>
-              <div>
-                <h4>AI-Powered Insights</h4>
-                <p>Receive automated recommendations to improve SEO, user experience, and conversion rates based on your site's performance data.</p>
-              </div>
-            </li>
-          </ul>
-          
-          <div className="dashboard-cta">
-            <Link to="/contact" className="btn btn-primary">Request Dashboard Demo</Link>
-          </div>
-        </div>
-        <div className="dashboard-image">
-          <img src="/images/admin-dashboard.png" alt="Altiora Admin Dashboard" />
-        </div>
-      </div>
-
-      {/* Technical Excellence Section */}
-      <div className="technical-excellence">
-        <h3>Technical Excellence</h3>
-        <div className="tech-grid">
-          <div className="tech-card">
-            <h4>Modern Tech Stack</h4>
-            <p>We leverage Next.js, React, and headless CMS solutions for blazing-fast, scalable applications with excellent developer experience.</p>
-          </div>
-          <div className="tech-card">
-            <h4>API-First Architecture</h4>
-            <p>Our applications are built with RESTful and GraphQL APIs, enabling seamless integration with your existing systems and third-party services.</p>
-          </div>
-          <div className="tech-card">
-            <h4>CI/CD Implementation</h4>
-            <p>Automated testing and deployment pipelines ensure code quality and enable rapid, risk-free updates to your digital platforms.</p>
-          </div>
-          <div className="tech-card">
-            <h4>Microservices Approach</h4>
-            <p>We build scalable, maintainable systems using microservices architecture that can grow with your business needs.</p>
-          </div>
-          <div className="tech-card">
-            <h4>Progressive Web Apps</h4>
-            <p>Deliver app-like experiences with offline capabilities, push notifications, and home screen installation for maximum user engagement.</p>
-          </div>
-          <div className="tech-card">
-            <h4>Serverless Computing</h4>
-            <p>Utilize AWS Lambda and Azure Functions for cost-effective, automatically scaling backend solutions without server management overhead.</p>
-          </div>
-          <div className="tech-card">
-            <h4>Advanced Analytics Integration</h4>
-            <p>Implement Google Analytics 4, heatmapping, and conversion tracking with custom event monitoring for comprehensive data insights.</p>
-          </div>
-          <div className="tech-card">
-            <h4>Infrastructure as Code</h4>
-            <p>Deploy and manage your infrastructure using Terraform and AWS CloudFormation for consistent, version-controlled environments.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-      {/* Testimonials Section */}
-      <section className="section testimonials-section">
+      {/* Partnership Benefits with Parallax */}
+      <section className="section partnership-section futuristic-section" ref={partnershipsRef}
+        style={{ backgroundPosition: `50% ${partnershipsParallax}px` }}>
+        <div className="partnership-blob blob-1"></div>
+        <div className="partnership-blob blob-2"></div>
+        
         <div className="container">
           <div className="section-heading">
-            <h2 className="section-title">What Our Clients Say</h2>
+            <span className="section-subtitle">Why Work With Us</span>
+            <h2 className="section-title">
+              <span className="text-gradient">Exclusive Partnership Benefits</span>
+            </h2>
+            <p className="section-description">
+              When you partner with Altiora Marketing, you gain access to exclusive benefits designed to accelerate 
+              your business growth and maximize your success in the digital marketplace.
+            </p>
+          </div>
+
+          <div className="benefits-grid">
+            {partnershipBenefits.map((benefit, index) => (
+              <div 
+                className="benefit-card futuristic-card" 
+                key={index}
+                style={{ '--card-color': benefit.color }}
+              >
+                <div className="benefit-icon" style={{ backgroundColor: `${benefit.color}20` }}>
+                  <i className={benefit.icon} style={{ color: benefit.color }}></i>
+                </div>
+                <h3 className="benefit-title">{benefit.title}</h3>
+                <p className="benefit-description">{benefit.description}</p>
+                <div className="card-border"></div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Why Choose Altiora with Interactive Elements */}
+      <section className="section why-choose-section futuristic-section">
+        <div className="why-choose-blob blob-1"></div>
+        <div className="why-choose-blob blob-2"></div>
+        
+        <div className="container">
+          <div className="section-heading">
+            <span className="section-subtitle">Our Difference</span>
+            <h2 className="section-title">
+              <span className="text-gradient">Why Choose Altiora</span>
+            </h2>
+            <p className="section-description">
+              We combine technical excellence with strategic thinking to deliver exceptional results
+            </p>
+          </div>
+
+          <div className="why-choose-content">
+            {/* Dashboard Feature with Interactive Hover */}
+            <div className="dashboard-feature futuristic-feature">
+              <div className="dashboard-content">
+                <div className="feature-badge">
+                  <span>Exclusive Access</span>
+                </div>
+                <h3>Exclusive Client Dashboard</h3>
+                <p>Every Altiora client receives access to our proprietary analytics and management dashboard.</p>
+                
+                <ul className="dashboard-features-list">
+                  <li className="feature-item">
+                    <div className="feature-icon">
+                      <i className="fa-solid fa-chart-line"></i>
+                    </div>
+                    <div>
+                      <h4>Real-time Analytics</h4>
+                      <p>Monitor website traffic, user behavior, and conversion metrics with intuitive visualizations updated in real-time.</p>
+                    </div>
+                  </li>
+                  <li className="feature-item">
+                    <div className="feature-icon">
+                      <i className="fa-solid fa-bullseye"></i>
+                    </div>
+                    <div>
+                      <h4>Performance Tracking</h4>
+                      <p>Track key performance indicators including page load times, bounce rates, and engagement metrics across devices.</p>
+                    </div>
+                  </li>
+                  <li className="feature-item">
+                    <div className="feature-icon">
+                      <i className="fa-solid fa-pen-to-square"></i>
+                    </div>
+                    <div>
+                      <h4>Content Management</h4>
+                      <p>Make quick updates to your website content, images, and promotions without technical knowledge or developer assistance.</p>
+                    </div>
+                  </li>
+                  <li className="feature-item">
+                    <div className="feature-icon">
+                      <i className="fa-solid fa-lightbulb"></i>
+                    </div>
+                    <div>
+                      <h4>AI-Powered Insights</h4>
+                      <p>Receive automated recommendations to improve SEO, user experience, and conversion rates based on your site's performance data.</p>
+                    </div>
+                  </li>
+                </ul>
+                
+                <div className="dashboard-cta">
+                  <Link to="/contact" className="btn btn-primary btn-glow">
+                    <span>Request Dashboard Demo</span>
+                    <i className="fa-solid fa-arrow-right"></i>
+                  </Link>
+                </div>
+              </div>
+              <div className="dashboard-image">
+                <img src="/images/admin-dashboard.png" alt="Altiora Admin Dashboard" />
+                <div className="image-overlay"></div>
+                <div className="interactive-hotspots">
+                  <div className="hotspot hotspot-1">
+                    <div className="hotspot-dot"></div>
+                    <div className="hotspot-tooltip">Real-time analytics and performance metrics</div>
+                  </div>
+                  <div className="hotspot hotspot-2">
+                    <div className="hotspot-dot"></div>
+                    <div className="hotspot-tooltip">Customizable reporting dashboard</div>
+                  </div>
+                  <div className="hotspot hotspot-3">
+                    <div className="hotspot-dot"></div>
+                    <div className="hotspot-tooltip">User behavior visualization</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonials with 3D Effect */}
+      <section className="section testimonials-section futuristic-section">
+        <div className="testimonial-blob blob-1"></div>
+        <div className="testimonial-blob blob-2"></div>
+        
+        <div className="container">
+          <div className="section-heading">
+            <span className="section-subtitle">Client Success Stories</span>
+            <h2 className="section-title">
+              <span className="text-gradient">What Our Clients Say</span>
+            </h2>
             <p className="section-description">
               Don't just take our word for it - hear from businesses that have transformed their success with Altiora Marketing
             </p>
@@ -389,10 +540,13 @@ const Home = () => {
                 <div 
                   key={index}
                   className={`testimonial-slide ${index === currentTestimonial ? 'active' : ''}`}
+                  style={{ transform: `translateX(${(index - currentTestimonial) * 100}%)` }}
                 >
                   <div className="testimonial-content">
                     <div className="testimonial-text">
-                      <i className="fa-solid fa-quote-left quote-icon"></i>
+                      <div className="quote-icon">
+                        <i className="fa-solid fa-quote-left"></i>
+                      </div>
                       <p>"{testimonial.text}"</p>
                     </div>
                     <div className="testimonial-author">
@@ -437,6 +591,28 @@ const Home = () => {
           </div>
         </div>
       </section>
+
+      {/* CTA Section with Animated Background */}
+      <section className="cta-section futuristic-cta">
+        <div className="cta-background">
+          <div className="cta-particles">
+            {[...Array(20)].map((_, i) => (
+              <div key={i} className="cta-particle"></div>
+            ))}
+          </div>
+        </div>
+        
+        <div className="container">
+          <div className="cta-content">
+            <h2>Ready to Transform Your Digital Presence?</h2>
+            <p>Let's discuss how our innovative strategies and solutions can help your business reach new heights.</p>
+            <Link to="/contact" className="btn btn-primary btn-glow btn-large">
+              <span>Start Your Journey</span>
+              <i className="fa-solid fa-rocket"></i>
+            </Link>
+          </div>
+        </div>
+      </section>
       
       {/* Error message if content loading failed */}
       {error && (
@@ -445,7 +621,7 @@ const Home = () => {
         </div>
       )}
     </>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;
