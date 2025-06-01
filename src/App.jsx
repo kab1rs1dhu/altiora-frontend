@@ -13,6 +13,24 @@ import AppointmentSetting from './pages/AppointmentSetting'
 import Contact from './pages/Contact'
 import NotFound from './pages/NotFound'
 import './styles/App.css'
+import './styles/MobileOptimized.css' // Import our new mobile optimization styles
+import './styles/BlackLineFix.css';
+
+// ResponsiveMeta component to ensure proper viewport settings
+const ResponsiveMeta = () => {
+  useEffect(() => {
+    // Create or update the viewport meta tag
+    let viewportMeta = document.querySelector('meta[name="viewport"]');
+    if (!viewportMeta) {
+      viewportMeta = document.createElement('meta');
+      viewportMeta.name = 'viewport';
+      document.head.appendChild(viewportMeta);
+    }
+    viewportMeta.content = 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no';
+  }, []);
+
+  return null; // This component doesn't render anything
+};
 
 // ContentLoader component to preload important content
 const ContentLoader = () => {
@@ -83,6 +101,9 @@ function App() {
   return (
     <ContentProvider>
       <Router>
+        {/* Add ResponsiveMeta to ensure proper viewport settings */}
+        <ResponsiveMeta />
+        
         <div className="app">
           {/* Add ContentLoader to prefetch content */}
           <ContentLoader />
