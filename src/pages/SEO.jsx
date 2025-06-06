@@ -195,7 +195,7 @@ const SEO = () => {
               </div>
             </div>
             <div className="overview-image">
-              <img src="/images/seo-overview.svg" alt="SEO Strategy" />
+              <img src="/images/seo-overview.webp" alt="SEO Strategy" />
             </div>
           </div>
         </div>
