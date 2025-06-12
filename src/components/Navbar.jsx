@@ -29,7 +29,6 @@ const Navbar = () => {
       e.preventDefault();
       e.stopPropagation();
     }
-    
     setActiveDropdown(prevActive => prevActive === name ? null : name);
   };
 
@@ -41,8 +40,8 @@ const Navbar = () => {
 
     // Close dropdowns when clicking outside
     const handleClickOutside = (e) => {
-      if (activeDropdown && !e.target.closest('.dropdown-menu') && 
-          !e.target.closest('.dropdown-toggle')) {
+      if (activeDropdown && !e.target.closest('.mobile-dropdown') && 
+          !e.target.closest('.desktop-dropdown')) {
         setActiveDropdown(null);
       }
     };
@@ -107,7 +106,7 @@ const Navbar = () => {
         </button>
 
         {/* Mobile navigation */}
-        <div className={`mobile-nav ${mobileMenuOpen ? 'active' : ''}`}>
+        <nav className={`mobile-nav ${mobileMenuOpen ? 'active' : ''}`}>
           <ul className="mobile-nav-list">
             {navItems.map((item, index) => (
               <li key={index} className="mobile-nav-item">
@@ -166,7 +165,7 @@ const Navbar = () => {
               Get Started <span className="arrow">→</span>
             </Link>
           </div>
-        </div>
+        </nav>
 
         {/* Desktop navigation */}
         <nav className="desktop-nav">
