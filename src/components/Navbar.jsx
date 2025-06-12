@@ -8,11 +8,20 @@ const Navbar = () => {
   const [activeDropdown, setActiveDropdown] = useState(null);
   const location = useLocation();
 
-  const toggleMobileMenu = () => {
+  const toggleMobileMenu = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    console.log('Toggle mobile menu clicked', !mobileMenuOpen);
     setMobileMenuOpen(!mobileMenuOpen);
     // Reset active dropdown when closing menu
     if (mobileMenuOpen) {
       setActiveDropdown(null);
+    }
+    // Prevent body scroll when menu is open
+    if (!mobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
     }
   };
 
@@ -22,6 +31,13 @@ const Navbar = () => {
     e.stopPropagation();
     console.log('Toggle dropdown:', name, 'Current state:', activeDropdown === name ? 'active' : 'inactive');
     setActiveDropdown(activeDropdown === name ? null : name);
+  };
+
+  // Close mobile menu function
+  const closeMobileMenu = () => {
+    setMobileMenuOpen(false);
+    setActiveDropdown(null);
+    document.body.style.overflow = 'unset';
   };
 
   useEffect(() => {
@@ -41,9 +57,36 @@ const Navbar = () => {
 
   // Close mobile menu when changing routes
   useEffect(() => {
-    setMobileMenuOpen(false);
-    setActiveDropdown(null);
+    closeMobileMenu();
   }, [location]);
+
+  // Close menu when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (mobileMenuOpen && !event.target.closest('.navbar')) {
+        closeMobileMenu();
+      }
+    };
+
+    document.addEventListener('click', handleClickOutside);
+    return () => {
+      document.removeEventListener('click', handleClickOutside);
+    };
+  }, [mobileMenuOpen]);
+
+  // Handle escape key
+  useEffect(() => {
+    const handleEscape = (event) => {
+      if (event.key === 'Escape' && mobileMenuOpen) {
+        closeMobileMenu();
+      }
+    };
+
+    document.addEventListener('keydown', handleEscape);
+    return () => {
+      document.removeEventListener('keydown', handleEscape);
+    };
+  }, [mobileMenuOpen]);
 
   // Define navigation items
   const navItems = [
@@ -91,7 +134,10 @@ const Navbar = () => {
         <button 
           className={`mobile-menu-toggle ${mobileMenuOpen ? 'active' : ''}`} 
           onClick={toggleMobileMenu}
+          onTouchStart={toggleMobileMenu}
           aria-label="Toggle menu"
+          aria-expanded={mobileMenuOpen}
+          type="button"
         >
           <span className="bar"></span>
           <span className="bar"></span>
@@ -109,6 +155,8 @@ const Navbar = () => {
                       <button 
                         className={`mobile-dropdown-toggle ${activeDropdown === item.name ? 'active' : ''}`}
                         onClick={(e) => handleDropdownClick(e, item.name)}
+                        onTouchStart={(e) => handleDropdownClick(e, item.name)}
+                        type="button"
                       >
                         {item.name}
                         <span className="dropdown-arrow">▾</span>
@@ -120,7 +168,7 @@ const Navbar = () => {
                             <Link 
                               to={subItem.path}
                               className={location.pathname === subItem.path ? 'active' : ''}
-                              onClick={() => setMobileMenuOpen(false)}
+                              onClick={closeMobileMenu}
                             >
                               {subItem.name}
                             </Link>
@@ -132,7 +180,7 @@ const Navbar = () => {
                     <Link 
                       to={item.path}
                       className={location.pathname === item.path ? 'active' : ''}
-                      onClick={() => setMobileMenuOpen(false)}
+                      onClick={closeMobileMenu}
                     >
                       {item.name}
                     </Link>
@@ -142,12 +190,21 @@ const Navbar = () => {
             </ul>
             
             <div className="mobile-cta-container">
-              <Link to="/contact" className="mobile-cta" onClick={() => setMobileMenuOpen(false)}>
+              <Link to="/contact" className="mobile-cta" onClick={closeMobileMenu}>
                 Get Started <span className="arrow">→</span>
               </Link>
             </div>
           </nav>
         </div>
+
+        {/* Mobile menu overlay */}
+        {mobileMenuOpen && (
+          <div 
+            className="mobile-menu-overlay" 
+            onClick={closeMobileMenu}
+            onTouchStart={closeMobileMenu}
+          ></div>
+        )}
 
         {/* Desktop navigation menu - hidden on mobile */}
         <nav className="desktop-nav">
@@ -156,7 +213,7 @@ const Navbar = () => {
               <li key={index} className="desktop-nav-item">
                 {item.dropdown ? (
                   <div className="desktop-dropdown">
-                    <button className="desktop-dropdown-toggle">
+                    <button className="desktop-dropdown-toggle" type="button">
                       {item.name}
                       <span className="dropdown-arrow">▾</span>
                     </button>
