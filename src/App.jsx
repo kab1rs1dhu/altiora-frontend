@@ -13,8 +13,9 @@ import AppointmentSetting from './pages/AppointmentSetting'
 import Contact from './pages/Contact'
 import NotFound from './pages/NotFound'
 import './styles/App.css'
-import './styles/MobileOptimized.css' // Import our new mobile optimization styles
-import './styles/BlackLineFix.css';
+import './styles/MobileOptimized.css' 
+import './styles/BlackLineFix.css'
+import './styles/SingleScroll.css' // Import the new SingleScroll CSS
 
 // ResponsiveMeta component to ensure proper viewport settings
 const ResponsiveMeta = () => {

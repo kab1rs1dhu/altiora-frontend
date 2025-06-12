@@ -1,33 +1,41 @@
-/* SingleScroll.css - Import this in your main App component */
+/* Fixed SingleScroll.css - Resolves the stuck scrolling issue */
 
-/* Force single scrollbar */
+/* Base scrolling styles - FIXED to allow proper scrolling */
 html, body {
-  overflow-x: hidden;
   width: 100%;
-  height: 100%;
+  height: auto; /* Allow height to expand based on content */
   margin: 0;
   padding: 0;
+  overflow-x: hidden;
+  overflow-y: auto !important; /* CRITICAL: Allow vertical scrolling */
 }
 
 body {
-  overflow-y: auto !important; /* Only the body should scroll */
+  /* Re-enable scrolling on body */
   position: relative;
+  min-height: 100vh;
 }
 
-/* Remove ALL scrollbars from other elements */
-div, section, article, aside, nav, header, footer, main,
-.container, .content, .wrapper, .page, .section,
-#root, #app, .app, .main-content, [class*="container"],
-[class*="content"], [class*="wrapper"], [class*="page"],
-[class*="section"], [id*="container"], [id*="content"],
-[id*="wrapper"], [id*="page"], [id*="section"] {
-  overflow: visible !important;
+/* Allow the app container to scroll */
+#root, .app, main, .main-content {
   overflow-y: visible !important;
+  min-height: 100vh;
+}
+
+/* Only disable scrollbars on non-body elements */
+div:not(#root):not(.app):not(.main-content),
+section, article, aside, nav, header, footer,
+.container, .content, .wrapper {
   overflow-x: hidden !important;
   max-width: 100vw;
 }
 
-/* Hide scrollbars in webkit browsers */
+/* Fix for when mobile menu is open */
+body.menu-open {
+  overflow: hidden !important;
+}
+
+/* Scrollbar styling */
 ::-webkit-scrollbar {
   width: 8px;
 }
@@ -41,12 +49,17 @@ div, section, article, aside, nav, header, footer, main,
   border-radius: 4px;
 }
 
-/* Only allow scrollbar on body */
-*:not(body)::-webkit-scrollbar {
-  display: none !important;
+/* Allow scrollbar on body */
+body::-webkit-scrollbar {
+  display: block;
 }
 
-/* Firefox scrollbar fix */
+/* Hide scrollbars in non-body elements */
+*:not(body)::-webkit-scrollbar {
+  display: none;
+}
+
+/* Firefox scrollbar settings */
 * {
   scrollbar-width: none;
 }
@@ -55,37 +68,39 @@ body {
   scrollbar-width: thin;
 }
 
-/* Fix for nested elements that might create scrollbars */
-iframe, embed, object {
-  max-width: 100%;
-  overflow: hidden !important;
+/* Ensure main content has appropriate spacing from fixed navbar */
+.main-content {
+  padding-top: 70px;
+  width: 100%;
 }
 
-/* Fix for position:fixed elements creating a second scrollbar */
-[style*="position: fixed"],
-[style*="position:fixed"] {
-  max-width: 100vw;
-  overflow: hidden !important;
-}
-
-/* Emergency fix for iOS - if needed */
+/* Fix for iOS Safari */
 @supports (-webkit-touch-callout: none) {
   body {
-    -webkit-overflow-scrolling: touch !important;
+    -webkit-overflow-scrolling: touch;
   }
-
-  * {
-    -webkit-overflow-scrolling: auto !important;
+  
+  .mobile-nav {
+    -webkit-overflow-scrolling: touch;
   }
 }
 
-/* Fix right margin issues */
-body::after {
-  content: '';
+/* Fix for nested fixed elements */
+.navbar {
   position: fixed;
   top: 0;
-  right: 0;
-  width: 0;
-  height: 100%;
-  background: transparent;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+}
+
+/* Mobile menu should not create a separate scrollbar */
+.mobile-nav {
+  position: fixed;
+  top: 70px;
+  left: 0;
+  height: calc(100vh - 70px);
+  width: 100%;
+  overflow: auto;
+  z-index: 999;
 }

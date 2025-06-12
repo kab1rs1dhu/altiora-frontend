@@ -1,4 +1,4 @@
-/* Updated Navbar.css with improved mobile support */
+/* Fixed Navbar.css for proper scrolling behavior */
 
 /* Base navbar styles */
 .navbar {
@@ -10,10 +10,12 @@
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   z-index: 1000;
   height: 70px;
+  transition: all 0.3s ease;
 }
 
 .navbar.scrolled {
   background-color: rgba(255, 255, 255, 0.95);
+  height: 60px;
 }
 
 .navbar-container {
@@ -22,10 +24,12 @@
   align-items: center;
   height: 100%;
   padding: 0 20px;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 /* Logo styles */
-.futuristic-logo {
+.logo {
   display: flex;
   align-items: center;
   text-decoration: none;
@@ -33,6 +37,7 @@
 
 .logo-icon {
   margin-right: 10px;
+  font-size: 1.5rem;
 }
 
 .logo-text {
@@ -43,39 +48,31 @@
   letter-spacing: 0.1em;
 }
 
-/* Desktop navigation - hidden on mobile */
-.desktop-nav {
-  display: none;
-}
-
-/* Mobile menu toggle button - improved tap target */
+/* Mobile menu toggle button */
 .mobile-menu-toggle {
-  display: flex;
+  display: none; /* Hidden on desktop */
   flex-direction: column;
   justify-content: space-between;
-  width: 30px; /* Increased from 24px */
-  height: 24px; /* Increased from 18px */
+  width: 30px; 
+  height: 24px;
   background: transparent;
   border: none;
   cursor: pointer;
   z-index: 1001;
-  padding: 8px; /* Added padding for larger tap target */
-  margin-right: -8px; /* Offset the padding */
-  -webkit-tap-highlight-color: transparent; /* Remove tap highlight on iOS */
-  touch-action: manipulation; /* Improve touch behavior */
-  position: relative; /* Ensure z-index works properly */
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .mobile-menu-toggle .bar {
   width: 100%;
-  height: 3px; /* Increased from 2px for better visibility */
+  height: 3px;
   background-color: #1a73e8;
   border-radius: 3px;
   transition: all 0.3s ease;
 }
 
 .mobile-menu-toggle.active .bar:nth-child(1) {
-  transform: translateY(10px) rotate(45deg); /* Adjusted for new dimensions */
+  transform: translateY(10px) rotate(45deg);
 }
 
 .mobile-menu-toggle.active .bar:nth-child(2) {
@@ -83,41 +80,31 @@
 }
 
 .mobile-menu-toggle.active .bar:nth-child(3) {
-  transform: translateY(-10px) rotate(-45deg); /* Adjusted for new dimensions */
+  transform: translateY(-10px) rotate(-45deg);
 }
 
-/* Mobile navigation - single scroll approach */
+/* Mobile navigation - FIXED */
 .mobile-nav {
   position: fixed;
   top: 70px;
   left: 0;
   width: 100%;
   height: calc(100vh - 70px);
-  background-color: #fff;
+  background-color: white;
   z-index: 999;
   transform: translateX(100%);
   transition: transform 0.3s ease;
-  visibility: hidden; /* Hide by default */
-  /* Remove overflow-y: auto to prevent separate scrolling */
+  overflow-y: auto; /* Allow scrolling within mobile menu */
 }
 
 .mobile-nav.active {
   transform: translateX(0);
-  visibility: visible; /* Show when active */
-}
-
-.mobile-nav-container {
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  height: 100%;
 }
 
 .mobile-nav-list {
   list-style: none;
-  padding: 0;
+  padding: 20px;
   margin: 0;
-  flex: 1;
 }
 
 .mobile-nav-item {
@@ -129,7 +116,7 @@
   color: #333;
   text-decoration: none;
   font-size: 1.1rem;
-  padding: 10px 0;
+  padding: 12px 0;
   text-align: center;
   transition: color 0.3s ease;
 }
@@ -139,9 +126,9 @@
   color: #1a73e8;
 }
 
-/* Mobile dropdown styles */
+/* Mobile dropdown styles - FIXED */
 .mobile-dropdown {
-  position: relative;
+  width: 100%;
 }
 
 .mobile-dropdown-toggle {
@@ -157,7 +144,7 @@
   color: #333;
   cursor: pointer;
   transition: all 0.3s ease;
-  -webkit-tap-highlight-color: transparent; /* Remove tap highlight on iOS */
+  -webkit-tap-highlight-color: transparent;
 }
 
 .mobile-dropdown-toggle.active {
@@ -181,14 +168,16 @@
   list-style: none;
   padding: 0;
   margin: 0;
-  transition: max-height 0.5s ease;
+  transition: max-height 0.5s ease, opacity 0.3s ease;
   background-color: #f9f9f9;
   border-radius: 0 0 8px 8px;
+  opacity: 0;
 }
 
 .mobile-dropdown-menu.active {
   max-height: 500px; /* Large enough to fit all items */
   margin-top: 5px;
+  opacity: 1;
 }
 
 .mobile-dropdown-item a {
@@ -203,7 +192,7 @@
 
 /* Mobile CTA button */
 .mobile-cta-container {
-  margin-top: 20px;
+  padding: 0 20px 20px 20px;
 }
 
 .mobile-cta {
@@ -228,108 +217,117 @@
   margin-left: 8px;
 }
 
-/* Media query for desktop */
-@media (min-width: 992px) {
-  .mobile-menu-toggle {
-    display: none;
-  }
-  
-  .mobile-nav {
-    display: none;
-  }
-  
+/* Desktop navigation */
+.desktop-nav {
+  display: flex;
+  align-items: center;
+}
+
+.desktop-nav-list {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.desktop-nav-item {
+  margin: 0 15px;
+  position: relative;
+}
+
+.desktop-nav-item a {
+  color: #333;
+  text-decoration: none;
+  font-weight: 500;
+  padding: 10px 0;
+  transition: color 0.3s ease;
+}
+
+.desktop-nav-item a:hover,
+.desktop-nav-item a.active {
+  color: #1a73e8;
+}
+
+/* Desktop dropdown styles */
+.desktop-dropdown {
+  position: relative;
+}
+
+.desktop-dropdown-toggle {
+  display: flex;
+  align-items: center;
+  background: none;
+  border: none;
+  font-weight: 500;
+  font-size: 1rem;
+  color: #333;
+  cursor: pointer;
+  padding: 10px 0;
+  transition: color 0.3s ease;
+}
+
+.desktop-dropdown-toggle:hover,
+.desktop-dropdown-toggle.active {
+  color: #1a73e8;
+}
+
+.desktop-dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  min-width: 220px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  padding: 10px 0;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: all 0.3s ease;
+  z-index: 100;
+}
+
+.desktop-dropdown-menu.active {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.desktop-dropdown-item a {
+  display: block;
+  padding: 10px 20px;
+  transition: background-color 0.3s ease;
+}
+
+.desktop-dropdown-item a:hover {
+  background-color: rgba(26, 115, 232, 0.05);
+}
+
+.desktop-cta {
+  display: inline-flex;
+  align-items: center;
+  background-color: #1a73e8;
+  color: white;
+  text-decoration: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-weight: 600;
+  margin-left: 20px;
+  transition: background-color 0.3s ease;
+}
+
+.desktop-cta:hover {
+  background-color: #0d62c9;
+}
+
+/* Responsive breakpoints */
+@media (max-width: 991px) {
   .desktop-nav {
+    display: none;
+  }
+  
+  .mobile-menu-toggle {
     display: flex;
-    align-items: center;
-  }
-  
-  .desktop-nav-list {
-    display: flex;
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-  
-  .desktop-nav-item {
-    margin: 0 15px;
-    position: relative;
-  }
-  
-  .desktop-nav-item a {
-    color: #333;
-    text-decoration: none;
-    font-weight: 500;
-    padding: 10px 0;
-    transition: color 0.3s ease;
-  }
-  
-  .desktop-nav-item a:hover,
-  .desktop-nav-item a.active {
-    color: #1a73e8;
-  }
-  
-  .desktop-dropdown {
-    position: relative;
-  }
-  
-  .desktop-dropdown-toggle {
-    display: flex;
-    align-items: center;
-    background: none;
-    border: none;
-    font-weight: 500;
-    color: #333;
-    cursor: pointer;
-    padding: 10px 0;
-  }
-  
-  .desktop-dropdown:hover .desktop-dropdown-menu {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-  }
-  
-  .desktop-dropdown-menu {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    min-width: 200px;
-    background: white;
-    border-radius: 8px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    padding: 10px 0;
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(10px);
-    transition: all 0.3s ease;
-    z-index: 100;
-  }
-  
-  .desktop-dropdown-item a {
-    display: block;
-    padding: 10px 20px;
-    transition: background-color 0.3s ease;
-  }
-  
-  .desktop-dropdown-item a:hover {
-    background-color: rgba(26, 115, 232, 0.05);
-  }
-  
-  .desktop-cta {
-    display: inline-flex;
-    align-items: center;
-    background-color: #1a73e8;
-    color: white;
-    text-decoration: none;
-    padding: 10px 20px;
-    border-radius: 8px;
-    font-weight: 600;
-    margin-left: 20px;
-    transition: background-color 0.3s ease;
-  }
-  
-  .desktop-cta:hover {
-    background-color: #0d62c9;
   }
 }
 
@@ -348,65 +346,7 @@
   }
 }
 
-/* Full-page scroll fix - eliminate ALL duplicate scrollbars */
-html, body {
-  width: 100%;
-  max-width: 100%;
-  overflow-x: hidden !important;
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  position: relative;
-  -ms-overflow-style: none; /* Hide scrollbar in IE and Edge */
-}
-
-/* Single scroll system - prevent content scrolling when menu is open */
+/* Menu open body state */
 body.menu-open {
-  overflow: hidden !important;
-  position: fixed;
-  width: 100%;
-  height: 100%;
-}
-
-/* Aggressive fix to prevent ANY elements from having their own scrollbars */
-html, body, div, section, main, article, aside, header, footer, nav,
-.main-content, #root, #app, .app, .container, .content-wrapper,
-.page-wrapper, .page-content, [class*="container"], [class*="wrapper"],
-[class*="content"], [class*="page"], [class*="section"] {
-  overflow: visible !important;
-  overflow-y: visible !important;
-  overflow-x: hidden !important;
-  max-width: 100vw;
-}
-
-/* Target the exact right-side scrollbar in browsers */
-::-webkit-scrollbar {
-  width: 10px !important; /* Make only ONE scrollbar visible */
-}
-
-body::-webkit-scrollbar {
-  display: block !important; /* Ensure main scrollbar is visible */
-}
-
-*:not(body)::-webkit-scrollbar {
-  display: none !important; /* Hide ALL other scrollbars */
-}
-
-/* Only allow scrolling on the body element */
-* {
-  overflow-y: visible !important;
-}
-
-body {
-  overflow-y: auto !important;
-  overflow-x: hidden !important;
-}
-
-/* Force single scrollbar in Firefox and other browsers */
-* {
-  scrollbar-width: none;
-}
-
-body {
-  scrollbar-width: thin;
+  overflow: hidden;
 }
