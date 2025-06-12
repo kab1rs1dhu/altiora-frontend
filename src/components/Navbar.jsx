@@ -1,3 +1,5 @@
+// Updated Navbar.jsx with improved mobile menu toggle functionality
+
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import '../styles/Navbar.css';
@@ -8,36 +10,29 @@ const Navbar = () => {
   const [activeDropdown, setActiveDropdown] = useState(null);
   const location = useLocation();
 
+  // Improved toggle function with additional debugging
   const toggleMobileMenu = (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    console.log('Toggle mobile menu clicked', !mobileMenuOpen);
-    setMobileMenuOpen(!mobileMenuOpen);
+    if (e) e.preventDefault();
+    console.log('Mobile menu toggle clicked. Current state:', mobileMenuOpen);
+    const newState = !mobileMenuOpen;
+    setMobileMenuOpen(newState);
+    console.log('Mobile menu new state:', newState);
+    
+    // Force body overflow based on menu state
+    document.body.style.overflow = newState ? 'hidden' : '';
+    
     // Reset active dropdown when closing menu
     if (mobileMenuOpen) {
       setActiveDropdown(null);
     }
-    // Prevent body scroll when menu is open
-    if (!mobileMenuOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'unset';
-    }
   };
 
-  // Function to specifically handle mobile dropdown toggle
+  // Function to specifically handle mobile dropdown toggle with improved logging
   const handleDropdownClick = (e, name) => {
     e.preventDefault();
     e.stopPropagation();
     console.log('Toggle dropdown:', name, 'Current state:', activeDropdown === name ? 'active' : 'inactive');
     setActiveDropdown(activeDropdown === name ? null : name);
-  };
-
-  // Close mobile menu function
-  const closeMobileMenu = () => {
-    setMobileMenuOpen(false);
-    setActiveDropdown(null);
-    document.body.style.overflow = 'unset';
   };
 
   useEffect(() => {
@@ -50,43 +45,37 @@ const Navbar = () => {
     };
 
     window.addEventListener('scroll', handleScroll);
+    
+    // Fix for iOS Safari - ensure touch events work properly
+    const fixMobileMenu = () => {
+      const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+      if (mobileMenuToggle) {
+        // Remove any existing listeners to prevent duplicates
+        const newToggle = mobileMenuToggle.cloneNode(true);
+        mobileMenuToggle.parentNode.replaceChild(newToggle, mobileMenuToggle);
+        
+        // Add both click and touchend events for better mobile support
+        newToggle.addEventListener('click', toggleMobileMenu, { passive: false });
+        newToggle.addEventListener('touchend', (e) => {
+          e.preventDefault();
+          toggleMobileMenu();
+        }, { passive: false });
+      }
+    };
+    
+    // Call the fix after a short delay to ensure DOM is ready
+    setTimeout(fixMobileMenu, 100);
+
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
-  }, []);
+  }, [mobileMenuOpen]); // Added mobileMenuOpen as dependency to ensure fresh event listeners
 
   // Close mobile menu when changing routes
   useEffect(() => {
-    closeMobileMenu();
+    setMobileMenuOpen(false);
+    setActiveDropdown(null);
   }, [location]);
-
-  // Close menu when clicking outside
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (mobileMenuOpen && !event.target.closest('.navbar')) {
-        closeMobileMenu();
-      }
-    };
-
-    document.addEventListener('click', handleClickOutside);
-    return () => {
-      document.removeEventListener('click', handleClickOutside);
-    };
-  }, [mobileMenuOpen]);
-
-  // Handle escape key
-  useEffect(() => {
-    const handleEscape = (event) => {
-      if (event.key === 'Escape' && mobileMenuOpen) {
-        closeMobileMenu();
-      }
-    };
-
-    document.addEventListener('keydown', handleEscape);
-    return () => {
-      document.removeEventListener('keydown', handleEscape);
-    };
-  }, [mobileMenuOpen]);
 
   // Define navigation items
   const navItems = [
@@ -130,13 +119,13 @@ const Navbar = () => {
           <span className="logo-text">ALTIORA</span>
         </Link>
 
-        {/* Mobile menu toggle button */}
+        {/* Mobile menu toggle button - with improved accessibility */}
         <button 
           className={`mobile-menu-toggle ${mobileMenuOpen ? 'active' : ''}`} 
           onClick={toggleMobileMenu}
-          onTouchStart={toggleMobileMenu}
           aria-label="Toggle menu"
           aria-expanded={mobileMenuOpen}
+          aria-controls="mobile-nav"
           type="button"
         >
           <span className="bar"></span>
@@ -144,8 +133,8 @@ const Navbar = () => {
           <span className="bar"></span>
         </button>
 
-        {/* Mobile navigation menu */}
-        <div className={`mobile-nav ${mobileMenuOpen ? 'active' : ''}`}>
+        {/* Mobile navigation menu with ID for ARIA controls */}
+        <div id="mobile-nav" className={`mobile-nav ${mobileMenuOpen ? 'active' : ''}`}>
           <nav className="mobile-nav-container">
             <ul className="mobile-nav-list">
               {navItems.map((item, index) => (
@@ -155,7 +144,7 @@ const Navbar = () => {
                       <button 
                         className={`mobile-dropdown-toggle ${activeDropdown === item.name ? 'active' : ''}`}
                         onClick={(e) => handleDropdownClick(e, item.name)}
-                        onTouchStart={(e) => handleDropdownClick(e, item.name)}
+                        aria-expanded={activeDropdown === item.name}
                         type="button"
                       >
                         {item.name}
@@ -168,7 +157,7 @@ const Navbar = () => {
                             <Link 
                               to={subItem.path}
                               className={location.pathname === subItem.path ? 'active' : ''}
-                              onClick={closeMobileMenu}
+                              onClick={() => setMobileMenuOpen(false)}
                             >
                               {subItem.name}
                             </Link>
@@ -180,7 +169,7 @@ const Navbar = () => {
                     <Link 
                       to={item.path}
                       className={location.pathname === item.path ? 'active' : ''}
-                      onClick={closeMobileMenu}
+                      onClick={() => setMobileMenuOpen(false)}
                     >
                       {item.name}
                     </Link>
@@ -190,21 +179,12 @@ const Navbar = () => {
             </ul>
             
             <div className="mobile-cta-container">
-              <Link to="/contact" className="mobile-cta" onClick={closeMobileMenu}>
+              <Link to="/contact" className="mobile-cta" onClick={() => setMobileMenuOpen(false)}>
                 Get Started <span className="arrow">→</span>
               </Link>
             </div>
           </nav>
         </div>
-
-        {/* Mobile menu overlay */}
-        {mobileMenuOpen && (
-          <div 
-            className="mobile-menu-overlay" 
-            onClick={closeMobileMenu}
-            onTouchStart={closeMobileMenu}
-          ></div>
-        )}
 
         {/* Desktop navigation menu - hidden on mobile */}
         <nav className="desktop-nav">

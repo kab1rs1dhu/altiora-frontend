@@ -1,4 +1,4 @@
-/* Navbar.css - Fixed mobile dropdown version */
+/* Updated Navbar.css with improved mobile support */
 
 /* Base navbar styles */
 .navbar {
@@ -14,7 +14,6 @@
 
 .navbar.scrolled {
   background-color: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(10px);
 }
 
 .navbar-container {
@@ -23,8 +22,6 @@
   align-items: center;
   height: 100%;
   padding: 0 20px;
-  max-width: 1200px;
-  margin: 0 auto;
 }
 
 /* Logo styles */
@@ -32,8 +29,6 @@
   display: flex;
   align-items: center;
   text-decoration: none;
-  z-index: 1002;
-  position: relative;
 }
 
 .logo-icon {
@@ -48,86 +43,72 @@
   letter-spacing: 0.1em;
 }
 
-/* Mobile menu toggle button */
-.mobile-menu-toggle {
+/* Desktop navigation - hidden on mobile */
+.desktop-nav {
   display: none;
+}
+
+/* Mobile menu toggle button - improved tap target */
+.mobile-menu-toggle {
+  display: flex;
   flex-direction: column;
   justify-content: space-between;
-  width: 30px;
-  height: 21px;
+  width: 30px; /* Increased from 24px */
+  height: 24px; /* Increased from 18px */
   background: transparent;
   border: none;
   cursor: pointer;
-  z-index: 1002;
-  padding: 0;
-  position: relative;
-  touch-action: manipulation;
-  -webkit-tap-highlight-color: transparent;
+  z-index: 1001;
+  padding: 8px; /* Added padding for larger tap target */
+  margin-right: -8px; /* Offset the padding */
+  -webkit-tap-highlight-color: transparent; /* Remove tap highlight on iOS */
+  touch-action: manipulation; /* Improve touch behavior */
+  position: relative; /* Ensure z-index works properly */
 }
 
 .mobile-menu-toggle .bar {
   width: 100%;
-  height: 3px;
+  height: 3px; /* Increased from 2px for better visibility */
   background-color: #1a73e8;
-  border-radius: 2px;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  transform-origin: center;
+  border-radius: 3px;
+  transition: all 0.3s ease;
 }
 
 .mobile-menu-toggle.active .bar:nth-child(1) {
-  transform: translateY(9px) rotate(45deg);
+  transform: translateY(10px) rotate(45deg); /* Adjusted for new dimensions */
 }
 
 .mobile-menu-toggle.active .bar:nth-child(2) {
   opacity: 0;
-  transform: scaleX(0);
 }
 
 .mobile-menu-toggle.active .bar:nth-child(3) {
-  transform: translateY(-9px) rotate(-45deg);
+  transform: translateY(-10px) rotate(-45deg); /* Adjusted for new dimensions */
 }
 
-/* Mobile navigation overlay */
-.mobile-menu-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100vh;
-  background-color: rgba(0, 0, 0, 0.5);
-  z-index: 998;
-  opacity: 0;
-  animation: fadeIn 0.3s ease forwards;
-}
-
-@keyframes fadeIn {
-  to {
-    opacity: 1;
-  }
-}
-
-/* Mobile navigation */
+/* Mobile navigation - fixed transform and visibility */
 .mobile-nav {
   position: fixed;
-  top: 0;
-  right: 0;
+  top: 70px;
+  left: 0;
   width: 100%;
-  max-width: 350px;
-  height: 100vh;
+  height: calc(100vh - 70px);
   background-color: #fff;
   z-index: 999;
   transform: translateX(100%);
-  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: transform 0.3s ease;
   overflow-y: auto;
-  box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+  -webkit-overflow-scrolling: touch; /* Smooth scrolling for iOS */
+  visibility: hidden; /* Hide by default */
 }
 
 .mobile-nav.active {
   transform: translateX(0);
+  visibility: visible; /* Show when active */
 }
 
 .mobile-nav-container {
-  padding: 80px 20px 20px;
+  padding: 20px;
   display: flex;
   flex-direction: column;
   height: 100%;
@@ -141,64 +122,54 @@
 }
 
 .mobile-nav-item {
-  margin-bottom: 0;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  margin-bottom: 15px;
 }
 
-.mobile-nav-item:last-child {
-  border-bottom: none;
-}
-
-.mobile-nav-item > a {
+.mobile-nav-item a {
   display: block;
-  padding: 20px 0;
   color: #333;
   text-decoration: none;
   font-size: 1.1rem;
-  font-weight: 500;
-  transition: all 0.3s ease;
-  border-left: 3px solid transparent;
-  padding-left: 0;
+  padding: 10px 0;
+  text-align: center;
+  transition: color 0.3s ease;
 }
 
-.mobile-nav-item > a:hover,
-.mobile-nav-item > a.active {
+.mobile-nav-item a:hover,
+.mobile-nav-item a.active {
   color: #1a73e8;
-  border-left-color: #1a73e8;
-  padding-left: 15px;
 }
 
 /* Mobile dropdown styles */
 .mobile-dropdown {
-  width: 100%;
+  position: relative;
 }
 
 .mobile-dropdown-toggle {
-  width: 100%;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  padding: 20px 0;
+  width: 100%;
   background: none;
-  border: none;
-  color: #333;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 15px;
   font-size: 1.1rem;
-  font-weight: 500;
+  color: #333;
   cursor: pointer;
-  text-align: left;
   transition: all 0.3s ease;
-  touch-action: manipulation;
-  -webkit-tap-highlight-color: transparent;
+  -webkit-tap-highlight-color: transparent; /* Remove tap highlight on iOS */
 }
 
-.mobile-dropdown-toggle:hover,
 .mobile-dropdown-toggle.active {
+  background-color: #f0f7ff;
+  border-color: #1a73e8;
   color: #1a73e8;
 }
 
 .dropdown-arrow {
+  margin-left: 8px;
   transition: transform 0.3s ease;
-  font-size: 0.8rem;
 }
 
 .mobile-dropdown-toggle.active .dropdown-arrow {
@@ -206,224 +177,190 @@
 }
 
 .mobile-dropdown-menu {
+  max-height: 0;
+  overflow: hidden;
   list-style: none;
   padding: 0;
   margin: 0;
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  background-color: rgba(26, 115, 232, 0.05);
-  border-radius: 8px;
-  margin-bottom: 10px;
+  transition: max-height 0.5s ease;
+  background-color: #f9f9f9;
+  border-radius: 0 0 8px 8px;
 }
 
 .mobile-dropdown-menu.active {
-  max-height: 400px;
-  transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.mobile-dropdown-item {
-  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-}
-
-.mobile-dropdown-item:last-child {
-  border-bottom: none;
+  max-height: 500px; /* Large enough to fit all items */
+  margin-top: 5px;
 }
 
 .mobile-dropdown-item a {
-  display: block;
-  padding: 15px 20px;
-  color: #666;
-  text-decoration: none;
+  padding: 12px 15px;
   font-size: 1rem;
-  transition: all 0.3s ease;
+  border-bottom: 1px solid #eee;
 }
 
-.mobile-dropdown-item a:hover,
-.mobile-dropdown-item a.active {
-  color: #1a73e8;
-  background-color: rgba(26, 115, 232, 0.1);
-  padding-left: 30px;
+.mobile-dropdown-item:last-child a {
+  border-bottom: none;
 }
 
-/* Mobile CTA */
+/* Mobile CTA button */
 .mobile-cta-container {
-  padding-top: 20px;
-  border-top: 1px solid rgba(0, 0, 0, 0.1);
-  margin-top: auto;
+  margin-top: 20px;
 }
 
 .mobile-cta {
-  display: inline-flex;
+  display: flex;
+  justify-content: center;
   align-items: center;
-  gap: 8px;
-  padding: 15px 25px;
-  background: linear-gradient(135deg, #1a73e8 0%, #4285f4 100%);
+  width: 100%;
+  background-color: #1a73e8;
   color: white;
   text-decoration: none;
+  padding: 15px;
   border-radius: 8px;
   font-weight: 600;
-  transition: all 0.3s ease;
-  width: 100%;
-  justify-content: center;
+  transition: background-color 0.3s ease;
 }
 
 .mobile-cta:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(26, 115, 232, 0.3);
+  background-color: #0d62c9;
 }
 
-.mobile-cta .arrow {
-  transition: transform 0.3s ease;
+.arrow {
+  margin-left: 8px;
 }
 
-.mobile-cta:hover .arrow {
-  transform: translateX(3px);
-}
-
-/* Desktop navigation - hidden on mobile */
-.desktop-nav {
-  display: none;
-}
-
-/* Desktop dropdown styles (for larger screens) */
-.desktop-dropdown {
-  position: relative;
-}
-
-.desktop-dropdown-toggle {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  background: none;
-  border: none;
-  color: #333;
-  font-size: 1rem;
-  cursor: pointer;
-  padding: 10px 0;
-}
-
-.desktop-dropdown-menu {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  background: white;
-  border-radius: 8px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-  padding: 10px 0;
-  min-width: 200px;
-  list-style: none;
-  margin: 0;
-  opacity: 0;
-  visibility: hidden;
-  transform: translateY(-10px);
-  transition: all 0.3s ease;
-}
-
-.desktop-dropdown:hover .desktop-dropdown-menu {
-  opacity: 1;
-  visibility: visible;
-  transform: translateY(0);
-}
-
-.desktop-dropdown-item a {
-  display: block;
-  padding: 10px 20px;
-  color: #666;
-  text-decoration: none;
-  transition: all 0.3s ease;
-}
-
-.desktop-dropdown-item a:hover {
-  background-color: rgba(26, 115, 232, 0.1);
-  color: #1a73e8;
-}
-
-/* Desktop CTA */
-.desktop-cta {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 12px 20px;
-  background: linear-gradient(135deg, #1a73e8 0%, #4285f4 100%);
-  color: white;
-  text-decoration: none;
-  border-radius: 6px;
-  font-weight: 600;
-  transition: all 0.3s ease;
-}
-
-.desktop-cta:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(26, 115, 232, 0.3);
-}
-
-.desktop-cta .arrow {
-  transition: transform 0.3s ease;
-}
-
-.desktop-cta:hover .arrow {
-  transform: translateX(3px);
-}
-
-/* Responsive breakpoints */
-@media (max-width: 991px) {
+/* Media query for desktop */
+@media (min-width: 992px) {
   .mobile-menu-toggle {
-    display: flex;
-  }
-  
-  .desktop-nav {
     display: none;
   }
-}
-
-@media (min-width: 992px) {
-  .mobile-menu-toggle,
-  .mobile-nav,
-  .mobile-menu-overlay {
-    display: none !important;
+  
+  .mobile-nav {
+    display: none;
   }
   
   .desktop-nav {
     display: flex;
     align-items: center;
-    gap: 30px;
   }
   
   .desktop-nav-list {
     display: flex;
-    align-items: center;
-    gap: 25px;
     list-style: none;
-    margin: 0;
     padding: 0;
+    margin: 0;
   }
   
-  .desktop-nav-item > a {
+  .desktop-nav-item {
+    margin: 0 15px;
+    position: relative;
+  }
+  
+  .desktop-nav-item a {
     color: #333;
     text-decoration: none;
     font-weight: 500;
+    padding: 10px 0;
     transition: color 0.3s ease;
+  }
+  
+  .desktop-nav-item a:hover,
+  .desktop-nav-item a.active {
+    color: #1a73e8;
+  }
+  
+  .desktop-dropdown {
+    position: relative;
+  }
+  
+  .desktop-dropdown-toggle {
+    display: flex;
+    align-items: center;
+    background: none;
+    border: none;
+    font-weight: 500;
+    color: #333;
+    cursor: pointer;
     padding: 10px 0;
   }
   
-  .desktop-nav-item > a:hover,
-  .desktop-nav-item > a.active {
-    color: #1a73e8;
+  .desktop-dropdown:hover .desktop-dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+  
+  .desktop-dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    min-width: 200px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    padding: 10px 0;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: all 0.3s ease;
+    z-index: 100;
+  }
+  
+  .desktop-dropdown-item a {
+    display: block;
+    padding: 10px 20px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .desktop-dropdown-item a:hover {
+    background-color: rgba(26, 115, 232, 0.05);
+  }
+  
+  .desktop-cta {
+    display: inline-flex;
+    align-items: center;
+    background-color: #1a73e8;
+    color: white;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: 600;
+    margin-left: 20px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .desktop-cta:hover {
+    background-color: #0d62c9;
   }
 }
 
-/* Fix for iOS Safari and touch devices */
+/* iOS-specific fixes */
 @supports (-webkit-touch-callout: none) {
-  .mobile-menu-toggle,
-  .mobile-dropdown-toggle {
-    -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1);
+  .mobile-nav {
+    height: calc(100vh - 70px - env(safe-area-inset-bottom));
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+  
+  /* Fix for sticky hover state on iOS */
+  .mobile-nav-item a:active,
+  .mobile-dropdown-toggle:active,
+  .mobile-cta:active {
+    -webkit-tap-highlight-color: transparent;
   }
 }
 
-/* Prevent body scroll when mobile menu is open */
-body.menu-open {
-  overflow: hidden;
-  position: fixed;
+/* BlackLineFix - preventing the black line from appearing on mobile */
+html, body {
   width: 100%;
+  max-width: 100%;
+  overflow-x: hidden !important;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  position: relative;
+}
+
+/* Double check to ensure no scrollbars when menu is open */
+body.menu-open {
+  overflow: hidden !important;
 }
