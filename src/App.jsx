@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom'
 import { ContentProvider, useContent } from './context/ContentContext'
 import { useEffect } from 'react'
-// import Navbar from './components/Navbar'
+import BrandNavbar from './components/BrandNavbar'
 import FabMenu from './components/FabMenu'
 import Footer from './components/Footer'
 import Home from './pages/Home'
@@ -18,6 +18,7 @@ import './styles/MobileOptimized.css'
 import './styles/BlackLineFix.css'
 import './styles/SingleScroll.css' // Import the new SingleScroll CSS
 import './styles/FabMenu.css'
+import './styles/BrandNavbar.css'
 
 // ResponsiveMeta component to ensure proper viewport settings
 const ResponsiveMeta = () => {
@@ -91,6 +92,7 @@ const ContentLoader = () => {
 const MainLayout = ({ children }) => {
   return (
     <>
+      <BrandNavbar />
       <FabMenu />
       <main className="main-content">
         {children}

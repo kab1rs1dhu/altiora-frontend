@@ -13,19 +13,17 @@ const services = [
 
 const FabMenu = () => {
   const [open, setOpen] = useState(false);
-  const [servicesOpen, setServicesOpen] = useState(false);
   const location = useLocation();
 
-  // Close all on route change
+  // Close on route change
   React.useEffect(() => {
     setOpen(false);
-    setServicesOpen(false);
   }, [location]);
 
   return (
     <div className="fab-menu-root">
       {/* Overlay for closing menu */}
-      {open && <div className="fab-menu-overlay" onClick={() => { setOpen(false); setServicesOpen(false); }} />}
+      {open && <div className="fab-menu-overlay" onClick={() => setOpen(false)} />}
       <div className={`fab-menu${open ? ' open' : ''}`}>
         <button
           className="fab-main"
@@ -39,38 +37,20 @@ const FabMenu = () => {
             <span role="img" aria-label="Home">🏠</span>
             <span className="fab-label">Home</span>
           </Link>
-          <button
-            className="fab-action"
-            onClick={() => setServicesOpen((v) => !v)}
-            aria-haspopup="true"
-            aria-expanded={servicesOpen}
-            title="Services"
-          >
-            <span role="img" aria-label="Services">🛠️</span>
-            <span className="fab-label">Services</span>
-            <span className="fab-caret">▼</span>
-          </button>
-          {servicesOpen && (
-            <div className="fab-dropdown">
-              {services.map((s) => (
-                <Link
-                  to={s.path}
-                  className="fab-dropdown-item"
-                  key={s.name}
-                >
-                  <span className="fab-dropdown-icon">{s.icon}</span>
-                  {s.name}
-                </Link>
-              ))}
-            </div>
-          )}
+          {services.map((s) => (
+            <Link
+              to={s.path}
+              className="fab-action"
+              key={s.name}
+              title={s.name}
+            >
+              <span className="fab-dropdown-icon" role="img" aria-label={s.name}>{s.icon}</span>
+              <span className="fab-label">{s.name}</span>
+            </Link>
+          ))}
           <Link to="/contact" className="fab-action" title="Contact">
             <span role="img" aria-label="Contact">✉️</span>
             <span className="fab-label">Contact</span>
-          </Link>
-          <Link to="/contact" className="fab-action fab-cta" title="Get Started">
-            <span role="img" aria-label="Get Started">🚀</span>
-            <span className="fab-label">Get Started</span>
           </Link>
         </div>
       </div>

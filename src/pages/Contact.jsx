@@ -162,7 +162,7 @@ const Contact = () => {
   }
 
   return (
-    <>
+    <section className="page-blue-gold contact-page">
       <section className="contact-hero">
         <div className="container">
           <div className="contact-hero-content">
@@ -331,7 +331,7 @@ const Contact = () => {
           <p>Some content could not be loaded. Please refresh the page or try again later.</p>
         </div>
       )}
-    </>
+    </section>
   )
 }
 
