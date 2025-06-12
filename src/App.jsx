@@ -16,6 +16,7 @@ import './styles/App.css'
 import './styles/MobileOptimized.css' 
 import './styles/BlackLineFix.css'
 import './styles/SingleScroll.css' // Import the new SingleScroll CSS
+import './styles/Navbar.css' // Import the new Navbar CSS
 
 // ResponsiveMeta component to ensure proper viewport settings
 const ResponsiveMeta = () => {
