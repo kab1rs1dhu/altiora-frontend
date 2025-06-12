@@ -18,8 +18,16 @@ const Navbar = () => {
     setMobileMenuOpen(newState);
     console.log('Mobile menu new state:', newState);
     
-    // Force body overflow based on menu state
-    document.body.style.overflow = newState ? 'hidden' : '';
+    // Control body overflow to prevent dual scrolling
+    if (newState) {
+      // When menu is open, prevent body scrolling completely
+      document.body.style.overflow = 'hidden';
+      document.body.classList.add('menu-open');
+    } else {
+      // When menu is closed, restore normal scrolling
+      document.body.style.overflow = '';
+      document.body.classList.remove('menu-open');
+    }
     
     // Reset active dropdown when closing menu
     if (mobileMenuOpen) {
@@ -68,6 +76,9 @@ const Navbar = () => {
 
     return () => {
       window.removeEventListener('scroll', handleScroll);
+      // Ensure we clean up body classes when component unmounts
+      document.body.classList.remove('menu-open');
+      document.body.style.overflow = '';
     };
   }, [mobileMenuOpen]); // Added mobileMenuOpen as dependency to ensure fresh event listeners
 
@@ -75,6 +86,9 @@ const Navbar = () => {
   useEffect(() => {
     setMobileMenuOpen(false);
     setActiveDropdown(null);
+    // Ensure body scroll is restored when navigating
+    document.body.classList.remove('menu-open');
+    document.body.style.overflow = '';
   }, [location]);
 
   // Define navigation items

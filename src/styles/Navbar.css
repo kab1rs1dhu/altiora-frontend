@@ -86,7 +86,7 @@
   transform: translateY(-10px) rotate(-45deg); /* Adjusted for new dimensions */
 }
 
-/* Mobile navigation - fixed transform and visibility */
+/* Mobile navigation - single scroll approach */
 .mobile-nav {
   position: fixed;
   top: 70px;
@@ -97,9 +97,8 @@
   z-index: 999;
   transform: translateX(100%);
   transition: transform 0.3s ease;
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch; /* Smooth scrolling for iOS */
   visibility: hidden; /* Hide by default */
+  /* Remove overflow-y: auto to prevent separate scrolling */
 }
 
 .mobile-nav.active {
@@ -349,7 +348,7 @@
   }
 }
 
-/* BlackLineFix - preventing the black line from appearing on mobile */
+/* Full-page scroll fix - eliminate ALL duplicate scrollbars */
 html, body {
   width: 100%;
   max-width: 100%;
@@ -358,9 +357,56 @@ html, body {
   padding: 0;
   box-sizing: border-box;
   position: relative;
+  -ms-overflow-style: none; /* Hide scrollbar in IE and Edge */
 }
 
-/* Double check to ensure no scrollbars when menu is open */
+/* Single scroll system - prevent content scrolling when menu is open */
 body.menu-open {
   overflow: hidden !important;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+}
+
+/* Aggressive fix to prevent ANY elements from having their own scrollbars */
+html, body, div, section, main, article, aside, header, footer, nav,
+.main-content, #root, #app, .app, .container, .content-wrapper,
+.page-wrapper, .page-content, [class*="container"], [class*="wrapper"],
+[class*="content"], [class*="page"], [class*="section"] {
+  overflow: visible !important;
+  overflow-y: visible !important;
+  overflow-x: hidden !important;
+  max-width: 100vw;
+}
+
+/* Target the exact right-side scrollbar in browsers */
+::-webkit-scrollbar {
+  width: 10px !important; /* Make only ONE scrollbar visible */
+}
+
+body::-webkit-scrollbar {
+  display: block !important; /* Ensure main scrollbar is visible */
+}
+
+*:not(body)::-webkit-scrollbar {
+  display: none !important; /* Hide ALL other scrollbars */
+}
+
+/* Only allow scrolling on the body element */
+* {
+  overflow-y: visible !important;
+}
+
+body {
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+}
+
+/* Force single scrollbar in Firefox and other browsers */
+* {
+  scrollbar-width: none;
+}
+
+body {
+  scrollbar-width: thin;
 }

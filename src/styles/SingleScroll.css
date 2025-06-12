@@ -1,0 +1,91 @@
+/* SingleScroll.css - Import this in your main App component */
+
+/* Force single scrollbar */
+html, body {
+  overflow-x: hidden;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  overflow-y: auto !important; /* Only the body should scroll */
+  position: relative;
+}
+
+/* Remove ALL scrollbars from other elements */
+div, section, article, aside, nav, header, footer, main,
+.container, .content, .wrapper, .page, .section,
+#root, #app, .app, .main-content, [class*="container"],
+[class*="content"], [class*="wrapper"], [class*="page"],
+[class*="section"], [id*="container"], [id*="content"],
+[id*="wrapper"], [id*="page"], [id*="section"] {
+  overflow: visible !important;
+  overflow-y: visible !important;
+  overflow-x: hidden !important;
+  max-width: 100vw;
+}
+
+/* Hide scrollbars in webkit browsers */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 4px;
+}
+
+/* Only allow scrollbar on body */
+*:not(body)::-webkit-scrollbar {
+  display: none !important;
+}
+
+/* Firefox scrollbar fix */
+* {
+  scrollbar-width: none;
+}
+
+body {
+  scrollbar-width: thin;
+}
+
+/* Fix for nested elements that might create scrollbars */
+iframe, embed, object {
+  max-width: 100%;
+  overflow: hidden !important;
+}
+
+/* Fix for position:fixed elements creating a second scrollbar */
+[style*="position: fixed"],
+[style*="position:fixed"] {
+  max-width: 100vw;
+  overflow: hidden !important;
+}
+
+/* Emergency fix for iOS - if needed */
+@supports (-webkit-touch-callout: none) {
+  body {
+    -webkit-overflow-scrolling: touch !important;
+  }
+
+  * {
+    -webkit-overflow-scrolling: auto !important;
+  }
+}
+
+/* Fix right margin issues */
+body::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 0;
+  height: 100%;
+  background: transparent;
+}
