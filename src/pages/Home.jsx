@@ -8,7 +8,7 @@ const Home = () => {
   const { fetchPageContent, getContentSection, loading, error } = useContent();
   const [pageContent, setPageContent] = useState(null);
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
-  const [isHeroVisible, setIsHeroVisible] = useState(false);
+  const [isHeroVisible, setIsHeroVisible] = useState(true);
   const [animatedServices, setAnimatedServices] = useState([]);
   const [scrollPosition, setScrollPosition] = useState(0);
   const heroRef = useRef(null);
@@ -64,6 +64,9 @@ const Home = () => {
           });
         }
       }
+      
+      // Always keep hero visible
+      setIsHeroVisible(true);
     };
     
     window.addEventListener('scroll', handleScroll);
