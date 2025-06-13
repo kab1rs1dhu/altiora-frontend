@@ -4,21 +4,21 @@ import '../styles/Navbar.css';
 import BrandNavbar from './components/BrandNavbar'
 
 const navLinks = [
-  { name: 'Home', path: '/' },
-  {
-    name: 'Services',
-    dropdown: true,
-    items: [
-      { name: 'SEO', path: '/seo' },
-      { name: 'PPC Advertising', path: '/ppc' },
-      { name: 'Web Development', path: '/web-development' },
-      { name: 'Mobile Development', path: '/mobile-development' },
-      { name: 'Lead Generation', path: '/lead-generation' },
+    { name: 'Home', path: '/' },
+    {
+      name: 'Services',
+      dropdown: true,
+      items: [
+        { name: 'SEO', path: '/seo' },
+        { name: 'PPC Advertising', path: '/ppc' },
+        { name: 'Web Development', path: '/web-development' },
+        { name: 'Mobile Development', path: '/mobile-development' },
+        { name: 'Lead Generation', path: '/lead-generation' },
       { name: 'Appointment Setting', path: '/appointment-setting' },
     ],
-  },
+    },
   { name: 'Contact', path: '/contact' },
-];
+  ];
 
 const Navbar = () => {
   const location = useLocation();
@@ -48,7 +48,7 @@ const Navbar = () => {
       <div className="navbar-container-new">
         <Link to="/" className="navbar-logo">🚀 Altiora</Link>
         {/* Hamburger for mobile */}
-        <button
+        <button 
           className={`navbar-hamburger${mobileOpen ? ' open' : ''}`}
           aria-label="Open menu"
           onClick={() => setMobileOpen((v) => !v)}
@@ -65,7 +65,7 @@ const Navbar = () => {
                 onMouseEnter={() => setDropdownOpen(true)}
                 onMouseLeave={() => setDropdownOpen(false)}
               >
-                <button
+                    <button 
                   className={`navbar-link${dropdownOpen ? ' active' : ''}`}
                   aria-haspopup="true"
                   aria-expanded={dropdownOpen}
@@ -82,12 +82,12 @@ const Navbar = () => {
                       className={location.pathname === item.path ? 'active' : ''}
                     >
                       {item.name}
-                    </Link>
-                  ))}
+                          </Link>
+                      ))}
                 </div>
-              </div>
-            ) : (
-              <Link
+                  </div>
+                ) : (
+                  <Link 
                 to={link.path}
                 key={link.name}
                 className={`navbar-link${location.pathname === link.path ? ' active' : ''}`}
@@ -115,20 +115,20 @@ const Navbar = () => {
                   <ul className={`navbar-dropdown-mobile${servicesDropdownMobile ? ' show' : ''}`}>
                     {link.items.map((item) => (
                       <li key={item.name}>
-                        <Link
+            <Link 
                           to={item.path}
                           className={location.pathname === item.path ? 'active' : ''}
                           onClick={() => setMobileOpen(false)}
-                        >
-                          {item.name}
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
+                    >
+                      {item.name}
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
                 </li>
-              ) : (
+                ) : (
                 <li key={link.name}>
-                  <Link
+                  <Link 
                     to={link.path}
                     className={location.pathname === link.path ? 'active' : ''}
                     onClick={() => setMobileOpen(false)}
@@ -137,12 +137,12 @@ const Navbar = () => {
                   </Link>
                 </li>
               )
-            )}
+                )}
             <li>
               <Link to="/contact" className="navbar-cta" onClick={() => setMobileOpen(false)}>
                 Get Started →
               </Link>
-            </li>
+              </li>
           </ul>
         </nav>
       </div>
@@ -150,4 +150,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar; 
+export default Navbar;
