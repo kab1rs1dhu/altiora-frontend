@@ -1,102 +1,190 @@
-
-.brand-navbar {
-  position: sticky;
+/* Navbar Styles */
+.navbar {
+  position: fixed;
   top: 0;
+  left: 0;
   width: 100%;
-  background: linear-gradient(90deg, #e3f0ff 0%, #b6d0ff 100%);
-  box-shadow: 0 8px 60px rgba(26, 115, 232, 0.15);
-  z-index: 100;
-  padding: 12px 0;
-  min-height: unset;
-  transition: box-shadow 0.2s, background 0.2s;
-  overflow: visible;
+  background: linear-gradient(to right, #ffffff 0%, #f8fbff 100%);
+  box-shadow: 0 4px 15px rgba(26, 115, 232, 0.12);
+  padding: 20px 0 30px 0; /* More padding at the bottom */
+  z-index: 1000;
+  border-bottom: 2px solid rgba(26, 115, 232, 0.15);
+  overflow: hidden; /* Prevent scrolling within the navbar */
 }
 
-.brand-navbar-container {
-  max-width: 100vw;
+.navbar-container {
+  max-width: 1200px;
   margin: 0 auto;
+  padding: 0 20px;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: auto;
-  padding: 0;
-  gap: 16px; /* Reduced from 32px */
-  width: 100%;
-  overflow: visible;
+  align-items: flex-start;
+  position: relative;
+  min-height: 90px;
+  overflow: visible; /* Allow logo to be visible */
+  padding-top: 10px;
 }
 
-.brand-logo-img {
-  height: 180px; /* Reduced from 400px */
-  width: 180px; /* Reduced from 400px */
-  max-width: 100vw;
-  max-height: 90vh;
-  object-fit: contain;
+.navbar-logo-container {
+  position: absolute;
+  left: 20px;
+  top: 45%;
+  transform: translateY(-50%);
+  padding: 5px 5px 10px 5px;
+  background: linear-gradient(135deg, rgba(26, 115, 232, 0.08) 0%, rgba(66, 133, 244, 0.05) 100%);
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  z-index: 10;
+  margin-bottom: 10px;
+}
+
+.navbar-logo-container:hover {
+  transform: translateY(-52%) scale(1.02);
+  box-shadow: 0 5px 15px rgba(26, 115, 232, 0.18);
+}
+
+.navbar-logo {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(26, 115, 232, 0.2);
+  background-color: white;
   display: block;
-  border-radius: 24px; /* Reduced from 48px */
-  box-shadow: 0 10px 40px rgba(26, 115, 232, 0.18);
-  background: #fff;
-  border: 4px solid #e8f0fe; /* Reduced from 6px */
-  transition: box-shadow 0.2s, border 0.2s;
-  margin: 0 auto;
+  border: 2px solid rgba(26, 115, 232, 0.1);
+  transition: all 0.3s ease;
 }
 
-.brand-logo-img:hover {
-  box-shadow: 0 16px 64px rgba(26, 115, 232, 0.24);
-  border: 4px solid #1a73e8;
+.navbar-logo-container:hover .navbar-logo {
+  border-color: rgba(26, 115, 232, 0.3);
 }
 
-.brand-name {
-  font-size: 2.6rem; /* Reduced from 4.2rem */
-  font-weight: 800; /* Reduced from 1000 */
-  letter-spacing: 0.18em; /* Reduced from 0.22em */
+.navbar-title {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  margin-top: 5px;
+  margin-bottom: 15px;
+}
+
+.navbar-title::before, .navbar-title::after {
+  content: '';
+  height: 2px;
+  width: 40px;
+  background: linear-gradient(90deg, rgba(26, 115, 232, 0) 0%, rgba(66, 133, 244, 0.5) 50%, rgba(26, 115, 232, 0) 100%);
+  position: absolute;
+  top: 50%;
+}
+
+.navbar-title::before {
+  right: calc(50% + 120px);
+}
+
+.navbar-title::after {
+  left: calc(50% + 120px);
+}
+
+.navbar-name {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 2.2rem;
+  font-weight: 700;
   color: #1a73e8;
-  font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
-  text-transform: uppercase;
-  background: linear-gradient(90deg, #1a73e8 40%, #4285f4 80%, #b6d0ff 100%);
+  letter-spacing: 0.12em;
+  background: linear-gradient(135deg, #1a73e8 0%, #4285f4 60%, #5e9bff 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  background-clip: text;
-  text-fill-color: transparent;
-  user-select: none;
-  text-shadow: 0 6px 24px rgba(26, 115, 232, 0.15);
-  transition: font-size 0.2s;
-  margin-top: 14px; /* Reduced from 32px */
-  text-align: center;
+  text-transform: uppercase;
+  position: relative;
+  padding: 0 10px;
+  text-shadow: 0 2px 10px rgba(26, 115, 232, 0.1);
 }
 
-@media (max-width: 1200px) {
-  .brand-logo-img {
-    height: 160px; /* Adjusted from 400px */
-    width: 160px; /* Adjusted from 400px */
-    border-radius: 20px;
-  }
-  .brand-name {
-    font-size: 2.2rem;
-    margin-top: 12px;
-  }
+.navbar-name::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
+  height: 2px;
+  background: linear-gradient(90deg, rgba(26, 115, 232, 0) 0%, rgba(66, 133, 244, 0.5) 50%, rgba(26, 115, 232, 0) 100%);
 }
 
-@media (max-width: 900px) {
-  .brand-logo-img {
-    height: 120px; /* Adjusted from 180px */
-    width: 120px; /* Adjusted from 180px */
-    border-radius: 12px;
+/* Responsive styles */
+@media (max-width: 768px) {
+  .navbar {
+    padding: 15px 0 25px 0;
+    overflow: hidden;
   }
-  .brand-name {
-    font-size: 1.3rem;
+  
+  .navbar-container {
+    min-height: 70px;
+  }
+  
+  .navbar-logo-container {
+    padding: 5px 5px 8px 5px;
+    margin-bottom: 8px;
+  }
+  
+  .navbar-logo {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .navbar-name {
+    font-size: 1.8rem;
+  }
+  
+  .navbar-title {
     margin-top: 8px;
+    margin-bottom: 8px;
+  }
+  
+  .navbar-title::before {
+    right: calc(50% + 90px);
+    width: 30px;
+  }
+
+  .navbar-title::after {
+    left: calc(50% + 90px);
+    width: 30px;
   }
 }
 
-@media (max-width: 600px) {
-  .brand-logo-img {
-    height: 80px;
-    width: 80px;
-    border-radius: 5px;
+@media (max-width: 480px) {
+  .navbar {
+    padding: 12px 0 18px 0;
   }
-  .brand-name {
-    font-size: 1rem;
+  
+  .navbar-container {
+    padding: 0 10px;
+    min-height: 60px;
+  }
+  
+  .navbar-logo-container {
+    left: 10px;
+    padding: 3px 3px 6px 3px;
+    border-radius: 8px;
+    margin-bottom: 6px;
+  }
+  
+  .navbar-logo {
+    width: 45px;
+    height: 45px;
+    border-radius: 6px;
+  }
+  
+  .navbar-name {
+    font-size: 1.4rem;
+  }
+  
+  .navbar-title {
     margin-top: 6px;
+    margin-bottom: 6px;
   }
-}
+  
+  .navbar-title::before, .navbar-title::after {
+    display: none;
+  }
+} 
