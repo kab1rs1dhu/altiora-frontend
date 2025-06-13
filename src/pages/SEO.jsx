@@ -632,6 +632,22 @@ const toggleProcessDetails = (e, index) => {
                 ></button>
               ))}
             </div>
+            
+            {/* Navigation arrows */}
+            <button 
+              className="testimonial-arrow prev"
+              onClick={() => setActiveTestimonial(prev => prev === 0 ? testimonials.length - 1 : prev - 1)}
+              aria-label="Previous testimonial"
+            >
+              <i className="fa-solid fa-chevron-left"></i>
+            </button>
+            <button 
+              className="testimonial-arrow next"
+              onClick={() => setActiveTestimonial(prev => (prev + 1) % testimonials.length)}
+              aria-label="Next testimonial"
+            >
+              <i className="fa-solid fa-chevron-right"></i>
+            </button>
           </div>
         </div>
       </section>

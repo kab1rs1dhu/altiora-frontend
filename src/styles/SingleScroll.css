@@ -8,18 +8,21 @@ html, body {
   padding: 0;
   overflow-x: hidden;
   overflow-y: auto !important; /* CRITICAL: Allow vertical scrolling */
+  -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
 }
 
 body {
   /* Re-enable scrolling on body */
   position: relative;
   min-height: 100vh;
+  touch-action: pan-y; /* Explicitly allow vertical touch scrolling */
 }
 
 /* Allow the app container to scroll */
 #root, .app, main, .main-content {
   overflow-y: visible !important;
   min-height: 100vh;
+  touch-action: pan-y; /* Explicitly allow vertical touch scrolling */
 }
 
 /* Only disable scrollbars on non-body elements */

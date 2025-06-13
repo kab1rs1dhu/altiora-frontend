@@ -550,6 +550,22 @@ const PPC = () => {
                 ></button>
               ))}
             </div>
+            
+            {/* Navigation arrows */}
+            <button 
+              className="testimonial-arrow prev"
+              onClick={() => setActiveTestimonial(prev => prev === 0 ? testimonials.length - 1 : prev - 1)}
+              aria-label="Previous testimonial"
+            >
+              <i className="fa-solid fa-chevron-left"></i>
+            </button>
+            <button 
+              className="testimonial-arrow next"
+              onClick={() => setActiveTestimonial(prev => (prev + 1) % testimonials.length)}
+              aria-label="Next testimonial"
+            >
+              <i className="fa-solid fa-chevron-right"></i>
+            </button>
           </div>
         </div>
       </section>
@@ -636,9 +652,9 @@ const PPC = () => {
                 className={`faq-item ${visibleFaqs.includes(3) ? 'visible' : ''}`} 
                 style={{ transitionDelay: '0.6s' }}
               >
-                <h3>What are responsive search ads and why should I use them?</h3>
+                <h3>How do you optimize for mobile devices in PPC campaigns?</h3>
                 <p>
-                  Responsive Search Ads (RSAs) allow you to create multiple headline and description options that Google automatically tests and optimizes over time. We recommend RSAs because they adapt to different devices, match more search queries, and save time through automated testing. Google's machine learning shows the most effective combinations based on search context and user behavior, improving performance and providing valuable insights about messaging that resonates with your audience.
+                  We optimize for mobile devices by ensuring your ads are mobile-friendly, using responsive ad formats, and implementing mobile-specific targeting options. We also monitor mobile performance metrics such as mobile click-through rate, mobile conversion rate, and mobile bounce rate to make data-driven adjustments.
                 </p>
               </div>
             </div>
@@ -651,9 +667,9 @@ const PPC = () => {
                 className={`faq-item ${visibleFaqs.includes(0) ? 'visible' : ''}`} 
                 style={{ transitionDelay: '0.15s' }}
               >
-                <h3>Which social media platforms should my business advertise on?</h3>
+                <h3>Which social media platforms are best for PPC advertising?</h3>
                 <p>
-                  The best platforms depend on your target audience, business type, and goals. Facebook/Instagram works well for most B2C businesses with their broad user base and robust targeting options. LinkedIn is superior for B2B and professional services targeting. Twitter can be effective for time-sensitive promotions and engaging with trending topics. We'll analyze where your audience is most active and engaged to recommend the optimal platform mix for your specific business.
+                  The best social media platforms for PPC advertising depend on your business type, target audience, and goals. Popular platforms include Facebook, Instagram, LinkedIn, Twitter, and Pinterest. We'll recommend the optimal mix based on your specific situation.
                 </p>
               </div>
               
@@ -661,9 +677,9 @@ const PPC = () => {
                 className={`faq-item ${visibleFaqs.includes(1) ? 'visible' : ''}`} 
                 style={{ transitionDelay: '0.3s' }}
               >
-                <h3>How does targeting work in social media advertising?</h3>
+                <h3>How do you target specific demographics on social media platforms?</h3>
                 <p>
-                  Social media platforms offer sophisticated targeting options based on user demographics, interests, behaviors, and connections. You can target by age, location, gender, job titles, education, interests, past purchasing behavior, life events, and more. Each platform has unique targeting capabilities - for example, LinkedIn excels at professional targeting, while Facebook offers detailed interest and behavior targeting. We create targeted audience segments to reach the most qualified prospects for your business.
+                  We target specific demographics on social media platforms using various targeting options such as age, gender, location, interests, behaviors, and custom audiences. We'll create custom targeting segments based on your business goals and target audience.
                 </p>
               </div>
               
@@ -671,53 +687,22 @@ const PPC = () => {
                 className={`faq-item ${visibleFaqs.includes(2) ? 'visible' : ''}`} 
                 style={{ transitionDelay: '0.45s' }}
               >
-                <h3>What types of social media ad formats are most effective?</h3>
+                <h3>What types of social media ads are available?</h3>
                 <p>
-                  The most effective ad format depends on your goals and audience. Image ads are versatile and work well for most campaigns. Video ads typically generate higher engagement and are excellent for storytelling and demonstrations. Carousel ads are effective for showcasing multiple products or features. Stories ads feel native and authentic. We test multiple formats to determine which performs best for your specific objectives and continuously optimize based on performance data.
+                  Social media platforms offer various ad formats such as image ads, video ads, carousel ads, collection ads, lead generation ads, and more. We'll recommend the optimal ad formats based on your business goals and target audience.
                 </p>
               </div>
+              
               <div 
                 className={`faq-item ${visibleFaqs.includes(3) ? 'visible' : ''}`} 
                 style={{ transitionDelay: '0.6s' }}
               >
-                <h3>How can I measure the success of social media ad campaigns?</h3>
+                <h3>How do you measure the success of social media ads?</h3>
                 <p>
-                  We track both platform-specific metrics and business outcomes. Key metrics include reach, impressions, engagement rate, click-through rate, cost per click, and conversion rate. For business outcomes, we focus on lead generation, sales, return on ad spend (ROAS), and customer acquisition cost. We set up proper tracking through platform pixels and analytics tools to attribute conversions accurately and provide comprehensive reporting dashboards to visualize performance.
+                  We measure the success of social media ads using metrics such as impressions, clicks, click-through rate, cost per click, cost per conversion, conversion rate, and return on ad spend. Most importantly, we focus on the KPIs that directly impact your business goals, whether that's lead generation, sales, or brand awareness.
                 </p>
               </div>
             </div>
-          </div>
-          
-          <div className="faq-cta">
-            <p>Have more questions? We're here to help!</p>
-            <Link to="/contact" className="btn btn-primary">Contact Us</Link>
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section with Particles */}
-      <section className="section service-cta-section ppc-cta">
-        <div className="cta-particles">
-          {[...Array(10)].map((_, i) => (
-            <div 
-              key={i} 
-              className="cta-particle"
-              style={{
-                width: `${Math.random() * 8 + 4}px`,
-                height: `${Math.random() * 8 + 4}px`,
-                top: `${Math.random() * 100}%`,
-                left: `${Math.random() * 100}%`,
-                animationDuration: `${Math.random() * 10 + 10}s`,
-                animationDelay: `${Math.random() * 5}s`
-              }}
-            ></div>
-          ))}
-        </div>
-        <div className="container">
-          <div className="service-cta-content">
-            <h2>{ctaTitle}</h2>
-            <p>{ctaDescription}</p>
-            <Link to="/contact" className="btn btn-primary">Get Started</Link>
           </div>
         </div>
       </section>

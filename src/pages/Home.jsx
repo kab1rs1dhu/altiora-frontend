@@ -17,6 +17,56 @@ const Home = () => {
   const mouseRef = useRef({ x: 0, y: 0 });
   const heroImageRef = useRef(null);
   
+  // Testimonials data
+  const testimonials = [
+    {
+      name: "Sarah Johnson",
+      company: "TechStart Solutions",
+      role: "CEO",
+      image: "/images/testimonial-1.jpg",
+      text: "Altiora transformed our online presence completely. Their SEO strategies increased our organic traffic by 300% in just 6 months. The team is professional, responsive, and truly understands digital marketing."
+    },
+    {
+      name: "Michael Chen", 
+      company: "GrowthCorp",
+      role: "Marketing Director",
+      image: "/images/testimonial-2.jpg",
+      text: "Working with Altiora has been a game-changer for our business. Their PPC campaigns generated a 400% ROI, and their strategic guidance helped us scale efficiently. Highly recommended!"
+    },
+    {
+      name: "Emily Rodriguez",
+      company: "InnovateNow",
+      role: "Founder",
+      image: "/images/testimonial-3.jpg",
+      text: "The team at Altiora doesn't just deliver results - they become true partners in your success. Their personalized approach and expertise helped us achieve goals we never thought possible."
+    },
+    {
+      name: "David Thompson",
+      company: "NextGen Enterprises",
+      role: "VP of Sales",
+      image: "/images/testimonial-4.jpg",
+      text: "Altiora's lead generation services filled our sales pipeline consistently. Their appointment setting team is professional and delivered high-quality prospects that converted into loyal customers."
+    },
+    {
+      name: "Lisa Anderson",
+      company: "Digital Dynamics",
+      role: "CMO",
+      image: "/images/testimonial-5.jpg",
+      text: "From web development to mobile apps, Altiora delivered exceptional quality. Their technical expertise combined with marketing insights created solutions that truly drive business growth."
+    }
+  ];
+  
+  // Simple navigation functions
+  const goToPrevTestimonial = () => {
+    const newIndex = currentTestimonial === 0 ? testimonials.length - 1 : currentTestimonial - 1;
+    setCurrentTestimonial(newIndex);
+  };
+  
+  const goToNextTestimonial = () => {
+    const newIndex = (currentTestimonial + 1) % testimonials.length;
+    setCurrentTestimonial(newIndex);
+  };
+  
   // Mouse move effect for hero section
   useEffect(() => {
     const handleMouseMove = (e) => {
@@ -92,45 +142,8 @@ const Home = () => {
     loadContent();
   }, [fetchPageContent]);
   
-  // Auto-slide testimonials
-  const testimonials = [
-    {
-      name: "Sarah Johnson",
-      company: "TechStart Solutions",
-      role: "CEO",
-      image: "/images/testimonial-1.jpg",
-      text: "Altiora transformed our online presence completely. Their SEO strategies increased our organic traffic by 300% in just 6 months. The team is professional, responsive, and truly understands digital marketing."
-    },
-    {
-      name: "Michael Chen", 
-      company: "GrowthCorp",
-      role: "Marketing Director",
-      image: "/images/testimonial-2.jpg",
-      text: "Working with Altiora has been a game-changer for our business. Their PPC campaigns generated a 400% ROI, and their strategic guidance helped us scale efficiently. Highly recommended!"
-    },
-    {
-      name: "Emily Rodriguez",
-      company: "InnovateNow",
-      role: "Founder",
-      image: "/images/testimonial-3.jpg",
-      text: "The team at Altiora doesn't just deliver results - they become true partners in your success. Their personalized approach and expertise helped us achieve goals we never thought possible."
-    },
-    {
-      name: "David Thompson",
-      company: "NextGen Enterprises",
-      role: "VP of Sales",
-      image: "/images/testimonial-4.jpg",
-      text: "Altiora's lead generation services filled our sales pipeline consistently. Their appointment setting team is professional and delivered high-quality prospects that converted into loyal customers."
-    },
-    {
-      name: "Lisa Anderson",
-      company: "Digital Dynamics",
-      role: "CMO",
-      image: "/images/testimonial-5.jpg",
-      text: "From web development to mobile apps, Altiora delivered exceptional quality. Their technical expertise combined with marketing insights created solutions that truly drive business growth."
-    }
-  ];
-
+  // Auto-slide testimonials - disabled for better user control
+  /*
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentTestimonial((prev) => (prev + 1) % testimonials.length);
@@ -138,6 +151,7 @@ const Home = () => {
     
     return () => clearInterval(interval);
   }, [testimonials.length]);
+  */
 
   // Services data
   const services = [
@@ -539,32 +553,24 @@ const Home = () => {
 
           <div className="testimonials-container">
             <div className="testimonial-slider">
-              {testimonials.map((testimonial, index) => (
-                <div 
-                  key={index}
-                  className={`testimonial-slide ${index === currentTestimonial ? 'active' : ''}`}
-                  style={{ transform: `translateX(${(index - currentTestimonial) * 100}%)` }}
-                >
-                  <div className="testimonial-content">
-                    <div className="testimonial-text">
-                      <div className="quote-icon">
-                        <i className="fa-solid fa-quote-left"></i>
-                      </div>
-                      <p>"{testimonial.text}"</p>
-                    </div>
-                    <div className="testimonial-author">
-                      <div className="author-image">
-                        <img src={testimonial.image} alt={testimonial.name} />
-                      </div>
-                      <div className="author-info">
-                        <h4>{testimonial.name}</h4>
-                        <p>{testimonial.role}</p>
-                        <span>{testimonial.company}</span>
-                      </div>
-                    </div>
+              <div className="testimonial-content">
+                <div className="testimonial-text">
+                  <div className="quote-icon">
+                    <i className="fa-solid fa-quote-left"></i>
+                  </div>
+                  <p>"{testimonials[currentTestimonial].text}"</p>
+                </div>
+                <div className="testimonial-author">
+                  <div className="author-image">
+                    <img src={testimonials[currentTestimonial].image} alt={testimonials[currentTestimonial].name} />
+                  </div>
+                  <div className="author-info">
+                    <h4>{testimonials[currentTestimonial].name}</h4>
+                    <p>{testimonials[currentTestimonial].role}</p>
+                    <span>{testimonials[currentTestimonial].company}</span>
                   </div>
                 </div>
-              ))}
+              </div>
             </div>
 
             {/* Navigation dots */}
@@ -574,6 +580,7 @@ const Home = () => {
                   key={index}
                   className={`dot ${index === currentTestimonial ? 'active' : ''}`}
                   onClick={() => setCurrentTestimonial(index)}
+                  aria-label={`View testimonial ${index + 1}`}
                 ></button>
               ))}
             </div>
@@ -581,13 +588,15 @@ const Home = () => {
             {/* Navigation arrows */}
             <button 
               className="testimonial-arrow prev"
-              onClick={() => setCurrentTestimonial((prev) => prev === 0 ? testimonials.length - 1 : prev - 1)}
+              onClick={goToPrevTestimonial}
+              aria-label="Previous testimonial"
             >
               <i className="fa-solid fa-chevron-left"></i>
             </button>
             <button 
               className="testimonial-arrow next"
-              onClick={() => setCurrentTestimonial((prev) => (prev + 1) % testimonials.length)}
+              onClick={goToNextTestimonial}
+              aria-label="Next testimonial"
             >
               <i className="fa-solid fa-chevron-right"></i>
             </button>

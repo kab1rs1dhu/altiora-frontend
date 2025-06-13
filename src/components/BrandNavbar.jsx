@@ -6,11 +6,15 @@ const BrandNavbar = () => {
   return (
     <header className="navbar">
       <div className="navbar-container">
-        <Link to="/" className="navbar-logo-container">
+        <Link 
+          to="/" 
+          className="navbar-logo-container"
+        >
           <img 
             src="/images/logo.jpg" 
             alt="Altiora" 
-            className="navbar-logo" 
+            className="navbar-logo"
+            draggable="false"
           />
         </Link>
         <div className="navbar-title">

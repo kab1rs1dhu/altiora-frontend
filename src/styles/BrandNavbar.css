@@ -6,10 +6,10 @@
   width: 100%;
   background: linear-gradient(to right, #ffffff 0%, #f8fbff 100%);
   box-shadow: 0 4px 15px rgba(26, 115, 232, 0.12);
-  padding: 20px 0 30px 0; /* More padding at the bottom */
+  padding: 0px 0 25px 0;
   z-index: 1000;
   border-bottom: 2px solid rgba(26, 115, 232, 0.15);
-  overflow: hidden; /* Prevent scrolling within the navbar */
+  overflow: hidden; /* Ensure elements aren't cut off */
 }
 
 .navbar-container {
@@ -17,34 +17,35 @@
   margin: 0 auto;
   padding: 0 20px;
   display: flex;
-  align-items: flex-start;
+  align-items: center; /* Changed from flex-start to center */
+  justify-content: center; /* Center horizontally */
   position: relative;
-  min-height: 90px;
-  overflow: visible; /* Allow logo to be visible */
-  padding-top: 10px;
+  min-height: 80px;
+  overflow: visible;
+  padding-top: 5px;
 }
 
 .navbar-logo-container {
   position: absolute;
   left: 20px;
-  top: 45%;
+  top: 50%; /* Center vertically */
   transform: translateY(-50%);
-  padding: 5px 5px 10px 5px;
+  padding: 5px;
   background: linear-gradient(135deg, rgba(26, 115, 232, 0.08) 0%, rgba(66, 133, 244, 0.05) 100%);
   border-radius: 12px;
   transition: all 0.3s ease;
   z-index: 10;
-  margin-bottom: 10px;
+  margin-bottom: 0;
 }
 
 .navbar-logo-container:hover {
-  transform: translateY(-52%) scale(1.02);
+  transform: translateY(-50%) scale(1.02); /* Keep centered while scaling */
   box-shadow: 0 5px 15px rgba(26, 115, 232, 0.18);
 }
 
 .navbar-logo {
-  width: 80px;
-  height: 80px;
+  width: 60px; /* Reduced size */
+  height: 60px; /* Reduced size */
   object-fit: cover;
   border-radius: 10px;
   box-shadow: 0 4px 12px rgba(26, 115, 232, 0.2);
@@ -54,147 +55,121 @@
   transition: all 0.3s ease;
 }
 
-.navbar-logo-container:hover .navbar-logo {
-  border-color: rgba(26, 115, 232, 0.3);
-}
-
 .navbar-title {
   flex: 1;
   display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
-  margin-top: 5px;
-  margin-bottom: 15px;
-}
-
-.navbar-title::before, .navbar-title::after {
-  content: '';
-  height: 2px;
-  width: 40px;
-  background: linear-gradient(90deg, rgba(26, 115, 232, 0) 0%, rgba(66, 133, 244, 0.5) 50%, rgba(26, 115, 232, 0) 100%);
-  position: absolute;
-  top: 50%;
-}
-
-.navbar-title::before {
-  right: calc(50% + 120px);
-}
-
-.navbar-title::after {
-  left: calc(50% + 120px);
+  margin: 0;
 }
 
 .navbar-name {
   font-family: 'Knockout Sumo', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  font-size: 2.8rem; /* Slightly larger for the display font */
-  font-weight: normal; /* Knockout fonts often work best with normal weight */
+  font-size: 2.5rem;
+  font-weight: normal;
   color: #1a73e8;
-  letter-spacing: 0.12em; /* Slightly reduced letter spacing for this font */
+  letter-spacing: 0.1em;
   margin: 0;
   background: linear-gradient(135deg, #1a73e8 0%, #4285f4 60%, #5e9bff 100%);
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
   text-transform: uppercase;
   position: relative;
   padding: 0 10px;
   text-shadow: 0 2px 10px rgba(26, 115, 232, 0.1);
-  line-height: 1; /* Improved line height for display fonts */
+  line-height: 1;
+  display: inline-block;
+  max-width: 100%;
+  transform: translateZ(0);
+  animation: none;
+  transition: none;
+  user-select: none; /* Prevent text selection */
 }
 
-.navbar-name::after {
-  content: '';
-  position: absolute;
-  bottom: -5px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 60%;
-  height: 2px;
-  background: linear-gradient(90deg, rgba(26, 115, 232, 0) 0%, rgba(66, 133, 244, 0.5) 50%, rgba(26, 115, 232, 0) 100%);
+/* Prevent any accidental animations on the navbar elements */
+.navbar,
+.navbar-container,
+.navbar-title,
+.navbar-name,
+.navbar-logo-container,
+.navbar-logo {
+  animation: none !important;
+  transition: transform 0.3s ease, box-shadow 0.3s ease !important; /* Only allow specific transitions */
+  backface-visibility: hidden; /* Prevent 3D flipping */
+  transform-style: preserve-3d; /* Better 3D handling */
+  will-change: transform; /* Hint to the browser about what will change */
 }
 
 /* Responsive styles */
 @media (max-width: 768px) {
   .navbar {
-    padding: 15px 0 25px 0;
-    overflow: hidden;
+    padding: 10px 0 20px 0;
   }
   
   .navbar-container {
-    min-height: 70px;
+    min-height: 60px;
+    justify-content: center;
   }
   
   .navbar-logo-container {
-    padding: 5px 5px 8px 5px;
-    margin-bottom: 8px;
+    padding: 4px;
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
   }
   
   .navbar-logo {
-    width: 60px;
-    height: 60px;
-  }
-  
-  .navbar-name {
-    font-family: 'Knockout Sumo', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    font-size: 2.2rem; /* Adjusted for this font */
-    font-weight: normal;
-    letter-spacing: 0.1em; /* Slightly tighter on smaller screens */
-    line-height: 1;
+    width: 50px;
+    height: 50px;
   }
   
   .navbar-title {
-    margin-top: 8px;
-    margin-bottom: 8px;
+    width: 100%;
+    padding: 0 60px; /* Make space for the logo */
+    box-sizing: border-box;
+    margin: 0;
   }
   
-  .navbar-title::before {
-    right: calc(50% + 90px);
-    width: 30px;
-  }
-
-  .navbar-title::after {
-    left: calc(50% + 90px);
-    width: 30px;
+  .navbar-name {
+    font-size: 2rem;
+    white-space: nowrap;
+    letter-spacing: 0.1em;
   }
 }
 
+/* Extra small devices */
 @media (max-width: 480px) {
   .navbar {
-    padding: 12px 0 18px 0;
+    padding: 8px 0 15px 0;
   }
   
   .navbar-container {
     padding: 0 10px;
-    min-height: 60px;
+    min-height: 50px;
   }
   
   .navbar-logo-container {
     left: 10px;
-    padding: 3px 3px 6px 3px;
+    padding: 3px;
     border-radius: 8px;
-    margin-bottom: 6px;
   }
   
   .navbar-logo {
-    width: 45px;
-    height: 45px;
+    width: 40px;
+    height: 40px;
     border-radius: 6px;
   }
   
   .navbar-name {
-    font-family: 'Knockout Sumo', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    font-size: 1.6rem; /* Adjusted for this font */
-    font-weight: normal;
-    letter-spacing: 0.08em; /* Slightly tighter on mobile */
-    line-height: 1;
+    font-size: 1.5rem;
+    letter-spacing: 0.08em;
   }
   
   .navbar-title {
-    margin-top: 6px;
-    margin-bottom: 6px;
-  }
-  
-  .navbar-title::before, .navbar-title::after {
-    display: none;
+    padding: 0 50px;
   }
 } 

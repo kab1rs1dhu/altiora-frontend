@@ -46,6 +46,7 @@
   position: relative;
   overflow: hidden;
   z-index: 2;
+  width: 100%;
 }
 
 .brand-logos {
@@ -58,6 +59,53 @@
 .brand-logos.scrolling {
   animation: horizontalScroll 30s linear infinite;
   width: fit-content;
+}
+
+/* Ensure the animation pauses on hover */
+.brand-logos-container:hover .brand-logos.scrolling {
+  animation-play-state: paused;
+}
+
+/* Create a mask for better fading on the edges */
+.brand-logos-container::before,
+.brand-logos-container::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 100px;
+  height: 100%;
+  z-index: 3;
+  pointer-events: none;
+}
+
+.brand-logos-container::before {
+  left: 0;
+  background: linear-gradient(to right, rgba(255, 255, 255, 0.9), transparent);
+}
+
+.brand-logos-container::after {
+  right: 0;
+  background: linear-gradient(to left, rgba(255, 255, 255, 0.9), transparent);
+}
+
+/* Mobile specific overrides */
+@media (max-width: 768px) {
+  .brand-logos-container {
+    overflow: visible;
+  }
+  
+  .brand-logos-container::before,
+  .brand-logos-container::after {
+    display: none;
+  }
+  
+  .brand-logo img {
+    filter: none; /* Ensure no filters are applied on mobile */
+  }
+  
+  .brand-logos.scrolling {
+    animation: none; /* Disable scrolling animation on mobile for better performance */
+  }
 }
 
 .brand-logo {
@@ -673,25 +721,8 @@
 
 .testimonial-slider {
   position: relative;
-  height: 400px;
-  overflow: hidden;
-}
-
-.testimonial-slide {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: transform 0.8s var(--animation-timing), opacity 0.8s var(--animation-timing);
-  opacity: 0;
-}
-
-.testimonial-slide.active {
-  opacity: 1;
+  margin-bottom: 30px;
+  padding: 20px 0;
 }
 
 .testimonial-content {
@@ -704,9 +735,11 @@
   border: 1px solid rgba(255, 255, 255, 0.2);
   width: 100%;
   max-width: 800px;
+  margin: 0 auto;
   position: relative;
   transform: perspective(1000px) rotateX(0deg);
-  transition: transform 0.5s var(--animation-timing);
+  transition: all 0.3s var(--animation-timing);
+  animation: testimonialFadeIn 0.6s ease-out;
 }
 
 .testimonial-content:hover {
@@ -800,33 +833,36 @@
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  width: 50px;
-  height: 50px;
+  width: 70px;
+  height: 70px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.8);
   backdrop-filter: blur(5px);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  color: white;
-  font-size: 1.2rem;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  color: var(--primary-blue);
+  font-size: 1.6rem;
   cursor: pointer;
   transition: all 0.3s var(--animation-timing);
-  z-index: 3;
+  z-index: 10;
   display: flex;
   align-items: center;
   justify-content: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 .testimonial-arrow:hover {
-  background: rgba(255, 255, 255, 0.3);
-  transform: translateY(-50%) scale(1.1);
+  background: rgba(255, 255, 255, 1);
+  transform: translateY(-50%) scale(1.15);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  color: var(--primary-dark);
 }
 
 .testimonial-arrow.prev {
-  left: -25px;
+  left: 10px;
 }
 
 .testimonial-arrow.next {
-  right: -25px;
+  right: 10px;
 }
 
 /* CTA Section */
@@ -1024,8 +1060,14 @@ p {
 
 /* Animation Keyframes */
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @keyframes slideUp {
@@ -1432,7 +1474,7 @@ p {
 }
 
 .feature-icon i {
-  font-size: 1.3rem;
+  font-size: 1.1rem;
   color: white;
 }
 
@@ -1481,11 +1523,24 @@ p {
 }
 
 .testimonial-content {
-  background-color: var(--white);
-  border-radius: 12px;
-  padding: 25px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 30px;
+  padding: 50px 40px;
+  text-align: center;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  position: relative;
+  transform: perspective(1000px) rotateX(0deg);
+  transition: all 0.3s var(--animation-timing);
+  animation: testimonialFadeIn 0.6s ease-out;
+}
+
+.testimonial-content:hover {
+  transform: perspective(1000px) rotateX(2deg) scale(1.02);
 }
 
 .quote-icon {
@@ -1571,21 +1626,38 @@ p {
 }
 
 .testimonial-arrow {
-  width: 36px;
-  height: 36px;
+  width: 70px;
+  height: 70px;
   border-radius: 50%;
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: rgba(255, 255, 255, 0.8);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: white;
+  color: var(--primary-blue);
   cursor: pointer;
-  transition: all 0.3s ease;
-  border: none;
+  transition: all 0.3s var(--animation-timing);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  font-size: 1.6rem;
 }
 
 .testimonial-arrow:hover {
-  background-color: rgba(255, 255, 255, 0.3);
+  background-color: rgba(255, 255, 255, 1);
+  transform: translateY(-50%) scale(1.15);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  color: var(--primary-dark);
+}
+
+.testimonial-arrow.prev {
+  left: 10px;
+}
+
+.testimonial-arrow.next {
+  right: 10px;
 }
 
 /* CTA Section */
@@ -2165,5 +2237,26 @@ p {
   .feature-item h4 {
     font-size: 1rem;
     margin-top: 3px;
+  }
+}
+
+/* Add the missing keyframes definition */
+@keyframes horizontalScroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%); /* Move by half the width to create seamless loop */
+  }
+}
+
+@keyframes testimonialFadeIn {
+  0% {
+    opacity: 0;
+    transform: perspective(1000px) rotateX(-3deg) translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: perspective(1000px) rotateX(0deg) translateY(0);
   }
 }
