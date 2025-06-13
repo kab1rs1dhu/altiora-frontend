@@ -1,3 +1,14 @@
+/* Import Knockout Sumo font */
+@font-face {
+  font-family: 'Knockout Sumo';
+  src: url('/fonts/knockout-sumo.woff2') format('woff2'),
+       url('/fonts/knockout-sumo.woff') format('woff'),
+       url('/fonts/knockout-sumo.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
