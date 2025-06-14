@@ -1,9 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
 .footer {
-  background-color: var(--light-blue);
-  color: var(--text-secondary);
+  background: linear-gradient(135deg, #0a1930 0%, #1a2942 100%);
+  color: rgba(255, 255, 255, 0.8);
   padding: 60px 0 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  position: relative;
+  overflow: hidden;
 }
 
 .footer-content {
@@ -11,6 +14,8 @@
   grid-template-columns: 1fr 2fr;
   gap: 30px;
   margin-bottom: 40px;
+  position: relative;
+  z-index: 2;
 }
 
 .footer-company {
@@ -18,31 +23,61 @@
 }
 
 .footer-logo {
-  display: inline-block;
+  display: flex;
+  align-items: center;
   margin-bottom: 20px;
-  font-size: 1.8rem;
-  font-weight: 700;
-  color: var(--primary-blue);
   text-decoration: none;
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
+}
+
+.footer-logo .logo-icon {
+  margin-right: 30px;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 8px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .footer-logo .logo-text {
-  background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
+  font-family: 'Knockout Sumo', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: 1.8rem;
+  font-weight: normal;
+  background: linear-gradient(135deg, #FBBC05 0%, #F9A602 50%, #FFD700 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  font-weight: 700;
   letter-spacing: 0.15em;
-  text-shadow: 0 2px 4px rgba(26, 115, 232, 0.3);
+  text-shadow: 0 2px 4px rgba(251, 188, 5, 0.3);
+  text-transform: uppercase;
+}
+
+.footer-logo:hover .logo-icon {
+  background: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.footer-logo-img {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  background-color: #0a1930;
+  display: block;
+  border: 1px solid rgba(251, 188, 5, 0.4);
+  transition: all 0.3s ease;
+}
+
+.footer-logo:hover .footer-logo-img {
+  border-color: rgba(251, 188, 5, 0.8);
+  box-shadow: 0 6px 12px rgba(251, 188, 5, 0.2);
 }
 
 .company-description {
   margin-bottom: 20px;
   line-height: 1.6;
-  color: var(--text-secondary);
+  color: rgba(255, 255, 255, 0.8);
 }
 
 .social-links {
@@ -57,17 +92,19 @@
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background-color: var(--white);
-  color: var(--primary-blue);
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #FBBC05;
   transition: all 0.3s ease;
   text-decoration: none;
   font-size: 1.1rem;
+  border: 1px solid rgba(251, 188, 5, 0.3);
 }
 
 .social-links a:hover {
-  background-color: var(--primary-blue);
-  color: var(--white);
+  background-color: rgba(251, 188, 5, 0.2);
+  color: #FBBC05;
   transform: translateY(-3px);
+  border-color: rgba(251, 188, 5, 0.5);
 }
 
 .footer-links {
@@ -77,7 +114,7 @@
 }
 
 .footer-heading {
-  color: var(--text-primary);
+  color: white;
   font-size: 1.2rem;
   margin-bottom: 20px;
   font-weight: 600;
@@ -94,13 +131,13 @@
 }
 
 .footer-list a {
-  color: var(--text-secondary);
+  color: rgba(255, 255, 255, 0.8);
   transition: color 0.3s ease;
   text-decoration: none;
 }
 
 .footer-list a:hover {
-  color: var(--primary-blue);
+  color: #FBBC05;
 }
 
 .contact-list li {
@@ -112,7 +149,7 @@
 .contact-list i {
   margin-top: 4px;
   margin-right: 15px;
-  color: var(--primary-blue);
+  color: #FBBC05;
   font-size: 1rem;
 }
 
@@ -121,7 +158,7 @@
   justify-content: space-between;
   align-items: center;
   padding-top: 20px;
-  border-top: 1px solid var(--light-gray);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
   font-size: 0.9rem;
 }
 
@@ -131,13 +168,109 @@
 
 .footer-bottom-links a {
   margin-left: 20px;
-  color: var(--text-secondary);
+  color: rgba(255, 255, 255, 0.7);
   text-decoration: none;
   transition: color 0.3s ease;
 }
 
 .footer-bottom-links a:hover {
-  color: var(--primary-blue);
+  color: #FBBC05;
+}
+
+/* Add decorative elements */
+.footer-decoration {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+}
+
+.deco-circle {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.1;
+}
+
+.circle-1 {
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, #FBBC05 0%, transparent 70%);
+  top: -150px;
+  right: 10%;
+}
+
+.circle-2 {
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(circle, #4285F4 0%, transparent 70%);
+  bottom: -100px;
+  left: 5%;
+}
+
+.deco-line {
+  position: absolute;
+  background: linear-gradient(90deg, transparent, rgba(251, 188, 5, 0.2), transparent);
+  height: 1px;
+}
+
+.line-1 {
+  width: 80%;
+  top: 30%;
+  left: 10%;
+}
+
+.line-2 {
+  width: 60%;
+  bottom: 20%;
+  right: 5%;
+}
+
+/* Newsletter styles */
+.newsletter-signup {
+  margin-bottom: 25px;
+}
+
+.newsletter-signup h4 {
+  color: white;
+  margin-bottom: 10px;
+}
+
+.newsletter-signup p {
+  margin-bottom: 15px;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.newsletter-form {
+  display: flex;
+}
+
+.newsletter-form input {
+  flex-grow: 1;
+  padding: 10px 15px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 4px 0 0 4px;
+  color: white;
+}
+
+.newsletter-form input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.btn-subscribe {
+  background: linear-gradient(135deg, #FBBC05 0%, #F9A602 100%);
+  border: none;
+  color: #0a1930;
+  padding: 10px 15px;
+  border-radius: 0 4px 4px 0;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-subscribe:hover {
+  background: linear-gradient(135deg, #FFD700 0%, #FBBC05 100%);
 }
 
 /* Responsive */

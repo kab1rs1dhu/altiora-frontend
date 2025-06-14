@@ -4,25 +4,25 @@
   top: 0;
   left: 0;
   width: 100%;
-  background: linear-gradient(to right, #ffffff 0%, #f8fbff 100%);
-  box-shadow: 0 4px 15px rgba(26, 115, 232, 0.12);
-  padding: 0px 0 25px 0;
+  background: linear-gradient(135deg, #0a1930 0%, #1a2942 100%);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  padding: 0;
   z-index: 1000;
-  border-bottom: 2px solid rgba(26, 115, 232, 0.15);
+  border-bottom: 2px solid rgba(255, 255, 255, 0.1);
   overflow: hidden; /* Ensure elements aren't cut off */
+  margin-bottom: 0;
 }
 
 .navbar-container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 20px;
+  padding: 10px 20px;
   display: flex;
   align-items: center; /* Changed from flex-start to center */
   justify-content: center; /* Center horizontally */
   position: relative;
-  min-height: 80px;
+  min-height: 60px;
   overflow: visible;
-  padding-top: 5px;
 }
 
 .navbar-logo-container {
@@ -31,7 +31,7 @@
   top: 50%; /* Center vertically */
   transform: translateY(-50%);
   padding: 5px;
-  background: linear-gradient(135deg, rgba(26, 115, 232, 0.08) 0%, rgba(66, 133, 244, 0.05) 100%);
+  background: rgba(255, 255, 255, 0.1);
   border-radius: 12px;
   transition: all 0.3s ease;
   z-index: 10;
@@ -40,7 +40,8 @@
 
 .navbar-logo-container:hover {
   transform: translateY(-50%) scale(1.02); /* Keep centered while scaling */
-  box-shadow: 0 5px 15px rgba(26, 115, 232, 0.18);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  background: rgba(255, 255, 255, 0.15);
 }
 
 .navbar-logo {
@@ -48,11 +49,16 @@
   height: 60px; /* Reduced size */
   object-fit: cover;
   border-radius: 10px;
-  box-shadow: 0 4px 12px rgba(26, 115, 232, 0.2);
-  background-color: white;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  background-color: #0a1930;
   display: block;
-  border: 2px solid rgba(26, 115, 232, 0.1);
+  border: 2px solid rgba(251, 188, 5, 0.4);
   transition: all 0.3s ease;
+}
+
+.navbar-logo-container:hover .navbar-logo {
+  border-color: rgba(251, 188, 5, 0.8);
+  box-shadow: 0 6px 15px rgba(251, 188, 5, 0.2);
 }
 
 .navbar-title {
@@ -68,17 +74,17 @@
   font-family: 'Knockout Sumo', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   font-size: 2.5rem;
   font-weight: normal;
-  color: #1a73e8;
+  color: #FBBC05;
   letter-spacing: 0.1em;
   margin: 0;
-  background: linear-gradient(135deg, #1a73e8 0%, #4285f4 60%, #5e9bff 100%);
+  background: linear-gradient(135deg, #FBBC05 0%, #F9A602 50%, #FFD700 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
   text-transform: uppercase;
   position: relative;
   padding: 0 10px;
-  text-shadow: 0 2px 10px rgba(26, 115, 232, 0.1);
+  text-shadow: 0 2px 10px rgba(251, 188, 5, 0.3);
   line-height: 1;
   display: inline-block;
   max-width: 100%;

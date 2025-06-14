@@ -49,20 +49,12 @@ const Footer = () => {
           <div className="footer-branding">
             <Link to="/" className="footer-logo">
               <div className="logo-icon">
-                <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M16 0L32 8V24L16 32L0 24V8L16 0Z" fill="url(#paint0_linear)" />
-                  <path d="M16 6L26 11V21L16 26L6 21V11L16 6Z" fill="url(#paint1_linear)" />
-                  <defs>
-                    <linearGradient id="paint0_linear" x1="0" y1="0" x2="32" y2="32" gradientUnits="userSpaceOnUse">
-                      <stop stopColor="#1A73E8" />
-                      <stop offset="1" stopColor="#4285F4" />
-                    </linearGradient>
-                    <linearGradient id="paint1_linear" x1="6" y1="6" x2="26" y2="26" gradientUnits="userSpaceOnUse">
-                      <stop stopColor="#FFFFFF" />
-                      <stop offset="1" stopColor="#E8F0FE" />
-                    </linearGradient>
-                  </defs>
-                </svg>
+                <img 
+                  src="/images/logo.jpg" 
+                  alt="Altiora" 
+                  className="footer-logo-img"
+                  draggable="false"
+                />
               </div>
               <span className="logo-text">ALTIORA</span>
             </Link>

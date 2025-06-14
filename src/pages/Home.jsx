@@ -604,6 +604,81 @@ const Home = () => {
         </div>
       </section>
 
+      {/* Our Process Section */}
+      <section className="section process-section futuristic-section" id="process-section">
+        <div className="process-blob blob-1"></div>
+        <div className="process-blob blob-2"></div>
+        
+        <div className="container">
+          <div className="section-heading">
+            <span className="section-subtitle">How We Work</span>
+            <h2 className="section-title">
+              <span className="text-gradient">Our Proven Process</span>
+            </h2>
+            <p className="section-description">
+              We follow a structured approach to ensure consistent results and transparent communication
+            </p>
+          </div>
+
+          <div className="process-steps">
+            <div className="process-step">
+              <div className="step-number">1</div>
+              <div className="step-content">
+                <div className="step-icon">
+                  <i className="fa-solid fa-magnifying-glass-chart"></i>
+                </div>
+                <h3>Discovery & Analysis</h3>
+                <p>We begin by thoroughly understanding your business, goals, target audience, and current digital presence to identify opportunities.</p>
+              </div>
+            </div>
+            
+            <div className="process-step">
+              <div className="step-number">2</div>
+              <div className="step-content">
+                <div className="step-icon">
+                  <i className="fa-solid fa-sitemap"></i>
+                </div>
+                <h3>Strategic Planning</h3>
+                <p>Based on our analysis, we develop a customized strategy that aligns with your business objectives and maximizes your ROI.</p>
+              </div>
+            </div>
+            
+            <div className="process-step">
+              <div className="step-number">3</div>
+              <div className="step-content">
+                <div className="step-icon">
+                  <i className="fa-solid fa-rocket"></i>
+                </div>
+                <h3>Implementation</h3>
+                <p>Our expert team executes the strategy with precision, leveraging cutting-edge tools and best practices to deliver exceptional results.</p>
+              </div>
+            </div>
+            
+            <div className="process-step">
+              <div className="step-number">4</div>
+              <div className="step-content">
+                <div className="step-icon">
+                  <i className="fa-solid fa-chart-line"></i>
+                </div>
+                <h3>Monitoring & Optimization</h3>
+                <p>We continuously track performance, analyze data, and make data-driven adjustments to optimize your campaigns for maximum impact.</p>
+              </div>
+            </div>
+            
+            <div className="process-step">
+              <div className="step-number">5</div>
+              <div className="step-content">
+                <div className="step-icon">
+                  <i className="fa-solid fa-arrows-spin"></i>
+                </div>
+                <h3>Reporting & Refinement</h3>
+                <p>Regular detailed reports keep you informed of progress, while we refine strategies based on insights and changing market conditions.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* CTA Section with Animated Background */}
       <section className="cta-section futuristic-cta">
         <div className="cta-background">
