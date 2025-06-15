@@ -2733,3 +2733,352 @@ p {
   animation-delay: -3s;
   background: rgba(66, 133, 244, 0.2);
 }
+
+/* Add these additional CSS rules to Home.css to ensure full visibility of the process section */
+
+/* Process Step Animation and Visibility */
+.process-step {
+  position: relative;
+  opacity: 0;
+  transform: translateX(-30px);
+  transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1), 
+              transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: opacity, transform;
+}
+
+.process-step.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Step number styling */
+.step-number {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  color: white;
+  font-size: 1.8rem;
+  font-weight: 700;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 2;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+/* Enhance visibility for section headings */
+.section-heading {
+  text-align: center;
+  margin-bottom: 60px;
+  position: relative;
+  z-index: 5; /* Ensure it's above background elements */
+}
+
+.section-subtitle {
+  display: inline-block;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 10px;
+  position: relative;
+  padding-bottom: 5px;
+  font-weight: 600;
+}
+
+.section-subtitle::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40px;
+  height: 2px;
+  background: linear-gradient(90deg, #4285F4, #34A853);
+}
+
+.section-title {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  color: white;
+  position: relative;
+}
+
+.section-description {
+  font-size: 1.1rem;
+  color: rgba(255, 255, 255, 0.9);
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* Ensure contrast for text and backgrounds */
+.futuristic-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.2); /* Darken background slightly to increase contrast */
+  z-index: 0;
+}
+
+/* Add interactive hover states */
+.process-step:hover .step-number {
+  transform: scale(1.1);
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.5);
+  box-shadow: 0 0 25px rgba(255, 255, 255, 0.3);
+}
+
+/* Ensure process steps are properly spaced and aligned */
+.process-steps {
+  position: relative;
+  z-index: 2;
+}
+
+/* Add a connecting line between steps */
+.process-steps::before {
+  content: '';
+  position: absolute;
+  top: 35px;
+  left: 35px;
+  width: 2px;
+  height: calc(100% - 70px);
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.1));
+  z-index: 1;
+}
+
+@media (max-width: 768px) {
+  .process-steps::before {
+    left: 30px;
+  }
+  
+  .step-number {
+    width: 60px;
+    height: 60px;
+    font-size: 1.5rem;
+  }
+  
+  .section-title {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .process-steps::before {
+    left: 25px;
+  }
+  
+  .step-number {
+    width: 50px;
+    height: 50px;
+    font-size: 1.2rem;
+  }
+  
+  .section-title {
+    font-size: 1.8rem;
+  }
+}
+
+/* Add these styles to your Home.css file to ensure the process section is visible */
+
+/* Process Section visibility fixes */
+.process-section {
+  position: relative;
+  padding: 120px 0;
+  background: linear-gradient(135deg, #0a1930 0%, #1a2942 100%);
+  overflow: hidden;
+  z-index: 1; /* Ensure proper stacking context */
+  display: block; /* Guarantee section is displayed */
+  visibility: visible; /* Explicitly set visibility */
+}
+
+/* Make process blobs more visible with increased opacity */
+.process-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(60px);
+  opacity: 0.7; /* Increased from 0.6 */
+  z-index: 0; /* Place behind content */
+}
+
+.process-blob.blob-1 {
+  top: -150px;
+  left: -100px;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(66, 133, 244, 0.7), rgba(26, 115, 232, 0.2));
+}
+
+.process-blob.blob-2 {
+  bottom: -150px;
+  right: -100px;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(52, 168, 83, 0.7), rgba(26, 115, 232, 0.2));
+}
+
+/* Ensure process steps are visible */
+.process-steps {
+  position: relative;
+  z-index: 2; /* Place above background elements */
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+}
+
+.process-step {
+  display: flex;
+  align-items: flex-start;
+  gap: 30px;
+  opacity: 1; /* Ensure full opacity */
+  transform: none; /* Reset any transforms that might hide it */
+}
+
+/* Ensure text and elements are clearly visible */
+.process-section .section-title, 
+.process-section .section-subtitle,
+.process-section .section-description,
+.step-content h3,
+.step-content p {
+  color: white;
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Ensure text gradient is visible */
+.process-section .text-gradient {
+  background: linear-gradient(135deg, #4285F4 0%, #34A853 50%, #FBBC05 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-weight: 700;
+  opacity: 1;
+}
+
+/* Add hover effects for interactive elements */
+.process-step:hover .step-number {
+  transform: scale(1.1);
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+}
+
+.process-step:hover .step-icon {
+  transform: rotate(5deg);
+}
+
+/* Better step icon visibility */
+.step-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 60px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  margin-bottom: 15px;
+  transition: all 0.3s ease;
+}
+
+.step-icon i {
+  font-size: 1.5rem;
+  color: white;
+}
+
+/* This CSS fixes the connecting line issue in the process section */
+
+/* Remove the continuous line that runs from step 1 to the end */
+.process-steps::before {
+  display: none; /* Remove the continuous vertical line */
+}
+
+/* Create individual connections between steps instead */
+.process-step {
+  position: relative;
+}
+
+/* Add individual connecting lines between steps */
+.process-step:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  top: 70px; /* Position it below the step number */
+  left: 35px; /* Align with the center of the step number */
+  width: 2px;
+  height: calc(100% - 50px); /* Adjust height to not connect all the way to the next step number */
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.1));
+  z-index: 1;
+  transform: translateX(-50%); /* Center the line */
+}
+
+/* Adjust the connection lines for different screen sizes */
+@media (max-width: 768px) {
+  .process-step:not(:last-child)::after {
+    left: 30px;
+    top: 60px;
+  }
+}
+
+@media (max-width: 480px) {
+  .process-step:not(:last-child)::after {
+    left: 25px;
+    top: 50px;
+  }
+}
+
+/* Alternative approach: If you prefer no connecting lines at all */
+/* Uncomment this section and comment out the code above if you want to remove all lines */
+/*
+.process-step:not(:last-child)::after {
+  display: none;
+}
+*/
+
+/* Remove all connecting lines between steps */
+.process-steps::before {
+  display: none; /* Remove the continuous vertical line */
+}
+
+.process-step:not(:last-child)::after {
+  display: none; /* Remove individual connecting lines between steps */
+}
+
+/* Ensure proper spacing between steps without the connecting lines */
+.process-steps {
+  gap: 40px; /* Maintain good spacing between steps */
+}
+
+/* Make step numbers more prominent since they're the main visual element now */
+.step-number {
+  width: 80px;
+  height: 80px;
+  font-size: 2rem;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+}
+
+.process-step:hover .step-number {
+  transform: scale(1.1);
+  border-color: rgba(255, 255, 255, 0.5);
+  box-shadow: 0 0 25px rgba(255, 255, 255, 0.3);
+}
+
+@media (max-width: 768px) {
+  .step-number {
+    width: 70px;
+    height: 70px;
+    font-size: 1.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .step-number {
+    width: 60px;
+    height: 60px;
+    font-size: 1.5rem;
+  }
+}
