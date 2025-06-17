@@ -343,32 +343,38 @@ const WebDevelopment = () => {
     {
       icon: '🎯',
       title: 'Strategic Approach',
-      description: 'We don\'t just build websites; we create strategic digital assets designed to achieve your business goals.'
+      description: 'We don\'t just build websites; we create strategic digital assets designed to achieve your business goals.',
+      dataFeature: 'strategic'
     },
     {
       icon: '👥',
       title: 'User-Centered Design',
-      description: 'We place your users at the center of the design process, creating intuitive experiences that convert.'
+      description: 'We place your users at the center of the design process, creating intuitive experiences that convert.',
+      dataFeature: 'user-centered'
     },
     {
       icon: '🔍',
       title: 'SEO-Friendly Development',
-      description: 'Our websites are built with search engines in mind, helping you rank higher and attract more organic traffic.'
+      description: 'Our websites are built with search engines in mind, helping you rank higher and attract more organic traffic.',
+      dataFeature: 'seo'
     },
     {
       icon: '📱',
       title: 'Mobile-First Approach',
-      description: 'We ensure your website delivers an excellent experience across all devices, especially mobile.'
+      description: 'We ensure your website delivers an excellent experience across all devices, especially mobile.',
+      dataFeature: 'mobile'
     },
     {
       icon: '⚡',
       title: 'Performance Optimization',
-      description: 'We build fast-loading websites that provide a smooth user experience and better search rankings.'
+      description: 'We build fast-loading websites that provide a smooth user experience and better search rankings.',
+      dataFeature: 'performance'
     },
     {
       icon: '🔒',
       title: 'Security Focus',
-      description: 'We implement robust security measures to protect your website and your users\' data from threats.'
+      description: 'We implement robust security measures to protect your website and your users\' data from threats.',
+      dataFeature: 'security'
     }
   ]
 
@@ -869,12 +875,14 @@ const WebDevelopment = () => {
       </section>
 
       {/* Why Choose Us Section */}
-      <section className="section why-choose-section" ref={whyChooseRef}>
-        <div className="container">
-          <h2 className="section-title text-center">{whyChooseTitle}</h2>
-          <p className="section-description text-center">
-            What sets our web development services apart
-          </p>
+      <section className="section why-choose-section webdev-why-choose" ref={whyChooseRef}>
+        <div className="container why-choose-container">
+          <div className="why-choose-header">
+            <h2 className="section-title">{whyChooseTitle}</h2>
+            <p className="section-description">
+              What sets our web development services apart
+            </p>
+          </div>
           
           <div className="why-choose-grid">
             {whyChooseItems.map((item, index) => (
@@ -882,6 +890,7 @@ const WebDevelopment = () => {
                 className={`why-choose-card ${visibleWhyChooseItems.includes(index) ? 'visible' : ''}`} 
                 key={index}
                 style={{ transitionDelay: `${index * 0.15}s` }}
+                data-feature={item.dataFeature || ''}
               >
                 <div className="why-choose-icon">
                   <i className="icon">{item.icon}</i>

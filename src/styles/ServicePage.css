@@ -269,6 +269,7 @@
   }
   
   .overview-content {
+    color: white;
     order: 1;
   }
   
@@ -412,9 +413,10 @@
 }
 
 .overview-content p {
+  color: rgba(255, 255, 255, 0.8);
   margin-bottom: 20px;
-  color: var(--text-secondary);
   font-size: 1.1rem;
+  line-height: 1.8;
 }
 
 .overview-stats {
@@ -431,7 +433,7 @@
 }
 
 .stat p {
-  color: var(--text-secondary);
+  color: rgba(255, 255, 255, 0.8);
   font-size: 1rem;
   margin-bottom: 0;
 }
@@ -486,12 +488,13 @@
 .service-detail-card h3 {
   font-size: 1.3rem;
   margin-bottom: 15px;
-  color: var(--text-primary);
+  color: #FBBC05;
 }
 
 .service-detail-card p {
-  color: var(--text-secondary);
+  color: rgba(255, 255, 255, 0.8);
   margin-bottom: 0;
+  line-height: 1.6;
 }
 
 /* Process Section */
@@ -694,6 +697,7 @@
   }
   
   .overview-content {
+    color: white;
     order: 1;
   }
   
