@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
 .footer {
-  background: linear-gradient(135deg, #0a1930 0%, #1a2942 100%);
+  background: linear-gradient(135deg, #02002D 0%, #02002D 100%);
   color: rgba(255, 255, 255, 0.8);
   padding: 60px 0 20px;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
@@ -63,7 +63,7 @@
   object-fit: cover;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-  background-color: #0a1930;
+  background-color: #02002D;
   display: block;
   border: 1px solid rgba(251, 188, 5, 0.4);
   transition: all 0.3s ease;
