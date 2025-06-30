@@ -13,7 +13,7 @@
 .webdev-hero {
   position: relative;
   overflow: hidden;
-  background: linear-gradient(135deg, #0a1930 0%, #1a2942 100%);
+  background: linear-gradient(135deg, #02002D 0%, #02002D 100%);
   color: white;
 }
 
@@ -107,7 +107,7 @@
 
 /* Overview section enhancements */
 .webdev-overview {
-  background: linear-gradient(135deg, #0a1930 0%, #1a2942 100%);
+  background: linear-gradient(135deg, #02002D 0%, #02002D 100%);
   color: white;
   position: relative;
 }
@@ -188,7 +188,7 @@
 
 /* Services section enhancements */
 .webdev-services {
-  background: linear-gradient(135deg, #0a1930 0%, #1a2942 100%);
+  background: linear-gradient(135deg, #02002D 0%, #02002D 100%);
   color: white;
   position: relative;
 }
@@ -241,7 +241,7 @@
 }
 
 .webdev-services .service-detail-card:hover .service-detail-icon i {
-  color: #0a1930;
+  color: #02002D;
 }
 
 .webdev-services .service-detail-card h3 {
@@ -257,7 +257,7 @@
 
 /* Process section enhancements */
 .webdev-process {
-  background: linear-gradient(135deg, #0a1930 0%, #1a2942 100%);
+  background: linear-gradient(135deg, #02002D 0%, #02002D 100%);
   color: white;
   position: relative;
   padding: 80px 0;
@@ -286,7 +286,7 @@
   overflow: hidden;
   transition: all 0.4s var(--animation-timing);
   background: var(--webdev-highlight);
-  color: #0a1930;
+  color: #02002D;
   width: 40px;
   height: 40px;
   display: flex;
@@ -376,7 +376,7 @@
 .process-cta p {
   font-size: 1.2rem;
   margin-bottom: 20px;
-  color: var(--text-primary);
+  color: #ffffff !important;
   font-weight: 500;
 }
 
@@ -397,7 +397,7 @@
 
 /* Technology section enhancements */
 .webdev-technologies {
-  background: linear-gradient(135deg, #0a1930 0%, #1a2942 100%);
+  background: linear-gradient(135deg, #02002D 0%, #02002D 100%);
   padding: 80px 0;
   position: relative;
   color: white;
@@ -501,17 +501,20 @@
 .technology-tab:hover {
   background: rgba(251, 188, 5, 0.1);
   color: var(--webdev-highlight);
+  border-color: var(--webdev-highlight);
+  transform: none;
 }
 
 .technology-tab.active {
   background: var(--webdev-highlight);
-  color: #0a1930;
+  color: #02002D;
   border-color: var(--webdev-highlight);
+  transform: none;
 }
 
 /* Results section styles */
 .webdev-results {
-  background: linear-gradient(135deg, #0a1930 0%, #1a2942 100%);
+  background: linear-gradient(135deg, #02002D 0%, #02002D 100%);
   padding: 80px 0;
   position: relative;
   overflow: hidden;
@@ -602,7 +605,7 @@
 
 /* Portfolio section */
 .webdev-portfolio {
-  background: linear-gradient(135deg, #0a1930 0%, #1a2942 100%);
+  background: linear-gradient(135deg, #02002D 0%, #02002D 100%);
   padding: 80px 0;
   position: relative;
   color: white;
@@ -718,7 +721,7 @@
 
 /* Testimonials section styles */
 .webdev-testimonials {
-  background: linear-gradient(135deg, #0a1930 0%, #1a2942 100%);
+  background: linear-gradient(135deg, #02002D 0%, #02002D 100%);
   padding: 80px 0;
   position: relative;
   overflow: hidden;
@@ -868,7 +871,7 @@
 
 /* FAQ enhancements */
 .webdev-faq {
-  background: linear-gradient(135deg, #0a1930 0%, #1a2942 100%);
+  background: linear-gradient(135deg, #02002D 0%, #02002D 100%);
   padding: 80px 0;
   position: relative;
   color: white;
@@ -921,6 +924,7 @@
 .webdev-faq .faq-item h3 {
   position: relative;
   padding-left: 30px;
+  color: rgba(255, 255, 255, 0.9);
 }
 
 .webdev-faq .faq-item h3::before {
@@ -958,12 +962,15 @@
 .faq-tab:hover {
   background: rgba(251, 188, 5, 0.1);
   color: var(--webdev-highlight);
+  border-color: var(--webdev-highlight);
+  transform: none;
 }
 
 .faq-tab.active {
   background: var(--webdev-highlight);
-  color: #0a1930;
+  color: #02002D;
   border-color: var(--webdev-highlight);
+  transform: none;
 }
 
 /* FAQ content tabs */
@@ -1005,7 +1012,7 @@
 .faq-cta .btn {
   background: var(--webdev-highlight);
   border-color: var(--webdev-highlight);
-  color: #0a1930;
+  color: #02002D;
   font-weight: 600;
   padding: 12px 30px;
   transition: all 0.3s ease;
@@ -1013,7 +1020,7 @@
 
 /* CTA enhancements */
 .webdev-cta {
-  background: linear-gradient(135deg, #0a1930 0%, #1a2942 100%);
+  background: linear-gradient(135deg, #02002D 0%, #02002D 100%);
   padding: 80px 0;
   position: relative;
   overflow: hidden;
@@ -1163,7 +1170,7 @@
 
 /* Why Choose Us section */
 .webdev-why-choose {
-  background: linear-gradient(135deg, #0a1930 0%, #1a2942 100%);
+  background: linear-gradient(135deg, #02002D 0%, #02002D 100%);
   padding: 80px 0;
   position: relative;
   color: white;
@@ -1198,9 +1205,9 @@
 }
 
 .why-choose-card {
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, 0.08);
   backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.15);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
   padding: 30px;
   border-radius: 12px;
@@ -1215,25 +1222,7 @@
   box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
 }
 
-.why-choose-icon {
-  width: 70px;
-  height: 70px;
-  border-radius: 50%;
-  background: rgba(251, 188, 5, 0.1);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 auto 20px;
-  transition: all 0.4s ease;
-  font-size: 2rem;
-  color: var(--webdev-highlight);
-}
-
-.why-choose-card:hover .why-choose-icon {
-  background: var(--webdev-highlight);
-  color: #0a1930;
-  transform: rotate(360deg);
-}
+/* Why Choose Icon styles moved to GlobalIcons.css */
 
 .why-choose-card h3 {
   color: var(--webdev-highlight);
@@ -1398,7 +1387,7 @@ button:active {
 .btn-primary {
   background: var(--webdev-highlight) !important;
   border-color: var(--webdev-highlight) !important;
-  color: #0a1930;
+  color: #02002D;
 }
 
 .btn-outline-primary {
@@ -1408,7 +1397,7 @@ button:active {
 
 .btn-outline-primary:hover {
   background: var(--webdev-highlight) !important;
-  color: #0a1930 !important;
+  color: #02002D !important;
 }
 
 /* FAQ section additional styling */
@@ -1424,7 +1413,7 @@ button:active {
 
 /* CTA section styling */
 .webdev-cta {
-  background: linear-gradient(135deg, #0a1930 0%, #1a2942 100%);
+  background: linear-gradient(135deg, #02002D 0%, #02002D 100%);
   padding: 80px 0;
   position: relative;
   overflow: hidden;
@@ -1448,7 +1437,7 @@ button:active {
 
 /* Approach section with different shade of blue */
 .approach-section {
-  background: linear-gradient(135deg, #0c203d 0%, #233457 100%);
+  background: linear-gradient(135deg, #02002D 0%, #02002D 100%);
   padding: 80px 0;
   position: relative;
   color: white;
@@ -1467,25 +1456,27 @@ button:active {
 }
 
 .approach-card {
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, 0.08);
   backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.15);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
   border-radius: 12px;
   padding: 30px;
   position: relative;
   overflow: hidden;
+  opacity: 0;
+  transform: translateY(30px);
   transition: all 0.4s ease;
 }
 
-.approach-card:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+.approach-card.visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .approach-number {
   background: var(--webdev-highlight);
-  color: #0c203d;
+  color: #02002D;
   width: 40px;
   height: 40px;
   border-radius: 50%;

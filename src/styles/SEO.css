@@ -13,7 +13,7 @@
 .seo-hero {
   position: relative;
   overflow: hidden;
-  background: linear-gradient(135deg, #0a1930 0%, #1a2942 100%);
+  background: linear-gradient(135deg, #02002D 0%, #02002D 100%);
   color: white;
 }
 
@@ -107,7 +107,7 @@
 
 /* Overview section enhancements */
 .seo-overview {
-  background: linear-gradient(135deg, #0a1930 0%, #1a2942 100%);
+  background: linear-gradient(135deg, #02002D 0%, #02002D 100%);
   color: white;
   position: relative;
 }
@@ -178,7 +178,7 @@
 
 /* Services section enhancements */
 .seo-services {
-  background: linear-gradient(135deg, #0a1930 0%, #1a2942 100%);
+  background: linear-gradient(135deg, #02002D 0%, #02002D 100%);
   color: white;
   position: relative;
 }
@@ -231,7 +231,7 @@
 }
 
 .seo-services .service-detail-card:hover .service-detail-icon i {
-  color: #0a1930;
+  color: #02002D;
 }
 
 .seo-services .service-detail-card h3 {
@@ -242,7 +242,7 @@
 
 /* Process section enhancements */
 .seo-process {
-  background: linear-gradient(135deg, #0a1930 0%, #1a2942 100%);
+  background: linear-gradient(135deg, #02002D 0%, #02002D 100%);
   color: white;
   position: relative;
 }
@@ -270,7 +270,7 @@
   overflow: hidden;
   transition: all 0.4s var(--animation-timing);
   background: var(--seo-highlight);
-  color: #0a1930;
+  color: #02002D;
   width: 40px;
   height: 40px;
   display: flex;
@@ -291,8 +291,8 @@
 
 /* New Results section styles */
 .seo-results {
-  background: linear-gradient(135deg, #0a1930 0%, #1a2942 100%);
-  padding: 80px 0;
+  background: linear-gradient(135deg, #02002D 0%, #02002D 100%);
+  padding: 120px 0;
   position: relative;
   overflow: hidden;
   color: white;
@@ -365,7 +365,7 @@
 }
 
 .result-card:hover .result-icon i {
-  color: #0a1930;
+  color: #02002D;
 }
 
 .result-card h3 {
@@ -383,8 +383,8 @@
 
 /* SEO Strategies section */
 .seo-strategies {
-  background: linear-gradient(135deg, #0a1930 0%, #1a2942 100%);
-  padding: 80px 0;
+  background: linear-gradient(135deg, #02002D 0%, #02002D 100%);
+  padding: 120px 0;
   position: relative;
   color: white;
 }
@@ -488,8 +488,8 @@
 
 /* Testimonials section */
 .seo-testimonials {
-  background: linear-gradient(135deg, #0a1930 0%, #1a2942 100%);
-  padding: 80px 0;
+  background: linear-gradient(135deg, #02002D 0%, #02002D 100%);
+  padding: 120px 0;
   position: relative;
   overflow: hidden;
   color: white;
@@ -618,7 +618,7 @@
 
 .testimonial-arrow:hover {
   background: var(--seo-highlight);
-  color: #0a1930;
+  color: #02002D;
   transform: scale(1.1);
 }
 
@@ -632,8 +632,8 @@
 
 /* FAQ section */
 .seo-faq {
-  background: linear-gradient(135deg, #0a1930 0%, #1a2942 100%);
-  padding: 80px 0;
+  background: linear-gradient(135deg, #02002D 0%, #02002D 100%);
+  padding: 120px 0;
   position: relative;
   color: white;
 }
@@ -689,7 +689,7 @@
 
 .faq-tab.active {
   background: var(--seo-highlight);
-  color: #0a1930;
+  color: #02002D;
   font-weight: 600;
   border-color: var(--seo-highlight);
   box-shadow: 0 5px 15px rgba(251, 188, 5, 0.2);
@@ -715,8 +715,8 @@
 
 /* CTA section */
 .seo-cta {
-  background: linear-gradient(135deg, #0a1930 0%, #1a2942 100%);
-  padding: 80px 0;
+  background: linear-gradient(135deg, #02002D 0%, #02002D 100%);
+  padding: 120px 0;
   position: relative;
   overflow: hidden;
   color: white;
@@ -864,7 +864,7 @@
 
 .process-step-toggle:hover {
   background: var(--seo-highlight);
-  color: #0a1930;
+  color: #02002D;
 }
 
 .process-step-toggle i {
@@ -912,8 +912,8 @@
 
 /* FAQ section */
 .seo-faq {
-  background: linear-gradient(135deg, #0a1930 0%, #1a2942 100%);
-  padding: 80px 0;
+  background: linear-gradient(135deg, #02002D 0%, #02002D 100%);
+  padding: 120px 0;
   position: relative;
   color: white;
 }
@@ -957,7 +957,7 @@
 
 .faq-tab.active {
   background: var(--seo-highlight);
-  color: #0a1930;
+  color: #02002D;
   font-weight: 600;
   border-color: var(--seo-highlight);
   box-shadow: 0 5px 15px rgba(251, 188, 5, 0.2);

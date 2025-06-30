@@ -1,0 +1,182 @@
+/* Global Icons Styling
+   Consistent styling for all icons throughout the site */
+
+/* Base icon container styles */
+.service-icon,
+.benefit-icon,
+.why-choose-icon,
+.channel-icon,
+.result-icon,
+.step-icon,
+.feature-icon,
+.process-step-icon,
+.industry-icon {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 25px;
+  transition: all 0.5s var(--animation-timing);
+  border: none;
+  background-color: rgba(var(--card-color-rgb, 26, 115, 232), 0.1);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Base icon styles */
+.service-icon i,
+.benefit-icon i,
+.why-choose-icon i,
+.channel-icon i,
+.result-icon i,
+.step-icon i,
+.feature-icon i,
+.process-step-icon i,
+.industry-icon i,
+.why-choose-icon::before,
+.channel-icon::before,
+.result-icon::before,
+.step-icon::before,
+.feature-icon::before,
+.process-step-icon::before,
+.industry-icon::before {
+  font-size: 2rem;
+  color: var(--card-color, var(--primary-blue));
+  transition: all 0.5s var(--animation-timing);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+/* Hover effects for icons inside cards */
+.service-card:hover .service-icon,
+.benefit-card:hover .benefit-icon,
+.why-choose-card:hover .why-choose-icon,
+.channel-card:hover .channel-icon,
+.result-card:hover .result-icon,
+.process-step:hover .step-icon,
+.feature-item:hover .feature-icon,
+.industry-card:hover .industry-icon {
+  transform: scale(1.1);
+  background-color: var(--card-color, var(--primary-blue));
+  box-shadow: 0 8px 25px rgba(var(--card-color-rgb, 26, 115, 232), 0.3);
+}
+
+/* Hover effects for icon colors */
+.service-card:hover .service-icon i,
+.benefit-card:hover .benefit-icon i,
+.why-choose-card:hover .why-choose-icon i,
+.why-choose-card:hover .why-choose-icon::before,
+.channel-card:hover .channel-icon i,
+.result-card:hover .result-icon i,
+.process-step:hover .step-icon i,
+.feature-item:hover .feature-icon i,
+.industry-card:hover .industry-icon i {
+  color: white !important;
+}
+
+/* Card-specific hover effects */
+/* Service Cards */
+.service-card:hover {
+  transform: translateY(-10px);
+}
+
+/* Benefit Cards - No vertical movement per user request */
+.benefit-card:hover {
+  transform: none;
+}
+
+/* Why Choose Cards */
+.why-choose-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+}
+
+/* Channel Cards */
+.channel-card:hover {
+  transform: translateY(-10px);
+}
+
+/* Result Cards */
+.result-card:hover {
+  transform: translateY(-10px);
+}
+
+/* Industry Cards */
+.industry-card:hover {
+  transform: translateY(-10px);
+}
+
+/* Media queries for responsive sizing */
+@media (max-width: 768px) {
+  .service-icon,
+  .benefit-icon,
+  .why-choose-icon,
+  .channel-icon,
+  .result-icon,
+  .step-icon,
+  .feature-icon,
+  .process-step-icon,
+  .industry-icon {
+    width: 70px;
+    height: 70px;
+    margin-bottom: 20px;
+  }
+  
+  .service-icon i,
+  .benefit-icon i,
+  .why-choose-icon i,
+  .channel-icon i,
+  .result-icon i,
+  .step-icon i,
+  .feature-icon i,
+  .process-step-icon i,
+  .industry-icon i,
+  .why-choose-icon::before,
+  .channel-icon::before,
+  .result-icon::before,
+  .step-icon::before,
+  .feature-icon::before,
+  .process-step-icon::before,
+  .industry-icon::before {
+    font-size: 1.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .service-icon,
+  .benefit-icon,
+  .why-choose-icon,
+  .channel-icon,
+  .result-icon,
+  .step-icon,
+  .feature-icon,
+  .process-step-icon,
+  .industry-icon {
+    width: 60px;
+    height: 60px;
+    margin-bottom: 15px;
+  }
+  
+  .service-icon i,
+  .benefit-icon i,
+  .why-choose-icon i,
+  .channel-icon i,
+  .result-icon i,
+  .step-icon i,
+  .feature-icon i,
+  .process-step-icon i,
+  .industry-icon i,
+  .why-choose-icon::before,
+  .channel-icon::before,
+  .result-icon::before,
+  .step-icon::before,
+  .feature-icon::before,
+  .process-step-icon::before,
+  .industry-icon::before {
+    font-size: 1.5rem;
+  }
+} 

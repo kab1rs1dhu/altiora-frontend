@@ -111,7 +111,9 @@ a:hover {
 .container {
   max-width: var(--max-width);
   margin: 0 auto;
-  padding: 0 20px;
+  padding: 0 40px; /* Increased horizontal padding */
+  width: 100%;
+  box-sizing: border-box;
 }
 
 /* Sections */
@@ -171,5 +173,81 @@ a:hover {
   
   .section {
     padding: 40px 0;
+  }
+  
+  .container {
+    padding: 0 30px; /* Slightly reduced padding on medium screens */
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 0 20px; /* Further reduced padding on small screens */
+  }
+}
+
+/* Global spacing improvements */
+/* Add container-like spacing for full-width sections */
+.section-full-width {
+  padding-left: 40px;
+  padding-right: 40px;
+  box-sizing: border-box;
+}
+
+/* Default all sections to have proper spacing */
+section:not(.container-fluid):not(.section-with-container) {
+  padding-left: 40px;
+  padding-right: 40px;
+  box-sizing: border-box;
+}
+
+/* Sections with container class don't need extra padding */
+.section-with-container {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+/* Make sure all grids and content have proper spacing */
+.benefits-grid,
+.services-grid,
+.why-choose-grid,
+.results-grid,
+.testimonials-container,
+.portfolio-grid,
+.process-steps,
+.faq-grid,
+.channels-grid,
+.industries-grid {
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+/* Ensure that full-bleed sections have proper spacing at large screen sizes */
+@media (min-width: 1600px) {
+  .container {
+    max-width: 1400px; /* Wider container on very large screens */
+  }
+  
+  .section-full-width,
+  section:not(.container-fluid) {
+    padding-left: 80px;
+    padding-right: 80px;
+  }
+}
+
+/* Ensure proper spacing on smaller screens */
+@media (max-width: 768px) {
+  .section-full-width,
+  section:not(.container-fluid) {
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+}
+
+@media (max-width: 480px) {
+  .section-full-width,
+  section:not(.container-fluid) {
+    padding-left: 20px;
+    padding-right: 20px;
   }
 }

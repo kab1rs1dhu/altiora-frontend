@@ -13,7 +13,7 @@
 .ppc-hero {
   position: relative;
   overflow: hidden;
-  background: linear-gradient(135deg, #0a1930 0%, #1a2942 100%);
+  background: linear-gradient(135deg, #02002D 0%, #02002D 100%);
   color: white;
 }
 
@@ -107,7 +107,7 @@
 
 /* Overview section enhancements */
 .ppc-overview {
-  background: linear-gradient(135deg, #0a1930 0%, #1a2942 100%);
+  background: linear-gradient(135deg, #02002D 0%, #02002D 100%);
   color: white;
   position: relative;
 }
@@ -183,7 +183,7 @@
 
 /* Services section enhancements */
 .ppc-services {
-  background: linear-gradient(135deg, #0a1930 0%, #1a2942 100%);
+  background: linear-gradient(135deg, #02002D 0%, #02002D 100%);
   color: white;
   position: relative;
 }
@@ -236,7 +236,7 @@
 }
 
 .ppc-services .service-detail-card:hover .service-detail-icon i {
-  color: #0a1930;
+  color: #02002D;
 }
 
 .ppc-services .service-detail-card h3 {
@@ -247,7 +247,7 @@
 
 /* Process section enhancements */
 .ppc-process {
-  background: linear-gradient(135deg, #0a1930 0%, #1a2942 100%);
+  background: linear-gradient(135deg, #02002D 0%, #02002D 100%);
   color: white;
   position: relative;
 }
@@ -275,7 +275,7 @@
   overflow: hidden;
   transition: all 0.4s var(--animation-timing);
   background: var(--ppc-highlight);
-  color: #0a1930;
+  color: #02002D;
   width: 40px;
   height: 40px;
   display: flex;
@@ -305,11 +305,50 @@
   color: rgba(255, 255, 255, 0.8);
 }
 
+/* Make process details always visible */
+.process-step-details.always-visible {
+  max-height: 500px;
+  opacity: 1;
+  margin-top: 20px;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
 .process-step.has-expanded .process-step-details {
   max-height: 500px;
   opacity: 1;
   margin-top: 20px;
   padding: 20px;
+}
+
+/* Process step detail items */
+.process-step-detail {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 12px;
+  padding: 8px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.03);
+  transition: all 0.3s ease;
+}
+
+.process-step-detail:hover {
+  background: rgba(255, 255, 255, 0.08);
+  transform: translateX(5px);
+}
+
+.process-step-detail i {
+  color: var(--ppc-highlight);
+  margin-right: 12px;
+  font-size: 14px;
+  padding-top: 3px;
+}
+
+.process-step-detail span {
+  font-size: 0.95rem;
+  line-height: 1.5;
 }
 
 /* Toggle button styling */
@@ -323,19 +362,23 @@
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.1);
   color: var(--ppc-highlight);
-  border-radius: 50%;
-  width: 36px;
-  height: 36px;
+  border-radius: 20px;
+  padding: 8px 16px;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   transition: all 0.3s ease;
+  font-size: 0.9rem;
+}
+
+.process-step-toggle span {
+  margin-right: 8px;
 }
 
 .process-step-toggle:hover {
   background: var(--ppc-highlight);
-  color: #0a1930;
+  color: #02002D;
 }
 
 .process-step-toggle i {
@@ -383,8 +426,8 @@
 
 /* Results section */
 .ppc-results {
-  background: linear-gradient(135deg, #0a1930 0%, #1a2942 100%);
-  padding: 80px 0;
+  background: linear-gradient(135deg, #02002D 0%, #02002D 100%);
+  padding: 120px 0;
   position: relative;
   overflow: hidden;
   color: white;
@@ -399,13 +442,13 @@
 
 .result-card {
   position: relative;
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--background, #02002D) !important; /* dark blue */
   backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(26, 115, 232, 0.2) !important;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
   padding: 30px;
   border-radius: 12px;
-  transition: transform 0.4s var(--animation-timing), box-shadow 0.4s var(--animation-timing);
+  transition: transform 0.4s var(--animation-timing), box-shadow 0.4s var(--animation-timing), border-color 0.4s var(--animation-timing);
   opacity: 0;
   transform: translateY(30px);
   z-index: 2;
@@ -418,7 +461,8 @@
 
 .result-card:hover {
   transform: translateY(-10px);
-  box-shadow: 0 15px 30px rgba(26, 115, 232, 0.15);
+  box-shadow: 0 15px 30px rgba(26, 115, 232, 0.3);
+  border-color: #FFFFFF !important; /* white border on hover */
 }
 
 .result-card::after {
@@ -443,40 +487,49 @@
   width: 60px;
   height: 60px;
   border-radius: 50%;
-  background: rgba(251, 188, 5, 0.1);
+  background: rgba(26, 115, 232, 0.15);
   display: flex;
   align-items: center;
   justify-content: center;
   margin-bottom: 20px;
   transition: all 0.4s var(--animation-timing);
+  border: 1px solid rgba(26, 115, 232, 0.2);
 }
 
 .result-card:hover .result-icon {
-  background: var(--ppc-highlight);
-  transform: rotateY(180deg);
+  border-color: white;
+}
+
+.result-icon i {
+  color: var(--ppc-primary);
+  font-size: 24px;
 }
 
 .result-card:hover .result-icon i {
-  color: #0a1930;
+  color: var(--ppc-primary);
 }
 
 .result-card h3 {
   margin: 15px 0;
   font-size: 1.5rem;
-  color: white;
+  color: #FBBC05 !important; /* gold heading */
   transition: color 0.3s ease;
 }
 
 .result-card p {
-  color: rgba(255, 255, 255, 0.7);
+  color: rgba(255, 255, 255, 0.9) !important; /* white paragraph */
   line-height: 1.6;
   margin-bottom: 0;
 }
 
+.result-card:hover p {
+  color: rgba(255, 255, 255, 0.9) !important;
+}
+
 /* Testimonials section */
 .ppc-testimonials {
-  background: linear-gradient(135deg, #0a1930 0%, #1a2942 100%);
-  padding: 80px 0;
+  background: linear-gradient(135deg, #02002D 0%, #02002D 100%);
+  padding: 120px 0;
   position: relative;
   overflow: hidden;
   color: white;
@@ -605,7 +658,7 @@
 
 .testimonial-arrow:hover {
   background: var(--ppc-highlight);
-  color: #0a1930;
+  color: #02002D;
   transform: scale(1.1);
 }
 
@@ -619,8 +672,8 @@
 
 /* FAQ section */
 .ppc-faq {
-  background: linear-gradient(135deg, #0a1930 0%, #1a2942 100%);
-  padding: 80px 0;
+  background: linear-gradient(135deg, #02002D 0%, #02002D 100%);
+  padding: 120px 0;
   position: relative;
   color: white;
 }
@@ -676,7 +729,7 @@
 
 .faq-tab.active {
   background: var(--ppc-highlight);
-  color: #0a1930;
+  color: #02002D;
   font-weight: 600;
   border-color: var(--ppc-highlight);
   box-shadow: 0 5px 15px rgba(251, 188, 5, 0.2);
@@ -784,8 +837,8 @@
 
 /* CTA section */
 .ppc-cta {
-  background: linear-gradient(135deg, #0a1930 0%, #1a2942 100%);
-  padding: 80px 0;
+  background: linear-gradient(135deg, #02002D 0%, #02002D 100%);
+  padding: 120px 0;
   position: relative;
   overflow: hidden;
   color: white;
@@ -926,4 +979,26 @@
     height: 50px;
     font-size: 1.2rem;
   }
+}
+
+.ppc-process .process-step-content {
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.ppc-process .process-step-content h3 {
+  color: var(--ppc-highlight);
+  margin-bottom: 15px;
+  font-size: 1.4rem;
+  font-weight: 600;
+}
+
+.ppc-process .process-step-content p {
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 20px;
+  font-size: 1.05rem;
+  line-height: 1.6;
 }

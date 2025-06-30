@@ -21,7 +21,7 @@
 .mobile-dev-hero {
   position: relative;
   overflow: hidden;
-  background: linear-gradient(135deg, #0a1930 0%, #1a2942 100%);
+  background: linear-gradient(135deg, #02002D 0%, #02002D 100%);
 }
 
 .mobile-dev-hero::before {
@@ -78,7 +78,7 @@
 
 .btn-mobile-dev {
   background: var(--mobile-dev-primary);
-  color: #0a1930;
+  color: #02002D;
   border: none;
   position: relative;
   overflow: hidden;
@@ -124,7 +124,7 @@
 .mobile-dev-overview {
   position: relative;
   overflow: hidden;
-  background: linear-gradient(135deg, #0a1930 0%, #1a2942 100%);
+  background: linear-gradient(135deg, #02002D 0%, #02002D 100%);
   color: white;
 }
 
@@ -256,7 +256,7 @@
 .mobile-dev-services {
   position: relative;
   overflow: hidden;
-  background: linear-gradient(135deg, #0a1930 0%, #1a2942 100%);
+  background: linear-gradient(135deg, #02002D 0%, #02002D 100%);
   color: white;
 }
 
@@ -321,7 +321,7 @@
 }
 
 .service-detail-card {
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, 0.04) !important;
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.1);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
@@ -379,11 +379,11 @@
 }
 
 .service-detail-card:hover .service-detail-icon i {
-  color: #0a1930;
+  color: #02002D;
 }
 
-.service-detail-card h3 {
-  color: var(--mobile-dev-primary);
+.mobile-dev-services .service-detail-card h3 {
+  color: #ffca28 !important;
   margin-bottom: 15px;
   font-size: 1.3rem;
   transition: all 0.3s ease;
@@ -401,15 +401,17 @@
 /* Process section enhancements */
 .mobile-dev-process {
   position: relative;
-  background: linear-gradient(135deg, #0a1930 0%, #1a2942 100%);
-  padding: 80px 0;
+  background: linear-gradient(135deg, #02002D 0%, #02002D 100%);
+  padding: 120px 0;
   color: white;
+  overflow: visible !important;
 }
 
 .process-steps {
   position: relative;
   margin-top: 60px;
   padding-left: 40px;
+  overflow: visible;
 }
 
 .process-step {
@@ -446,20 +448,22 @@
   width: 40px;
   height: 40px;
   background: var(--mobile-dev-primary);
-  color: #0a1930;
+  color: #02002D;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: 700;
-  z-index: 2;
+  z-index: 5;
   transition: all 0.3s ease;
   box-shadow: 0 5px 15px rgba(251, 188, 5, 0.3);
+  border: 2px solid rgba(255, 255, 255, 0.6);
+  box-sizing: border-box;
 }
 
-.process-step:hover .process-step-number {
-  transform: scale(1.1);
-  box-shadow: 0 8px 20px rgba(251, 188, 5, 0.4);
+.mobile-dev-process .process-step:hover .process-step-number {
+  transform: none !important;
+  box-shadow: 0 5px 15px rgba(251, 188, 5, 0.3);
 }
 
 .process-step-content {
@@ -507,7 +511,7 @@
 
 .process-cta .btn {
   background: var(--mobile-dev-primary);
-  color: #0a1930;
+  color: #02002D;
   border: none;
   padding: 12px 30px;
   font-weight: 600;
@@ -518,7 +522,7 @@
 .mobile-dev-technology {
   position: relative;
   background: linear-gradient(135deg, #0c203d 0%, #233457 100%);
-  padding: 80px 0;
+  padding: 120px 0;
   color: white;
   overflow: hidden;
 }
@@ -635,9 +639,10 @@
 /* Portfolio section */
 .mobile-dev-portfolio {
   position: relative;
-  background: linear-gradient(135deg, #0a1930 0%, #1a2942 100%);
-  padding: 80px 0;
+  background: linear-gradient(135deg, #02002D 0%, #02002D 100%);
+  padding: 120px 0;
   color: white;
+  overflow: hidden;
 }
 
 .portfolio-grid {
@@ -740,10 +745,11 @@
 
 /* FAQ section */
 .mobile-dev-faq {
-  background: linear-gradient(135deg, #0a1930 0%, #1a2942 100%);
-  padding: 80px 0;
+  background: linear-gradient(135deg, #02002D 0%, #02002D 100%);
+  padding: 120px 0;
   position: relative;
   color: white;
+  overflow: hidden;
 }
 
 .mobile-dev-faq::before {
@@ -792,7 +798,7 @@
 
 .faq-tab.active {
   background: var(--mobile-dev-primary);
-  color: #0a1930;
+  color: #02002D;
   border-color: var(--mobile-dev-primary);
 }
 
@@ -834,7 +840,7 @@
 }
 
 .faq-item h3 {
-  color: var(--mobile-dev-primary);
+  color: #ffca28;
   margin-bottom: 15px;
   font-size: 1.1rem;
   position: relative;
@@ -875,7 +881,7 @@
 
 .faq-cta .btn {
   background: var(--mobile-dev-primary);
-  color: #0a1930;
+  color: #02002D;
   border: none;
   padding: 12px 30px;
   font-weight: 600;
@@ -889,8 +895,8 @@
 
 /* CTA enhancements */
 .mobile-dev-cta {
-  background: linear-gradient(135deg, #0a1930 0%, #1a2942 100%);
-  padding: 80px 0;
+  background: linear-gradient(135deg, #02002D 0%, #02002D 100%);
+  padding: 120px 0;
   position: relative;
   overflow: hidden;
 }
@@ -926,7 +932,7 @@
 
 .btn-glow {
   background: var(--mobile-dev-primary);
-  color: #0a1930;
+  color: #02002D;
   border: none;
   padding: 15px 40px;
   font-size: 1.2rem;
@@ -1154,7 +1160,7 @@
 
 /* App showcase section styles */
 .app-showcase {
-  padding: 80px 0;
+  padding: 120px 0;
   background-color: var(--white);
   position: relative;
   overflow: hidden;
@@ -1290,7 +1296,7 @@
 .dev-approach {
   position: relative;
   background: linear-gradient(135deg, #0c203d 0%, #233457 100%);
-  padding: 80px 0;
+  padding: 120px 0;
   overflow: hidden;
   color: white;
 }
@@ -1370,7 +1376,7 @@
 
 .approach-card:hover .approach-icon {
   background: var(--mobile-dev-primary);
-  color: #0a1930;
+  color: #02002D;
   transform: rotateY(360deg);
 }
 
@@ -1424,9 +1430,10 @@
 /* Mobile platform comparison section */
 .platform-comparison {
   position: relative;
-  background: linear-gradient(135deg, #0a1930 0%, #1a2942 100%);
-  padding: 80px 0;
+  background: linear-gradient(135deg, #02002D 0%, #02002D 100%);
+  padding: 120px 0;
   color: white;
+  overflow: hidden;
 }
 
 .comparison-container {
@@ -1483,7 +1490,7 @@
 
 .platform-feature:hover .platform-feature-icon {
   background: var(--mobile-dev-primary);
-  color: #0a1930;
+  color: #02002D;
   transform: rotateY(360deg);
 }
 
@@ -1510,7 +1517,7 @@
 
 /* Mobile prototype demo section */
 .prototype-demo {
-  padding: 80px 0;
+  padding: 120px 0;
   background: linear-gradient(135deg, rgba(26, 115, 232, 0.05) 0%, rgba(66, 133, 244, 0.05) 100%);
   position: relative;
   overflow: hidden;
@@ -1609,7 +1616,7 @@
 
 /* Team section styles */
 .mobile-dev-team {
-  padding: 80px 0;
+  padding: 120px 0;
   background-color: var(--white);
   position: relative;
 }
@@ -1711,4 +1718,39 @@
   background-color: var(--mobile-dev-primary);
   color: white;
   transform: translateY(-3px);
+}
+
+/* ------------------------------------- */
+/* Mobile-dev process – visibility tweaks */
+/* ------------------------------------- */
+.mobile-dev-process .process-steps {
+  padding-left: 60px; /* room for the circle inside container */
+}
+
+.mobile-dev-process .process-step-number {
+  left: 0; /* keep circle fully inside container */
+}
+
+.mobile-dev-process .process-step:not(:last-child)::after {
+  left: 20px; /* align vertical line just inside circle */
+}
+
+/* Always show details and hide toggle */
+.mobile-dev-process .process-step-details {
+  max-height: 500px;
+  opacity: 1;
+  margin-top: 20px;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.mobile-dev-process .process-step-toggle {
+  display: none !important;
+}
+
+/* Hide green ticks in process-detail list */
+.mobile-dev-process .process-step-detail i {
+  display: none !important;
 }

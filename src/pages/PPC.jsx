@@ -13,12 +13,10 @@ const PPC = () => {
   const [activeFaqTab, setActiveFaqTab] = useState('general')
   
   // Refs for scroll animations
-  const processRef = useRef(null)
   const resultsRef = useRef(null)
   const faqRef = useRef(null)
   
   // Animation states
-  const [visibleProcessSteps, setVisibleProcessSteps] = useState([])
   const [visibleResults, setVisibleResults] = useState([])
   const [visibleFaqs, setVisibleFaqs] = useState([])
   
@@ -46,17 +44,6 @@ const PPC = () => {
   // Handle scroll animations
   useEffect(() => {
     const handleScroll = () => {
-      // Process steps animation
-      if (processRef.current) {
-        const processSteps = processRef.current.querySelectorAll('.process-step')
-        processSteps.forEach((step, index) => {
-          const rect = step.getBoundingClientRect()
-          if (rect.top < window.innerHeight * 0.8 && !visibleProcessSteps.includes(index)) {
-            setVisibleProcessSteps(prev => [...prev, index])
-          }
-        })
-      }
-      
       // Results animation
       if (resultsRef.current) {
         const resultCards = resultsRef.current.querySelectorAll('.result-card')
@@ -85,7 +72,7 @@ const PPC = () => {
     setTimeout(handleScroll, 500)
     
     return () => window.removeEventListener('scroll', handleScroll)
-  }, [visibleProcessSteps, visibleResults, visibleFaqs])
+  }, [visibleResults, visibleFaqs])
   
   // Auto-rotate testimonials
   useEffect(() => {
@@ -124,90 +111,11 @@ const PPC = () => {
   const heroDescription = getContentSection('ppc', 'heroDescription', 'Drive targeted traffic and generate immediate results with our data-driven pay-per-click campaigns.')
   const overviewTitle = getContentSection('ppc', 'overviewTitle', 'Drive Immediate Results with Targeted PPC')
   const overviewContent = getContentSection('ppc', 'overviewContent', 'In today\'s competitive digital landscape, pay-per-click (PPC) advertising offers an immediate way to reach your target audience and drive qualified traffic to your website. Our expert PPC management services ensure your ads appear in front of the right people at the right time.\n\nAt Altiora, we develop and manage high-performing paid advertising campaigns across Google Ads, Bing Ads, social media platforms, and more. Our data-driven approach focuses on maximizing your return on ad spend (ROAS) while minimizing costs.')
-  const servicesTitle = getContentSection('ppc', 'servicesTitle', 'Our PPC Services')
-  const processTitle = getContentSection('ppc', 'processTitle', 'Our PPC Management Process')
   const resultsTitle = getContentSection('ppc', 'resultsTitle', 'Results You Can Expect')
   const faqTitle = getContentSection('ppc', 'faqTitle', 'Frequently Asked Questions')
   const ctaTitle = getContentSection('ppc', 'ctaTitle', 'Ready to Accelerate Your Growth with PPC?')
   const ctaDescription = getContentSection('ppc', 'ctaDescription', 'Get a free PPC analysis and discover untapped opportunities for your business.')
   
-  // Parse services from the API response, or use default services
-  let services = []
-  try {
-    services = JSON.parse(getContentSection('ppc', 'services', '[]'))
-  } catch (err) {
-    console.error('Error parsing services:', err)
-    // Default services
-    services = [
-      {
-        icon: '🔍',
-        title: 'Google Ads Management',
-        description: 'We create and optimize campaigns across Google\'s search, display, shopping, and video networks to reach your target audience at every stage of the buying journey.'
-      },
-      {
-        icon: '🏢',
-        title: 'Microsoft Advertising',
-        description: 'Expand your reach on Bing, Yahoo, and other Microsoft partner networks to capture valuable leads that your competitors might be missing.'
-      },
-      {
-        icon: '📱',
-        title: 'Social Media Advertising',
-        description: 'We develop targeted campaigns on platforms like Facebook, Instagram, LinkedIn, and Twitter to reach your ideal audience based on demographics, interests, and behaviors.'
-      },
-      {
-        icon: '🎯',
-        title: 'Retargeting/Remarketing',
-        description: 'Re-engage visitors who have previously interacted with your website but haven\'t converted, bringing them back to complete their journey.'
-      },
-      {
-        icon: '🛍️',
-        title: 'Shopping Campaigns',
-        description: 'Showcase your products with visually-appealing shopping ads that drive qualified traffic and sales for e-commerce businesses.'
-      },
-      {
-        icon: '📊',
-        title: 'Performance Tracking & Analysis',
-        description: 'We monitor campaign performance, provide comprehensive reporting, and continuously optimize your ads to maximize return on investment.'
-      }
-    ]
-  }
-  
-  // Parse process steps from the API response, or use default steps
-  let processSteps = []
-  try {
-    processSteps = JSON.parse(getContentSection('ppc', 'processSteps', '[]'))
-  } catch (err) {
-    console.error('Error parsing process steps:', err)
-    // Default process steps
-    processSteps = [
-      {
-        number: 1,
-        title: 'Discovery & Research',
-        description: 'We analyze your business, competitors, target audience, and industry trends to understand your unique challenges and opportunities.'
-      },
-      {
-        number: 2,
-        title: 'Campaign Strategy',
-        description: 'We develop a custom PPC strategy with the right platforms, targeting options, ad formats, and budget allocation to meet your business goals.'
-      },
-      {
-        number: 3,
-        title: 'Campaign Setup',
-        description: 'We build well-structured campaigns with compelling ad copy, relevant keywords, and targeted audience segments to drive qualified traffic.'
-      },
-      {
-        number: 4,
-        title: 'Optimization',
-        description: 'We continuously monitor and refine your campaigns, adjusting bids, keywords, ad copy, and audience targeting to improve performance.'
-      },
-      {
-        number: 5,
-        title: 'Reporting & Analysis',
-        description: 'We provide transparent, detailed reports on campaign performance and insights for continuous improvement.'
-      }
-    ]
-  }
-
   // Results data
   const results = [
     {
@@ -346,150 +254,6 @@ const PPC = () => {
         </div>
       </section>
 
-      {/* Services Section */}
-      <section className="section service-details-section ppc-services">
-        <div className="container">
-          <h2 className="section-title text-center">{servicesTitle}</h2>
-          <div className="service-details-grid">
-            {services.map((service, index) => (
-              <div className="service-detail-card" key={index}>
-                <div className="service-detail-icon">
-                  <i className={service.icon}></i>
-                </div>
-                <h3>{service.title}</h3>
-                <p>{service.description}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Process Section with Enhanced Content and Animation */}
-      <section className="section process-section ppc-process" ref={processRef}>
-        <div className="container">
-          <h2 className="section-title text-center">{processTitle}</h2>
-          <p className="section-description text-center">
-            Our proven PPC methodology delivers consistent results through a structured, data-driven approach
-          </p>
-          
-          <div className="process-steps">
-            {processSteps.map((step, index) => (
-              <div 
-                className={`process-step ${visibleProcessSteps.includes(index) ? 'visible' : ''} ${expandedSteps.includes(index) ? 'has-expanded' : ''}`} 
-                key={index}
-                style={{ transitionDelay: `${index * 0.2}s` }}
-              >
-                <div className="process-step-number">{step.number}</div>
-                <div className="process-step-content">
-                  <h3>{step.title}</h3>
-                  <p>{step.description}</p>
-                  
-                  {/* Enhanced content for each process step */}
-                  <div className="process-step-details">
-                    {index === 0 && (
-                      <>
-                        <div className="process-step-detail">
-                          <i className="fa-solid fa-check"></i>
-                          <span>Comprehensive market analysis to identify opportunities</span>
-                        </div>
-                        <div className="process-step-detail">
-                          <i className="fa-solid fa-check"></i>
-                          <span>Competitor ad research to benchmark your performance</span>
-                        </div>
-                        <div className="process-step-detail">
-                          <i className="fa-solid fa-check"></i>
-                          <span>Thorough keyword research to identify high-value terms</span>
-                        </div>
-                      </>
-                    )}
-                    
-                    {index === 1 && (
-                      <>
-                        <div className="process-step-detail">
-                          <i className="fa-solid fa-check"></i>
-                          <span>Custom campaign strategy tailored to your business goals</span>
-                        </div>
-                        <div className="process-step-detail">
-                          <i className="fa-solid fa-check"></i>
-                          <span>Budget allocation across platforms for maximum impact</span>
-                        </div>
-                        <div className="process-step-detail">
-                          <i className="fa-solid fa-check"></i>
-                          <span>Targeting strategy to reach your ideal audience</span>
-                        </div>
-                      </>
-                    )}
-                    
-                    {index === 2 && (
-                      <>
-                        <div className="process-step-detail">
-                          <i className="fa-solid fa-check"></i>
-                          <span>Compelling ad creation with A/B testing</span>
-                        </div>
-                        <div className="process-step-detail">
-                          <i className="fa-solid fa-check"></i>
-                          <span>Strategic keyword implementation and organization</span>
-                        </div>
-                        <div className="process-step-detail">
-                          <i className="fa-solid fa-check"></i>
-                          <span>Landing page optimization for conversions</span>
-                        </div>
-                      </>
-                    )}
-                    
-                    {index === 3 && (
-                      <>
-                        <div className="process-step-detail">
-                          <i className="fa-solid fa-check"></i>
-                          <span>Continuous bid management and optimization</span>
-                        </div>
-                        <div className="process-step-detail">
-                          <i className="fa-solid fa-check"></i>
-                          <span>Regular ad creative refreshes and testing</span>
-                        </div>
-                        <div className="process-step-detail">
-                          <i className="fa-solid fa-check"></i>
-                          <span>Negative keyword refinement to reduce wasted spend</span>
-                        </div>
-                      </>
-                    )}
-                    
-                    {index === 4 && (
-                      <>
-                        <div className="process-step-detail">
-                          <i className="fa-solid fa-check"></i>
-                          <span>Detailed performance reports with actionable insights</span>
-                        </div>
-                        <div className="process-step-detail">
-                          <i className="fa-solid fa-check"></i>
-                          <span>ROI analysis and campaign effectiveness metrics</span>
-                        </div>
-                        <div className="process-step-detail">
-                          <i className="fa-solid fa-check"></i>
-                          <span>Strategic recommendations for continuous improvement</span>
-                        </div>
-                      </>
-                    )}
-                  </div>
-                  
-                  <div className="process-step-action">
-                    <button className="process-step-toggle" onClick={(e) => toggleProcessDetails(e, index)}>
-                      <span>{expandedSteps.includes(index) ? 'Show Less' : 'Show More'}</span>
-                      <i className={`fa-solid ${expandedSteps.includes(index) ? 'fa-chevron-up' : 'fa-chevron-down'}`}></i>
-                    </button>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-          
-          <div className="process-cta">
-            <p>Ready to start your PPC journey with us?</p>
-            <Link to="/contact" className="btn btn-primary">Get a Free PPC Analysis</Link>
-          </div>
-        </div>
-      </section>
-
       {/* Results Section */}
       <section className="section ppc-results" ref={resultsRef}>
         <div className="container">
@@ -602,11 +366,20 @@ const PPC = () => {
           {/* General FAQ Questions */}
           <div className={`faq-content ${activeFaqTab === 'general' ? 'active' : ''}`}>
             <div className="faq-grid">
-              {faqItems.map((item, index) => (
-                <div 
-                  className={`faq-item ${visibleFaqs.includes(index) ? 'visible' : ''}`} 
+              {faqItems.concat([
+                {
+                  question: 'How long does it take to see meaningful PPC results?',
+                  answer: 'You will start getting traffic immediately after launch, but meaningful optimised results usually take 2-4 weeks as campaigns collect data and we fine-tune bids, ads and keywords.'
+                },
+                {
+                  question: 'Do you provide transparent reporting?',
+                  answer: 'Yes. You will receive a detailed monthly report that covers spend, conversions, CPA, ROAS and our optimisation actions so you always know where your budget is going.'
+                }
+              ]).map((item, index) => (
+                <div
+                  className="faq-item visible"
                   key={index}
-                  style={{ transitionDelay: `${index * 0.15}s` }}
+                  style={{ transitionDelay: `${index * 0.1}s` }}
                 >
                   <h3>{item.question}</h3>
                   <p>{item.answer}</p>

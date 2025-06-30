@@ -20,6 +20,7 @@ const WebDevelopment = () => {
   const techRef = useRef(null)
   const whyChooseRef = useRef(null)
   const portfolioRef = useRef(null)
+  const approachRef = useRef(null)
   
   // Animation states
   const [visibleProcessSteps, setVisibleProcessSteps] = useState([])
@@ -28,6 +29,7 @@ const WebDevelopment = () => {
   const [visibleTechItems, setVisibleTechItems] = useState([])
   const [visibleWhyChooseItems, setVisibleWhyChooseItems] = useState([])
   const [visiblePortfolioItems, setVisiblePortfolioItems] = useState([])
+  const [visibleApproachItems, setVisibleApproachItems] = useState([])
   
   // Toggle process step details
   const toggleProcessDetails = (e, index) => {
@@ -100,6 +102,15 @@ const WebDevelopment = () => {
       );
     }
 
+    // Approach cards animation
+    if (approachRef.current) {
+      animateElements(
+        approachRef.current.querySelectorAll('.approach-card'),
+        visibleApproachItems,
+        setVisibleApproachItems
+      );
+    }
+
     // Why Choose Us animation
     if (whyChooseRef.current) {
       animateElements(
@@ -129,7 +140,7 @@ const WebDevelopment = () => {
     window.removeEventListener('scroll', handleScroll);
     clearTimeout(timer);
   };
-}, [visibleProcessSteps, visibleResults, visibleFaqs, visibleTechItems, visibleWhyChooseItems, visiblePortfolioItems]);
+}, [visibleProcessSteps, visibleResults, visibleFaqs, visibleTechItems, visibleApproachItems, visibleWhyChooseItems, visiblePortfolioItems]);
 
   useEffect(() => {
   // Reset visible tech items when tab changes
@@ -575,7 +586,7 @@ const WebDevelopment = () => {
       {/* Services Section */}
       <section className="section service-details-section webdev-services">
         <div className="container">
-          <h2 className="section-title text-center">{servicesTitle}</h2>
+          {/* Heading intentionally removed as per design requirements */}
           <div className="service-details-grid">
             {services.map((service, index) => (
               <div className="service-detail-card" key={index}>
@@ -591,7 +602,7 @@ const WebDevelopment = () => {
       </section>
 
       {/* Development Approach Section */}
-      <section className="section approach-section">
+      <section className="section approach-section" ref={approachRef}>
         <div className="container approach-container">
           <h2 className="section-title text-center">{approachTitle || 'Our Development Approach'}</h2>
           <p className="section-description text-center">
@@ -601,7 +612,7 @@ const WebDevelopment = () => {
           <div className="approach-grid">
             {approachSteps.map((step, index) => (
               <div 
-                className={`approach-card ${visibleWhyChooseItems.includes(index) ? 'visible' : ''}`} 
+                className={`approach-card ${visibleApproachItems.includes(index) ? 'visible' : ''}`} 
                 key={index}
                 style={{ transitionDelay: `${index * 0.15}s` }}
               >
@@ -617,11 +628,7 @@ const WebDevelopment = () => {
       {/* Process Section with Enhanced Content and Animation */}
       <section className="section process-section webdev-process" ref={processRef}>
         <div className="container">
-          <h2 className="section-title text-center">{processTitle}</h2>
-          <p className="section-description text-center">
-            Our proven development methodology delivers consistent results through a structured approach
-          </p>
-          
+          {/* Process heading and description removed */}
           <div className="process-steps">
             {processSteps.map((step, index) => (
               <div 

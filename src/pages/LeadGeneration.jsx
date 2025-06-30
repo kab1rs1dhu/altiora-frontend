@@ -17,12 +17,14 @@ const LeadGeneration = () => {
   const resultsRef = useRef(null)
   const faqRef = useRef(null)
   const channelsRef = useRef(null)
+  const servicesRef = useRef(null)
   
   // Animation states
   const [visibleProcessSteps, setVisibleProcessSteps] = useState([])
   const [visibleResults, setVisibleResults] = useState([])
   const [visibleFaqs, setVisibleFaqs] = useState([])
   const [visibleChannels, setVisibleChannels] = useState([])
+  const [visibleServiceCards, setVisibleServiceCards] = useState([])
   
   // Toggle expanded/collapsed state of process details
   const toggleProcessDetails = (e, index) => {
@@ -91,6 +93,22 @@ const LeadGeneration = () => {
           }
         })
       }
+
+      if (servicesRef.current) {
+        animateElements(
+          servicesRef.current.querySelectorAll('.service-detail-card'),
+          visibleServiceCards,
+          setVisibleServiceCards
+        )
+      }
+
+      if (processRef.current) {
+        animateElements(
+          processRef.current.querySelectorAll('.process-step'),
+          visibleProcessSteps,
+          setVisibleProcessSteps
+        )
+      }
     }
     
     window.addEventListener('scroll', handleScroll)
@@ -98,7 +116,7 @@ const LeadGeneration = () => {
     setTimeout(handleScroll, 500)
     
     return () => window.removeEventListener('scroll', handleScroll)
-  }, [visibleProcessSteps, visibleResults, visibleFaqs, visibleChannels])
+  }, [visibleProcessSteps, visibleResults, visibleFaqs, visibleChannels, visibleServiceCards])
   
   // Auto-rotate testimonials
   useEffect(() => {
@@ -404,6 +422,29 @@ const LeadGeneration = () => {
     }
   ];
   
+  const simpleProcessSteps = [
+    {
+      number: 1,
+      title: 'Research & Targeting',
+      description: 'We analyze your market and ideal customer profiles to lay a data-driven foundation for success.'
+    },
+    {
+      number: 2,
+      title: 'Campaign Build',
+      description: 'Compelling offers, landing pages and creative assets are crafted to attract and capture qualified prospects.'
+    },
+    {
+      number: 3,
+      title: 'Launch & Optimization',
+      description: 'Multi-channel campaigns go live and are continually optimized for maximum conversions.'
+    },
+    {
+      number: 4,
+      title: 'Qualification & Handoff',
+      description: 'Leads are scored, nurtured, and seamlessly handed to your sales team when they are purchase-ready.'
+    }
+  ]
+  
   return (
     <>
       {/* Hero Section with Particles */}
@@ -475,288 +516,26 @@ const LeadGeneration = () => {
         </div>
       </section>
 
-      {/* Services Section */}
-      <section className="section service-details-section lead-gen-services">
-        <div className="service-blob blob-1"></div>
-        <div className="service-blob blob-2"></div>
-        <div className="container">
-          <div className="section-heading">
-            <span className="section-subtitle">How We Help</span>
-            <h2 className="section-title">
-              <span className="text-gradient">{servicesTitle}</span>
-            </h2>
-            <p className="section-description">
-              Comprehensive lead generation solutions tailored to your business goals
-            </p>
-          </div>
-          <div className="service-details-grid">
-            {services.map((service, index) => (
-              <div 
-                className="service-detail-card" 
-                key={index}
-                style={{ 
-                  '--card-color': `var(--lead-gen-color-${index % 5 + 1})`,
-                  animationDelay: `${index * 0.1}s` 
-                }}
-              >
-                <div className="service-detail-icon">
-                  <i className="icon">{service.icon}</i>
-                </div>
-                <h3>{service.title}</h3>
-                <p>{service.description}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* Services Section removed as per design requirements */}
 
-      {/* Process Section with Enhanced Content and Animation */}
-      <section className="section process-section lead-gen-process" ref={processRef}>
-        <div className="container">
-          <div className="section-heading">
-            <span className="section-subtitle">Our Methodology</span>
-            <h2 className="section-title">
-              <span className="text-gradient">{processTitle}</span>
-            </h2>
-            <p className="section-description">
-              Our proven lead generation methodology delivers consistent results through a structured, data-driven approach
-            </p>
-          </div>
-          
-          <div className="process-steps">
-            {processSteps.map((step, index) => (
-              <div 
-                className={`process-step ${visibleProcessSteps.includes(index) ? 'visible' : ''} ${expandedSteps.includes(index) ? 'has-expanded' : ''}`} 
-                key={index}
-                style={{ transitionDelay: `${index * 0.2}s` }}
-              >
-                <div className="process-step-number">{step.number}</div>
-                <div className="process-step-content">
-                  <h3>{step.title}</h3>
-                  <p>{step.description}</p>
-                  
-                  {/* Enhanced content for each process step */}
-                  <div className="process-step-details">
-                    {index === 0 && (
-                      <>
-                        <div className="process-step-detail">
-                          <i className="fa-solid fa-check"></i>
-                          <span>Create detailed buyer personas based on your ideal customers</span>
-                        </div>
-                        <div className="process-step-detail">
-                          <i className="fa-solid fa-check"></i>
-                          <span>Analyze competitor lead generation tactics and results</span>
-                        </div>
-                        <div className="process-step-detail">
-                          <i className="fa-solid fa-check"></i>
-                          <span>Develop comprehensive lead generation goals and KPIs</span>
-                        </div>
-                      </>
-                    )}
-                    
-                    {index === 1 && (
-                      <>
-                        <div className="process-step-detail">
-                          <i className="fa-solid fa-check"></i>
-                          <span>Select optimal channels based on where your audience is most active</span>
-                        </div>
-                        <div className="process-step-detail">
-                          <i className="fa-solid fa-check"></i>
-                          <span>Set up tracking and attribution to measure performance</span>
-                        </div>
-                        <div className="process-step-detail">
-                          <i className="fa-solid fa-check"></i>
-                          <span>Create campaign-specific targeting parameters and budgets</span>
-                        </div>
-                      </>
-                    )}
-                    
-                    {index === 2 && (
-                      <>
-                        <div className="process-step-detail">
-                          <i className="fa-solid fa-check"></i>
-                          <span>Design high-value lead magnets that address audience pain points</span>
-                        </div>
-                        <div className="process-step-detail">
-                          <i className="fa-solid fa-check"></i>
-                          <span>Develop optimized landing pages with clear value propositions</span>
-                        </div>
-                        <div className="process-step-detail">
-                          <i className="fa-solid fa-check"></i>
-                          <span>Create compelling copy and creative assets for all campaign touchpoints</span>
-                        </div>
-                      </>
-                    )}
-                    
-                    {index === 3 && (
-                      <>
-                        <div className="process-step-detail">
-                          <i className="fa-solid fa-check"></i>
-                          <span>Set up automated email sequences tailored to lead interests</span>
-                        </div>
-                        <div className="process-step-detail">
-                          <i className="fa-solid fa-check"></i>
-                          <span>Implement lead scoring to identify when prospects are sales-ready</span>
-                        </div>
-                        <div className="process-step-detail">
-                          <i className="fa-solid fa-check"></i>
-                          <span>Create personalized touchpoints based on lead behavior</span>
-                        </div>
-                      </>
-                    )}
-                    
-                    {index === 4 && (
-                      <>
-                        <div className="process-step-detail">
-                          <i className="fa-solid fa-check"></i>
-                          <span>Track key performance metrics across all campaigns and channels</span>
-                        </div>
-                        <div className="process-step-detail">
-                          <i className="fa-solid fa-check"></i>
-                          <span>Conduct A/B testing to optimize conversion rates</span>
-                        </div>
-                        <div className="process-step-detail">
-                          <i className="fa-solid fa-check"></i>
-                          <span>Provide detailed reporting with actionable insights and recommendations</span>
-                        </div>
-                      </>
-                    )}
-                  </div>
-                  
-                  <div className="process-step-action">
-                    <button className="process-step-toggle" onClick={(e) => toggleProcessDetails(e, index)}>
-                      <span>{expandedSteps.includes(index) ? 'Show Less' : 'Show More'}</span>
-                      <i className={`fa-solid ${expandedSteps.includes(index) ? 'fa-chevron-up' : 'fa-chevron-down'}`}></i>
-                    </button>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-          
-          <div className="process-cta">
-            <p>Ready to start generating more qualified leads?</p>
-            <Link to="/contact" className="btn btn-primary">Get a Customized Strategy</Link>
-          </div>
-        </div>
-      </section>
+      {/* Results Section removed as per design requirements */}
 
-      {/* Lead Generation Channels Section with Animation */}
-      <section className="section channels-section lead-gen-channels" ref={channelsRef}>
-        <div className="channel-blob blob-1"></div>
-        <div className="channel-blob blob-2"></div>
+      {/* Our Process – simplified 4-step overview */}
+      <section className="section leadgen-process-simple" ref={processRef}>
         <div className="container">
-          <div className="section-heading">
-            <span className="section-subtitle">Multi-Channel Approach</span>
+          <div className="section-heading" style={{ textAlign: 'center' }}>
+            <span className="section-subtitle">How We Work</span>
             <h2 className="section-title">
-              <span className="text-gradient">{channelsTitle}</span>
+              <span className="text-gradient">Our Process</span>
             </h2>
-            <p className="section-description">
-              {channelsDescription}
-            </p>
           </div>
-          
-          <div className="channels-grid">
-            {channels.map((channel, index) => (
-              <div 
-                className={`channel-card ${visibleChannels.includes(index) ? 'visible' : ''}`} 
-                key={index}
-                style={{ 
-                  '--channel-color': `var(--lead-gen-color-${index % 5 + 1})`,
-                  transitionDelay: `${index * 0.15}s` 
-                }}
-              >
-                <div className="channel-icon">
-                  <i className="icon">{channel.icon}</i>
-                </div>
-                <h3>{channel.title}</h3>
-                <ul className="channel-list">
-                  {channel.items.map((item, itemIndex) => (
-                    <li key={itemIndex}>{item}</li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
 
-      {/* Results Section with Animation */}
-      <section className="section lead-gen-results" ref={resultsRef}>
-        <div className="container">
-          <div className="section-heading">
-            <span className="section-subtitle">Driving Success</span>
-            <h2 className="section-title">
-              <span className="text-gradient">{resultsTitle}</span>
-            </h2>
-            <p className="section-description">
-              Our data-driven lead generation strategies deliver measurable business outcomes
-            </p>
-          </div>
-          
-          <div className="results-grid">
-            {results.map((result, index) => (
-              <div 
-                className={`result-card ${visibleResults.includes(index) ? 'visible' : ''}`} 
-                key={index} 
-                style={{ 
-                  '--result-color': `var(--lead-gen-color-${index % 5 + 1})`,
-                  transitionDelay: `${index * 0.15}s` 
-                }}
-              >
-                <div className="result-icon">
-                  <i className="icon">{result.icon}</i>
-                </div>
-                <h3>{result.title}</h3>
-                <p>{result.description}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Case Studies Section */}
-      <section className="section lead-gen-case-studies">
-        <div className="container">
-          <div className="section-heading">
-            <span className="section-subtitle">Success Stories</span>
-            <h2 className="section-title">
-              <span className="text-gradient">Real-World Results</span>
-            </h2>
-            <p className="section-description">
-              See how our lead generation strategies have transformed businesses like yours
-            </p>
-          </div>
-          
-          <div className="case-studies-grid">
-            {caseStudies.map((study, index) => (
-              <div className="case-study-card" key={index}>
-                <div className="case-study-image">
-                  <img src={study.image} alt={study.company} />
-                  <div className="industry-badge">{study.industry}</div>
-                </div>
-                <div className="case-study-content">
-                  <h3>{study.company}</h3>
-                  
-                  <div className="case-study-detail">
-                    <h4>Challenge:</h4>
-                    <p>{study.challenge}</p>
-                  </div>
-                  
-                  <div className="case-study-detail">
-                    <h4>Solution:</h4>
-                    <p>{study.solution}</p>
-                  </div>
-                  
-                  <div className="case-study-detail">
-                    <h4>Results:</h4>
-                    <p className="results-highlight">{study.results}</p>
-                  </div>
-                  
-                  <Link to="/contact" className="case-study-link">
-                    Get Similar Results <i className="fa-solid fa-arrow-right"></i>
-                  </Link>
-                </div>
+          <div className="process-card-grid">
+            {simpleProcessSteps.map((step, index) => (
+              <div className="process-card" key={index} style={{ transitionDelay: `${index * 0.1}s` }}>
+                <div className="process-number">{step.number}</div>
+                <h3>{step.title}</h3>
+                <p>{step.description}</p>
               </div>
             ))}
           </div>

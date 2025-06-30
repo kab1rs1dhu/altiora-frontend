@@ -173,41 +173,44 @@
   color: white;
   border-radius: 20px;
   padding: 40px 30px;
+  height: 100%;
   transition: all 0.5s var(--animation-timing);
-  z-index: 1;
+  text-align: center;
   overflow: hidden;
-  opacity: 0;
-  transform: translateY(50px);
-}
-
-.service-card.animated {
-  opacity: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   transform: translateY(0);
+  outline: none;
 }
 
 .service-card:hover {
-  transform: translateY(-15px);
-  box-shadow: 0 20px 40px rgba(var(--card-color), 0.15);
-  border-color: rgba(var(--card-color), 0.3);
+  transform: translateY(-15px) scale(1.02);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+.service-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 20px;
+  pointer-events: none;
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .service-card .card-border {
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  inset: 0;
   border-radius: 20px;
   pointer-events: none;
   border: 2px solid transparent;
-  background: transparent;
-  z-index: -1;
-  transition: all 0.5s var(--animation-timing);
+  transition: all 0.3s var(--animation-timing);
+  z-index: 1;
 }
 
 .service-card:hover .card-border {
-  border-color: rgba(var(--card-color), 0.5);
-  box-shadow: 0 0 20px rgba(var(--card-color), 0.2);
+  border-color: var(--card-color);
+  box-shadow: 0 0 20px rgba(var(--card-color-rgb, 26, 115, 232), 0.3);
 }
 
 .service-card .card-glow {
@@ -217,42 +220,22 @@
   right: 0;
   bottom: 0;
   border-radius: 20px;
-  background: radial-gradient(circle at 50% 50%, rgba(var(--card-color), 0.2) 0%, transparent 70%);
+  background: radial-gradient(
+    circle at 50% 0%, 
+    rgba(255, 255, 255, 0.1), 
+    transparent 70%
+  );
   opacity: 0;
-  transition: opacity 0.5s var(--animation-timing);
-  z-index: -1;
+  transition: all 0.5s var(--animation-timing);
+  z-index: 0;
+  pointer-events: none;
 }
 
 .service-card:hover .card-glow {
-  opacity: 1;
+  opacity: 0.7;
 }
 
-.service-icon {
-  width: 80px;
-  height: 80px;
-  background-color: rgba(var(--card-color), 0.1);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 25px;
-  transition: all 0.5s var(--animation-timing);
-}
-
-.service-icon i {
-  font-size: 2rem;
-  color: rgb(var(--card-color));
-  transition: all 0.5s var(--animation-timing);
-}
-
-.service-card:hover .service-icon {
-  background-color: rgb(var(--card-color));
-  transform: translateY(-5px);
-}
-
-.service-card:hover .service-icon i {
-  color: white;
-}
+/* Service icon styles moved to GlobalIcons.css */
 
 .service-title {
   font-size: 1.4rem;
@@ -271,7 +254,9 @@
   line-height: 1.6;
 }
 
-.service-link {
+.service-link,
+.service-link:focus,
+.service-link:active {
   color: var(--primary-blue);
   font-weight: 600;
   position: relative;
@@ -279,6 +264,10 @@
   align-items: center;
   text-decoration: none;
   transition: all 0.3s var(--animation-timing);
+  outline: none;
+  border: none;
+  -webkit-tap-highlight-color: transparent;
+  margin-top: auto;
 }
 
 .service-link:hover {
@@ -340,51 +329,38 @@
   color: white;
   border-radius: 20px;
   padding: 40px 30px;
-  transition: all 0.5s var(--animation-timing);
+  transition: box-shadow 0.5s var(--animation-timing), border-color 0.5s var(--animation-timing);
   text-align: center;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  transform: none !important;
 }
 
+/* Only keep hover effects for shadow and border */
 .benefit-card:hover {
-  transform: translateY(-15px);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  transform: none !important;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
 }
 
 .benefit-card .card-border {
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  inset: 0;
   border-radius: 20px;
   pointer-events: none;
   border: 2px solid transparent;
   transition: all 0.3s var(--animation-timing);
+  z-index: 1;
 }
 
 .benefit-card:hover .card-border {
   border-color: var(--card-color);
+  box-shadow: 0 0 20px rgba(var(--card-color-rgb, 26, 115, 232), 0.3);
 }
 
-.benefit-icon {
-  width: 90px;
-  height: 90px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 auto 25px;
-  transition: all 0.5s var(--animation-timing);
-}
-
-.benefit-icon i {
-  font-size: 2.2rem;
-  transition: all 0.3s var(--animation-timing);
-}
-
-.benefit-card:hover .benefit-icon {
-  transform: scale(1.1);
-}
+/* Benefit icon styles moved to GlobalIcons.css */
 
 .benefit-title {
   font-size: 1.4rem;
@@ -394,12 +370,13 @@
 }
 
 .benefit-card:hover .benefit-title {
-  color: var(--card-color);
+  color: rgb(var(--card-color-rgb, 26, 115, 232));
 }
 
 .benefit-description {
   color: rgba(255, 255, 255, 0.8);
   line-height: 1.6;
+  margin-bottom: 25px;
 }
 
 /* Why Choose Section - Dashboard Feature */
@@ -518,18 +495,54 @@
   width: 50px;
   height: 50px;
   min-width: 50px; /* Ensure icon maintains fixed width */
-  background: var(--gradient-primary);
-  border-radius: 12px;
+  background: rgba(80, 80, 80, 0.1); /* Changed to grey background */
+  border-radius: 12px; /* Keep rectangular shape */
+  margin-right: 0;
+  flex-shrink: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-right: 0;
-  flex-shrink: 0;
+  transition: all 0.5s var(--animation-timing);
+  border: 2px solid transparent;
 }
 
+/* Other feature icon styles in GlobalIcons.css */
+
 .feature-icon i {
-  font-size: 1.3rem;
-  color: white;
+  color: var(--feature-color, #FBBC05);
+  font-size: 1.5rem;
+  transition: all 0.5s var(--animation-timing);
+}
+
+.feature-item:hover .feature-icon {
+  background-color: var(--feature-color, #FBBC05);
+  transform: scale(1.1);
+  box-shadow: 0 8px 25px rgba(var(--feature-color-rgb, 251, 188, 5), 0.3);
+}
+
+.feature-item:hover .feature-icon i {
+  color: white !important;
+}
+
+/* Feature color variants */
+.feature-item:nth-child(1) {
+  --feature-color: #4285F4;
+  --feature-color-rgb: 66, 133, 244;
+}
+
+.feature-item:nth-child(2) {
+  --feature-color: #EA4335;
+  --feature-color-rgb: 234, 67, 53;
+}
+
+.feature-item:nth-child(3) {
+  --feature-color: #34A853;
+  --feature-color-rgb: 52, 168, 83;
+}
+
+.feature-item:nth-child(4) {
+  --feature-color: #FBBC05;
+  --feature-color-rgb: 251, 188, 5;
 }
 
 .feature-item h4 {
@@ -1150,12 +1163,32 @@ p {
   color: var(--text-secondary);
   max-width: 90%;
   margin: 0 auto 20px;
+  text-align: center;
+}
+
+/* Specific styling for the services section description */
+.services-section .section-description {
+  text-align: center !important;
+  display: block;
+  width: 100%;
+  margin: 0 auto 20px;
+  max-width: 100% !important;
+}
+
+/* Even more targeted selector for services section */
+section.services-section .container .section-heading .section-description {
+  text-align: center !important;
+  display: block !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
 }
 
 /* Mobile-optimized Hero Section */
 .hero.mobile-optimized {
   padding: 30px 0 40px;
-  background: linear-gradient(135deg, #0a1930 0%, #1a2942 100%);
+  background: linear-gradient(135deg, #02002D 0%, #02002D 100%);
   overflow: hidden;
   text-align: center;
 }
@@ -1339,7 +1372,9 @@ p {
   margin-bottom: 15px;
 }
 
-.service-link {
+.service-link,
+.service-link:focus,
+.service-link:active {
   color: var(--primary-blue);
   font-weight: 600;
   position: relative;
@@ -1347,6 +1382,10 @@ p {
   align-items: center;
   text-decoration: none;
   transition: all 0.3s var(--animation-timing);
+  outline: none;
+  border: none;
+  -webkit-tap-highlight-color: transparent;
+  margin-top: auto;
 }
 
 .service-link:hover {
@@ -2210,6 +2249,7 @@ p {
     height: 40px;
     min-width: 40px; /* Ensure fixed width on mobile */
     border-radius: 8px;
+    background: rgba(80, 80, 80, 0.1); /* Changed to grey background */
   }
   
   .feature-icon i {
@@ -2228,6 +2268,15 @@ p {
   .feature-item p {
     font-size: 0.9rem;
   }
+  
+  /* Keep feature colors on mobile */
+  .feature-item:hover .feature-icon {
+    background-color: var(--feature-color, #FBBC05);
+  }
+  
+  .feature-item:hover .feature-icon i {
+    color: white !important;
+  }
 }
 
 @media (max-width: 480px) {
@@ -2239,11 +2288,22 @@ p {
     width: 36px;
     height: 36px;
     min-width: 36px;
+    border-radius: 8px;
+    background: rgba(80, 80, 80, 0.1); /* Changed to grey background */
   }
   
   .feature-item h4 {
     font-size: 1rem;
     margin-top: 3px;
+  }
+  
+  /* Keep feature colors on smaller screens */
+  .feature-item:hover .feature-icon {
+    background-color: var(--feature-color, #FBBC05);
+  }
+  
+  .feature-item:hover .feature-icon i {
+    color: white !important;
   }
 }
 
@@ -2272,7 +2332,7 @@ p {
 .process-section {
   position: relative;
   padding: 120px 0;
-  background: linear-gradient(135deg, #0a1930 0%, #1a2942 100%);
+  background: linear-gradient(135deg, #02002D 0%, #02002D 100%);
   overflow: hidden;
 }
 
@@ -2356,8 +2416,8 @@ p {
 
 .process-step:hover .step-number {
   transform: scale(1.1);
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
-  border: 2px solid rgba(255, 255, 255, 0.4);
+  border-color: #FFFFFF;
+  box-shadow: 0 0 25px rgba(255, 255, 255, 0.3);
 }
 
 .step-content {
@@ -2371,10 +2431,19 @@ p {
 }
 
 .process-step:hover .step-content {
-  transform: translateY(-5px);
+  /* Remove the translateY to prevent upward movement */
+  transform: none;
   box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
   background: rgba(255, 255, 255, 0.12);
-  border-color: rgba(255, 255, 255, 0.3);
+  border-color: #FFFFFF;
+  border-width: 1px;
+}
+
+/* Ensure consistency in other places where this style might be defined */
+.process-step:hover .step-number {
+  transform: scale(1.1);
+  border-color: #FFFFFF;
+  box-shadow: 0 0 25px rgba(255, 255, 255, 0.3);
 }
 
 .step-content h3 {
@@ -2892,7 +2961,7 @@ p {
 .process-section {
   position: relative;
   padding: 120px 0;
-  background: linear-gradient(135deg, #0a1930 0%, #1a2942 100%);
+  background: linear-gradient(135deg, #02002D 0%, #02002D 100%);
   overflow: hidden;
   z-index: 1; /* Ensure proper stacking context */
   display: block; /* Guarantee section is displayed */
@@ -3062,8 +3131,8 @@ p {
 }
 
 .process-step:hover .step-number {
-  transform: scale(1.1);
-  border-color: rgba(255, 255, 255, 0.5);
+  transform: none !important;
+  border-color: #FFFFFF;
   box-shadow: 0 0 25px rgba(255, 255, 255, 0.3);
 }
 
@@ -3081,4 +3150,263 @@ p {
     height: 60px;
     font-size: 1.5rem;
   }
+}
+
+@media (max-width: 768px) {
+  /* Icon styles moved to GlobalIcons.css */
+  
+  .service-card,
+  .benefit-card {
+    padding: 30px 20px;
+  }
+  
+  .service-card:hover {
+    transform: translateY(-10px) scale(1.01);
+  }
+  
+  .benefit-card:hover {
+    transform: none;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Icon styles moved to GlobalIcons.css */
+  
+  .service-card,
+  .benefit-card {
+    padding: 25px 15px;
+  }
+  
+  .service-card:hover {
+    transform: translateY(-5px) scale(1);
+  }
+  
+  .benefit-card:hover {
+    transform: none;
+  }
+}
+
+:root {
+  /* Primary colors */
+  --primary-blue: #1A73E8;
+  --primary-blue-rgb: 26, 115, 232;
+  --secondary-blue: #4285F4;
+  --dark-blue: #0D47A1;
+  --dark-blue-rgb: 13, 71, 161;
+  --light-blue: #E8F0FE;
+  --accent-color: #6C63FF;
+  --accent-color-rgb: 108, 99, 255;
+  --success-green: #34A853;
+  --success-green-rgb: 52, 168, 83;
+  --error-red: #EA4335;
+  --error-red-rgb: 234, 67, 53;
+  
+  /* Background colors */
+  --background: #02002D;
+  --background-rgb: 2, 0, 45;
+  --white: #FFFFFF;
+  --off-white: #F8F9FA;
+  --gray-100: #F1F3F4;
+  --gray-200: #E8EAED;
+  --gray-300: #DADCE0;
+  --gray-400: #BDC1C6;
+  --gray-500: #9AA0A6;
+  
+  /* Typography */
+  --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --font-secondary: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --font-size-small: 0.875rem;
+  --font-size-base: 1rem;
+  --font-size-medium: 1.125rem;
+  --font-size-large: 1.25rem;
+  
+  /* Gradients */
+  --gradient-primary: linear-gradient(135deg, #6C63FF 0%, #4285F4 100%);
+  --gradient-secondary: linear-gradient(135deg, #1A73E8 0%, #0D47A1 100%);
+  --gradient-accent: linear-gradient(135deg, #34A853 0%, #1A73E8 100%);
+  
+  /* Animations */
+  --animation-timing: cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-fast: 0.2s;
+  --transition-medium: 0.3s;
+  --transition-slow: 0.5s;
+}
+
+/* Ensure all borders and outlines follow the same border-radius */
+.services-section * {
+  outline: none !important;
+}
+
+/* Additional fixes for service cards */
+.service-card,
+.service-card .card-border,
+.service-card::after,
+.service-card .card-glow,
+.service-card:focus,
+.service-card:active {
+  border-radius: 20px;
+  outline: none !important;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Fix for any potential blue highlight on tap (mobile) */
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Extra fixes for the blue border issue */
+.service-card {
+  /* Apply a clean border with consistent radius */
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  
+  /* Override any native browser styling */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  
+  /* Remove any focus outlines */
+  outline: none !important;
+  outline-offset: 0;
+  
+  /* Ensure smooth rendering */
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  
+  /* Fix any potential rendering issues */
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  will-change: transform;
+}
+
+/* Ensure all service card borders have consistent radius */
+.service-card,
+.service-card::after,
+.service-card .card-border,
+.service-card .card-glow {
+  border-radius: 20px !important;
+}
+
+/* Normalize styling between service and benefit cards for consistent effects */
+.service-card,
+.benefit-card {
+  position: relative;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  color: white;
+  border-radius: 20px;
+  padding: 40px 30px;
+  height: 100%;
+  transition: all 0.5s var(--animation-timing);
+  text-align: center;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transform: translateY(0);
+  outline: none;
+  
+  /* Extra fixes for the blue border issue - applying to both service and benefit cards */
+  /* Apply a clean border with consistent radius */
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  
+  /* Override any native browser styling */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  
+  /* Remove any focus outlines */
+  outline: none !important;
+  outline-offset: 0;
+  
+  /* Ensure smooth rendering */
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  
+  /* Fix any potential rendering issues */
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  will-change: transform;
+}
+
+/* Ensure all card borders have consistent radius */
+.service-card,
+.service-card::after,
+.service-card .card-border,
+.service-card .card-glow,
+.benefit-card,
+.benefit-card::after,
+.benefit-card .card-border {
+  border-radius: 20px !important;
+}
+
+/* Fix hover styles for partnership section */
+.partnership-section * {
+  outline: none !important;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.benefit-card:hover .benefit-title {
+  color: rgb(var(--card-color-rgb, 26, 115, 232));
+}
+
+.benefit-card .card-glow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 20px;
+  background: radial-gradient(
+    circle at 50% 0%, 
+    rgba(255, 255, 255, 0.1), 
+    transparent 70%
+  );
+  opacity: 0;
+  transition: all 0.5s var(--animation-timing);
+  z-index: 0;
+  pointer-events: none;
+}
+
+.benefit-card:hover .card-glow {
+  opacity: 0.7;
+}
+
+/* Override any potential vertical movement for benefit cards */
+.benefit-card {
+  transition-property: transform, box-shadow, background-color, border-color;
+}
+
+/* Override for dashboard feature icons - make them golden */
+.dashboard-feature .dashboard-features-list .feature-item .feature-icon {
+  background-color: #D4AF37 !important; /* Golden color */
+}
+
+.dashboard-feature .feature-icon {
+  background-color: #D4AF37 !important; /* Golden color */
+}
+
+/* Make sure all instances of process step hover styles are consistent */
+.process-step:hover .step-number,
+.process-section .process-step:hover .step-number {
+  transform: none !important;
+  border-color: #FFFFFF;
+  box-shadow: 0 0 25px rgba(255, 255, 255, 0.3);
+}
+
+/* Override for all hover transformations on process steps */
+.process-step:hover {
+  transform: none !important;
+}
+
+/* Override all process step number hover styles to prevent movement */
+.process-step:hover .step-number,
+.process-section .process-step:hover .step-number,
+.step-number:hover,
+.process-step:hover .step-number {
+  transform: none !important;
+  border-color: #FFFFFF !important;
 }

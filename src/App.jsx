@@ -19,6 +19,7 @@ import './styles/BlackLineFix.css'
 import './styles/SingleScroll.css' // Import the new SingleScroll CSS
 import './styles/FabMenu.css'
 import './styles/BrandNavbar.css'
+import './styles/GlobalIcons.css' // Global consistent icon styling
 
 // ResponsiveMeta component to ensure proper viewport settings
 const ResponsiveMeta = () => {

@@ -402,7 +402,7 @@ useEffect(() => {
             <h2 className="section-title">
               <span className="text-gradient">Our Services</span>
             </h2>
-            <p className="section-description">
+            <p className="section-description" style={{ textAlign: 'center', width: '100%', display: 'block', margin: '0 auto 20px' }}>
               Comprehensive digital marketing solutions tailored to your business needs
             </p>
           </div>
@@ -413,10 +413,12 @@ useEffect(() => {
                 key={index}
                 style={{ 
                   '--card-color': service.color,
-                  transitionDelay: `${index * 0.1}s`
+                  '--card-color-rgb': service.color.replace('#', '').match(/.{2}/g).map(c => parseInt(c, 16)).join(', '),
+                  transitionDelay: `${index * 0.1}s`,
+                  outline: 'none'
                 }}>
-                <div className="service-icon">
-                  <i className={service.icon}></i>
+                <div className="service-icon" style={{ backgroundColor: `${service.color}20`, boxShadow: 'none', outline: 'none' }}>
+                  <i className={service.icon} style={{ fontSize: '28px' }}></i>
                 </div>
                 <h3 className="service-title">{service.title}</h3>
                 <p className="service-description">
@@ -425,8 +427,8 @@ useEffect(() => {
                 <Link to={service.link} className="service-link">
                   Learn More <i className="fa-solid fa-arrow-right"></i>
                 </Link>
-                <div className="card-glow"></div>
-                <div className="card-border"></div>
+                <div className="card-glow" style={{ borderRadius: '20px' }}></div>
+                <div className="card-border" style={{ borderRadius: '20px' }}></div>
               </div>
             ))}
           </div>
@@ -445,7 +447,7 @@ useEffect(() => {
             <h2 className="section-title">
               <span className="text-gradient">Exclusive Partnership Benefits</span>
             </h2>
-            <p className="section-description">
+            <p className="section-description" style={{ textAlign: 'center', width: '100%', display: 'block', margin: '0 auto 20px' }}>
               When you partner with Altiora Marketing, you gain access to exclusive benefits designed to accelerate 
               your business growth and maximize your success in the digital marketplace.
             </p>
@@ -456,14 +458,21 @@ useEffect(() => {
               <div 
                 className="benefit-card futuristic-card" 
                 key={index}
-                style={{ '--card-color': benefit.color }}
+                style={{ 
+                  '--card-color': benefit.color,
+                  '--card-color-rgb': benefit.color.replace('#', '').match(/.{2}/g).map(c => parseInt(c, 16)).join(', '),
+                  outline: 'none',
+                  transform: 'none',
+                  transition: 'box-shadow 0.5s ease, border-color 0.5s ease'
+                }}
               >
-                <div className="benefit-icon" style={{ backgroundColor: `${benefit.color}20` }}>
-                  <i className={benefit.icon} style={{ color: benefit.color }}></i>
+                <div className="benefit-icon" style={{ backgroundColor: `${benefit.color}20`, boxShadow: 'none', outline: 'none' }}>
+                  <i className={benefit.icon} style={{ fontSize: '28px' }}></i>
                 </div>
                 <h3 className="benefit-title">{benefit.title}</h3>
                 <p className="benefit-description">{benefit.description}</p>
-                <div className="card-border"></div>
+                <div className="card-glow" style={{ borderRadius: '20px' }}></div>
+                <div className="card-border" style={{ borderRadius: '20px' }}></div>
               </div>
             ))}
           </div>
@@ -481,7 +490,7 @@ useEffect(() => {
             <h2 className="section-title">
               <span className="text-gradient">Why Choose Altiora</span>
             </h2>
-            <p className="section-description">
+            <p className="section-description" style={{ textAlign: 'center', width: '100%', display: 'block', margin: '0 auto 20px' }}>
               We combine technical excellence with strategic thinking to deliver exceptional results
             </p>
           </div>
@@ -498,7 +507,7 @@ useEffect(() => {
                 
                 <ul className="dashboard-features-list">
                   <li className="feature-item">
-                    <div className="feature-icon">
+                    <div className="feature-icon" style={{ backgroundColor: "rgba(80, 80, 80, 0.1)" }}>
                       <i className="fa-solid fa-chart-line"></i>
                     </div>
                     <div>
@@ -507,7 +516,7 @@ useEffect(() => {
                     </div>
                   </li>
                   <li className="feature-item">
-                    <div className="feature-icon">
+                    <div className="feature-icon" style={{ backgroundColor: "rgba(80, 80, 80, 0.1)" }}>
                       <i className="fa-solid fa-bullseye"></i>
                     </div>
                     <div>
@@ -516,7 +525,7 @@ useEffect(() => {
                     </div>
                   </li>
                   <li className="feature-item">
-                    <div className="feature-icon">
+                    <div className="feature-icon" style={{ backgroundColor: "rgba(80, 80, 80, 0.1)" }}>
                       <i className="fa-solid fa-pen-to-square"></i>
                     </div>
                     <div>
@@ -525,7 +534,7 @@ useEffect(() => {
                     </div>
                   </li>
                   <li className="feature-item">
-                    <div className="feature-icon">
+                    <div className="feature-icon" style={{ backgroundColor: "rgba(80, 80, 80, 0.1)" }}>
                       <i className="fa-solid fa-lightbulb"></i>
                     </div>
                     <div>
@@ -635,90 +644,89 @@ useEffect(() => {
       </section>
 
       {/* Our Process Section */}
-      {/* Our Process Section */}
-<section className="section process-section futuristic-section" id="process-section" ref={processRef}>
-  <div className="process-blob blob-1"></div>
-  <div className="process-blob blob-2"></div>
-  
-  <div className="container">
-    <div className="section-heading">
-      <span className="section-subtitle">How We Work</span>
-      <h2 className="section-title">
-        <span className="text-gradient">Our Proven Process</span>
-      </h2>
-      <p className="section-description">
-        We follow a structured approach to ensure consistent results and transparent communication
-      </p>
-    </div>
+      <section className="section process-section futuristic-section" id="process-section" ref={processRef}>
+        <div className="process-blob blob-1"></div>
+        <div className="process-blob blob-2"></div>
+        
+        <div className="container">
+          <div className="section-heading">
+            <span className="section-subtitle">How We Work</span>
+            <h2 className="section-title">
+              <span className="text-gradient">Our Proven Process</span>
+            </h2>
+            <p className="section-description">
+              We follow a structured approach to ensure consistent results and transparent communication
+            </p>
+          </div>
 
-    <div className="process-steps">
-      {/* Step 1 */}
-      <div className={`process-step ${visibleProcessSteps.includes(0) ? 'visible' : ''}`}
-           style={{ transitionDelay: '0.1s' }}>
-        <div className="step-number">1</div>
-        <div className="step-content">
-          <div className="step-icon">
-            <i className="fa-solid fa-magnifying-glass-chart"></i>
+          <div className="process-steps">
+            {/* Step 1 */}
+            <div className={`process-step ${visibleProcessSteps.includes(0) ? 'visible' : ''}`}
+                 style={{ transitionDelay: '0.1s' }}>
+              <div className="step-number">1</div>
+              <div className="step-content">
+                <div className="step-icon">
+                  <i className="fa-solid fa-magnifying-glass-chart"></i>
+                </div>
+                <h3>Discovery & Analysis</h3>
+                <p>We begin by thoroughly understanding your business, goals, target audience, and current digital presence to identify opportunities.</p>
+              </div>
+            </div>
+            
+            {/* Step 2 */}
+            <div className={`process-step ${visibleProcessSteps.includes(1) ? 'visible' : ''}`}
+                 style={{ transitionDelay: '0.2s' }}>
+              <div className="step-number">2</div>
+              <div className="step-content">
+                <div className="step-icon">
+                  <i className="fa-solid fa-sitemap"></i>
+                </div>
+                <h3>Strategic Planning</h3>
+                <p>Based on our analysis, we develop a customized strategy that aligns with your business objectives and maximizes your ROI.</p>
+              </div>
+            </div>
+            
+            {/* Step 3 */}
+            <div className={`process-step ${visibleProcessSteps.includes(2) ? 'visible' : ''}`}
+                 style={{ transitionDelay: '0.3s' }}>
+              <div className="step-number">3</div>
+              <div className="step-content">
+                <div className="step-icon">
+                  <i className="fa-solid fa-rocket"></i>
+                </div>
+                <h3>Implementation</h3>
+                <p>Our expert team executes the strategy with precision, leveraging cutting-edge tools and best practices to deliver exceptional results.</p>
+              </div>
+            </div>
+            
+            {/* Step 4 */}
+            <div className={`process-step ${visibleProcessSteps.includes(3) ? 'visible' : ''}`}
+                 style={{ transitionDelay: '0.4s' }}>
+              <div className="step-number">4</div>
+              <div className="step-content">
+                <div className="step-icon">
+                  <i className="fa-solid fa-chart-line"></i>
+                </div>
+                <h3>Monitoring & Optimization</h3>
+                <p>We continuously track performance, analyze data, and make data-driven adjustments to optimize your campaigns for maximum impact.</p>
+              </div>
+            </div>
+            
+            {/* Step 5 */}
+            <div className={`process-step ${visibleProcessSteps.includes(4) ? 'visible' : ''}`}
+                 style={{ transitionDelay: '0.5s' }}>
+              <div className="step-number">5</div>
+              <div className="step-content">
+                <div className="step-icon">
+                  <i className="fa-solid fa-arrows-spin"></i>
+                </div>
+                <h3>Reporting & Refinement</h3>
+                <p>Regular detailed reports keep you informed of progress, while we refine strategies based on insights and changing market conditions.</p>
+              </div>
+            </div>
           </div>
-          <h3>Discovery & Analysis</h3>
-          <p>We begin by thoroughly understanding your business, goals, target audience, and current digital presence to identify opportunities.</p>
         </div>
-      </div>
-      
-      {/* Step 2 */}
-      <div className={`process-step ${visibleProcessSteps.includes(1) ? 'visible' : ''}`}
-           style={{ transitionDelay: '0.2s' }}>
-        <div className="step-number">2</div>
-        <div className="step-content">
-          <div className="step-icon">
-            <i className="fa-solid fa-sitemap"></i>
-          </div>
-          <h3>Strategic Planning</h3>
-          <p>Based on our analysis, we develop a customized strategy that aligns with your business objectives and maximizes your ROI.</p>
-        </div>
-      </div>
-      
-      {/* Step 3 */}
-      <div className={`process-step ${visibleProcessSteps.includes(2) ? 'visible' : ''}`}
-           style={{ transitionDelay: '0.3s' }}>
-        <div className="step-number">3</div>
-        <div className="step-content">
-          <div className="step-icon">
-            <i className="fa-solid fa-rocket"></i>
-          </div>
-          <h3>Implementation</h3>
-          <p>Our expert team executes the strategy with precision, leveraging cutting-edge tools and best practices to deliver exceptional results.</p>
-        </div>
-      </div>
-      
-      {/* Step 4 */}
-      <div className={`process-step ${visibleProcessSteps.includes(3) ? 'visible' : ''}`}
-           style={{ transitionDelay: '0.4s' }}>
-        <div className="step-number">4</div>
-        <div className="step-content">
-          <div className="step-icon">
-            <i className="fa-solid fa-chart-line"></i>
-          </div>
-          <h3>Monitoring & Optimization</h3>
-          <p>We continuously track performance, analyze data, and make data-driven adjustments to optimize your campaigns for maximum impact.</p>
-        </div>
-      </div>
-      
-      {/* Step 5 */}
-      <div className={`process-step ${visibleProcessSteps.includes(4) ? 'visible' : ''}`}
-           style={{ transitionDelay: '0.5s' }}>
-        <div className="step-number">5</div>
-        <div className="step-content">
-          <div className="step-icon">
-            <i className="fa-solid fa-arrows-spin"></i>
-          </div>
-          <h3>Reporting & Refinement</h3>
-          <p>Regular detailed reports keep you informed of progress, while we refine strategies based on insights and changing market conditions.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+      </section>
 
       {/* CTA Section with Animated Background */}
       <section className="cta-section futuristic-cta">
