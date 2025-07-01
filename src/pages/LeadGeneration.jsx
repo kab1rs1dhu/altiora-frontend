@@ -10,7 +10,7 @@ const LeadGeneration = () => {
   const [pageContent, setPageContent] = useState(null)
   const [activeTestimonial, setActiveTestimonial] = useState(0)
   const [expandedSteps, setExpandedSteps] = useState([])
-  const [activeFaqTab, setActiveFaqTab] = useState('general')
+  const [activeFaqTab, setActiveFaqTab] = useState('technical')
   
   // Refs for scroll animations
   const processRef = useRef(null)
@@ -356,71 +356,40 @@ const LeadGeneration = () => {
     }
   ];
   
+  // Default FAQ items
+  const defaultFaqItems = [
+    {
+      question: 'How long does it take to see results from lead generation efforts?',
+      answer: 'While some paid channels (e.g., search or social ads) can start producing leads within days, sustainable results typically emerge over 4–8 weeks as campaigns are optimized and nurturing sequences kick in.'
+    },
+    {
+      question: 'What budget do I need for an effective lead generation program?',
+      answer: 'Budgets vary by industry and goals, but most companies start seeing meaningful impact with a combined media and management spend of at least $3k–$5k per month. We tailor strategies to maximise ROI at your budget level.'
+    },
+    {
+      question: 'How do you qualify and score leads?',
+      answer: 'We build a custom lead-scoring model based on demographic fit (company size, role, industry) and behavioural signals (content engagement, site visits). Scores sync to your CRM so sales can focus on the hottest prospects.'
+    },
+    {
+      question: 'Do you provide ongoing optimisation and reporting?',
+      answer: 'Yes. We continuously A/B test ads, landing pages, and email sequences, providing transparent weekly or monthly reports that highlight performance, insights, and next-step recommendations.'
+    }
+  ]
+
   // Parse FAQ items from the API response, or use default FAQ items
   let faqItems = []
   try {
     faqItems = JSON.parse(getContentSection('lead-generation', 'faqItems', '[]'))
   } catch (err) {
     console.error('Error parsing FAQ items:', err)
-    // Default FAQ items
-    faqItems = [
-      {
-        question: 'How quickly will I see results from lead generation campaigns?',
-        answer: 'The timeline for results varies depending on your industry, target audience, and chosen strategies. Some channels like paid search can generate leads immediately, while others like content marketing may take several weeks or months to build momentum. We focus on both quick wins and sustainable long-term results.'
-      },
-      {
-        question: 'How do you measure the success of lead generation campaigns?',
-        answer: 'We track key metrics including lead volume, lead quality, cost per lead, conversion rates, and ROI. We provide regular reports with these metrics and actionable insights. Our focus is always on the metrics that matter most to your specific business goals.'
-      },
-      {
-        question: 'What makes a good lead generation strategy?',
-        answer: 'Effective lead generation strategies are multi-channel, data-driven, and focused on attracting high-quality leads rather than just high quantities. They include compelling offers, clear calls to action, and systematic nurturing processes. Most importantly, they align with your specific business goals and target audience.'
-      },
-      {
-        question: 'How do you ensure leads are qualified?',
-        answer: 'We implement lead scoring systems that evaluate prospects based on demographic fit, engagement level, and buying signals. We also use targeted messaging and qualification questions in our lead capture forms to filter out prospects who aren\'t a good fit for your products or services.'
-      }
-    ]
+  }
+
+  if (faqItems.length === 0) {
+    faqItems = defaultFaqItems
   }
 
   // Additional FAQ items organized by category
-  const technicalFaqs = [
-    {
-      question: 'What lead generation tools and technologies do you use?',
-      answer: 'We utilize a suite of industry-leading tools including HubSpot, Marketo, Google Analytics, SEMrush, LinkedIn Sales Navigator, Unbounce for landing pages, and various automation platforms. Our tech stack is customized based on your specific needs and existing systems to ensure seamless integration and optimal results.'
-    },
-    {
-      question: 'Can you integrate with our existing CRM or marketing automation platform?',
-      answer: 'Yes, we can integrate with most major CRM and marketing automation platforms including Salesforce, HubSpot, Marketo, Pardot, and others. We ensure that lead data flows smoothly into your existing systems, maintaining proper tracking and attribution throughout the process.'
-    },
-    {
-      question: 'How do you handle lead data privacy and compliance?',
-      answer: 'We maintain strict compliance with data privacy regulations including GDPR, CCPA, and other relevant laws. Our lead generation practices include proper consent mechanisms, transparent data policies, and secure data handling procedures. We also help you ensure your lead collection and management processes are compliant with applicable regulations.'
-    },
-    {
-      question: 'What types of lead magnets are most effective?',
-      answer: 'The most effective lead magnets vary by industry and target audience. Common high-performing options include industry reports, how-to guides, templates, calculators, assessments, webinars, and free trials. We test different formats to identify what resonates best with your specific audience and drives the highest quality leads.'
-    }
-  ];
-
-  const strategicFaqs = [
-    {
-      question: 'How do you determine which lead generation channels to use?',
-      answer: 'We conduct thorough research to identify where your target audience spends their time online, analyze your competitors strategies, and assess previous campaign performance. We also consider your sales cycle, budget, and business goals to determine the optimal channel mix. Our approach is data-driven and continuously refined based on performance.'
-    },
-    {
-      question: 'How many leads can I expect per month?',
-      answer: 'Lead volume varies significantly based on factors like your industry, target audience, budget, and competition. During our initial consultation, we will establish realistic projections based on our experience with similar businesses. Our focus is not just on quantity but on generating high-quality leads that convert into customers.'
-    },
-    {
-      question: 'How do you nurture leads that are not ready to buy?',
-      answer: 'We develop targeted nurturing sequences using email, retargeting ads, and content marketing to keep your brand top-of-mind. These sequences deliver relevant information based on the prospects interests and stage in the buying journey. Our nurturing strategies are designed to build trust, address objections, and guide prospects toward a purchasing decision when they are ready.'
-    },
-    {
-      question: 'What industries do you specialize in for lead generation?',
-      answer: 'We have experience across B2B and B2C sectors including SaaS, professional services, healthcare, finance, manufacturing, e-commerce, education, and real estate. Our team includes specialists with industry-specific knowledge who understand the unique challenges and buying processes in different sectors.'
-    }
-  ];
+  const technicalFaqs = faqItems.length ? faqItems : defaultFaqItems
   
   const simpleProcessSteps = [
     {
@@ -442,6 +411,25 @@ const LeadGeneration = () => {
       number: 4,
       title: 'Qualification & Handoff',
       description: 'Leads are scored, nurtured, and seamlessly handed to your sales team when they are purchase-ready.'
+    }
+  ]
+  
+  const strategicFaqs = [
+    {
+      question: 'How do you determine which lead generation channels to use?',
+      answer: 'We conduct thorough research to identify where your target audience spends their time online, analyze your competitors\' strategies, and assess previous campaign performance. We then select and continuously refine the optimal channel mix.'
+    },
+    {
+      question: 'How many leads can I expect per month?',
+      answer: 'Lead volume depends on factors like industry, target audience, budget, and competition. After an initial consultation, we provide realistic projections based on data from similar campaigns.'
+    },
+    {
+      question: 'How do you nurture leads that aren\'t ready to buy?',
+      answer: 'We build multi-touch nurturing sequences using email, retargeting ads, and personalised content to keep your brand top-of-mind and guide prospects toward a purchasing decision.'
+    },
+    {
+      question: 'What industries do you specialise in?',
+      answer: 'Our team has experience across SaaS, professional services, healthcare, finance, manufacturing, e-commerce, education, and real estate, adapting strategies to each sector\'s buying processes.'
     }
   ]
   
@@ -618,16 +606,10 @@ const LeadGeneration = () => {
           
           <div className="faq-tabs">
             <button 
-              className={`faq-tab ${activeFaqTab === 'general' ? 'active' : ''}`} 
-              onClick={() => setActiveFaqTab('general')}
-            >
-              General Questions
-            </button>
-            <button 
               className={`faq-tab ${activeFaqTab === 'technical' ? 'active' : ''}`} 
               onClick={() => setActiveFaqTab('technical')}
             >
-              Technical Details
+              General Questions
             </button>
             <button 
               className={`faq-tab ${activeFaqTab === 'strategic' ? 'active' : ''}`} 
@@ -637,24 +619,6 @@ const LeadGeneration = () => {
             </button>
           </div>
           
-          {/* General FAQ Questions */}
-          <div className={`faq-content ${activeFaqTab === 'general' ? 'active' : ''}`}>
-            <div className="faq-grid">
-              {/* Original FAQ items */}
-              {faqItems.map((item, index) => (
-                <div 
-                  className={`faq-item ${visibleFaqs.includes(index) ? 'visible' : ''}`} 
-                  key={index}
-                  style={{ transitionDelay: `${index * 0.15}s` }}
-                >
-                  <h3>{item.question}</h3>
-                  <p>{item.answer}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-          
-          {/* Technical FAQ Questions */}
           <div className={`faq-content ${activeFaqTab === 'technical' ? 'active' : ''}`}>
             <div className="faq-grid">
               {technicalFaqs.map((item, index) => (
@@ -670,7 +634,6 @@ const LeadGeneration = () => {
             </div>
           </div>
           
-          {/* Strategic FAQ Questions */}
           <div className={`faq-content ${activeFaqTab === 'strategic' ? 'active' : ''}`}>
             <div className="faq-grid">
               {strategicFaqs.map((item, index) => (

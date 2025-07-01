@@ -23,36 +23,29 @@ const Home = () => {
       name: "Sarah Johnson",
       company: "TechStart Solutions",
       role: "CEO",
-      image: "/images/testimonial-1.jpg",
+      image: "/images/img-1.jpeg",
       text: "Altiora transformed our online presence completely. Their SEO strategies increased our organic traffic by 300% in just 6 months. The team is professional, responsive, and truly understands digital marketing."
     },
     {
       name: "Michael Chen", 
       company: "GrowthCorp",
       role: "Marketing Director",
-      image: "/images/testimonial-2.jpg",
+      image: "/images/img-2.jpeg",
       text: "Working with Altiora has been a game-changer for our business. Their PPC campaigns generated a 400% ROI, and their strategic guidance helped us scale efficiently. Highly recommended!"
     },
     {
       name: "Emily Rodriguez",
       company: "InnovateNow",
       role: "Founder",
-      image: "/images/testimonial-3.jpg",
+      image: "/images/img-3.jpeg",
       text: "The team at Altiora doesn't just deliver results - they become true partners in your success. Their personalized approach and expertise helped us achieve goals we never thought possible."
     },
     {
       name: "David Thompson",
       company: "NextGen Enterprises",
       role: "VP of Sales",
-      image: "/images/testimonial-4.jpg",
+      image: "/images/img-4.jpeg",
       text: "Altiora's lead generation services filled our sales pipeline consistently. Their appointment setting team is professional and delivered high-quality prospects that converted into loyal customers."
-    },
-    {
-      name: "Lisa Anderson",
-      company: "Digital Dynamics",
-      role: "CMO",
-      image: "/images/testimonial-5.jpg",
-      text: "From web development to mobile apps, Altiora delivered exceptional quality. Their technical expertise combined with marketing insights created solutions that truly drive business growth."
     }
   ];
 
@@ -90,11 +83,13 @@ useEffect(() => {
   const goToPrevTestimonial = () => {
     const newIndex = currentTestimonial === 0 ? testimonials.length - 1 : currentTestimonial - 1;
     setCurrentTestimonial(newIndex);
+    console.log("Previous button clicked, new index:", newIndex);
   };
   
   const goToNextTestimonial = () => {
     const newIndex = (currentTestimonial + 1) % testimonials.length;
     setCurrentTestimonial(newIndex);
+    console.log("Next button clicked, new index:", newIndex);
   };
   
   // Mouse move effect for hero section
@@ -612,33 +607,23 @@ useEffect(() => {
               </div>
             </div>
 
-            {/* Navigation dots */}
-            <div className="testimonial-dots">
-              {testimonials.map((_, index) => (
-                <button
-                  key={index}
-                  className={`dot ${index === currentTestimonial ? 'active' : ''}`}
-                  onClick={() => setCurrentTestimonial(index)}
-                  aria-label={`View testimonial ${index + 1}`}
-                ></button>
-              ))}
+            {/* Small navigation buttons */}
+            <div className="testimonial-small-buttons">
+              <button 
+                className="small-nav-button prev"
+                onClick={goToPrevTestimonial}
+                aria-label="Previous testimonial"
+              >
+                <i className="fa-solid fa-chevron-left"></i>
+              </button>
+              <button 
+                className="small-nav-button next"
+                onClick={goToNextTestimonial}
+                aria-label="Next testimonial"
+              >
+                <i className="fa-solid fa-chevron-right"></i>
+              </button>
             </div>
-
-            {/* Navigation arrows */}
-            <button 
-              className="testimonial-arrow prev"
-              onClick={goToPrevTestimonial}
-              aria-label="Previous testimonial"
-            >
-              <i className="fa-solid fa-chevron-left"></i>
-            </button>
-            <button 
-              className="testimonial-arrow next"
-              onClick={goToNextTestimonial}
-              aria-label="Next testimonial"
-            >
-              <i className="fa-solid fa-chevron-right"></i>
-            </button>
           </div>
         </div>
       </section>

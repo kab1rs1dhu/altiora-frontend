@@ -852,26 +852,33 @@
   display: flex;
   justify-content: center;
   gap: 15px;
-  margin-bottom: 40px;
-  flex-wrap: wrap;
+  margin-bottom: 30px;
+  overflow: visible;
+  padding: 5px 0;
 }
 
 .faq-tab {
-  background: rgba(255, 255, 255, 0.05) !important;
-  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: white;
+  padding: 12px 25px;
   border-radius: 30px;
-  padding: 10px 25px;
-  font-size: 1rem;
   font-weight: 600;
-  color: rgba(255, 255, 255, 0.9);
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.3s var(--animation-timing);
+  min-width: 200px;
+  text-align: center;
+  transform: none;
+  -webkit-transform: none;
+  overflow: visible;
 }
 
 .faq-tab:hover {
   background-color: rgba(26, 115, 232, 0.05);
   border-color: rgba(26, 115, 232, 0.5);
   color: var(--lead-gen-primary);
+  transform: none;
+  -webkit-transform: none;
 }
 
 .faq-tab.active {
@@ -879,6 +886,8 @@
   border-color: transparent;
   color: white;
   box-shadow: 0 5px 15px rgba(26, 115, 232, 0.2);
+  transform: none;
+  -webkit-transform: none;
 }
 
 .faq-content {
@@ -920,21 +929,11 @@
 }
 
 .faq-item h3 {
-  position: relative;
-  padding-left: 30px;
-  color: var(--text-primary);
-  font-size: 1.2rem;
-  margin-bottom: 15px;
+  color: #ffca28 !important;
 }
 
-.faq-item h3::before {
-  content: '?';
-  position: absolute;
-  left: 0;
-  top: 0;
-  font-size: 1.2rem;
-  color: var(--lead-gen-primary);
-  font-weight: 700;
+.faq-item p {
+  color: rgba(255, 255, 255, 0.9) !important;
 }
 
 .faq-cta {
@@ -949,7 +948,7 @@
 .faq-cta p {
   font-size: 1.2rem;
   margin-bottom: 20px;
-  color: var(--text-primary);
+  color: rgba(255, 255, 255, 0.9) !important;
   font-weight: 500;
 }
 
@@ -1275,11 +1274,20 @@
     flex-direction: column;
     align-items: center;
     gap: 10px;
+    overflow: visible;
+    padding: 5px 0;
   }
   
   .faq-tab {
     width: 100%;
     max-width: 280px;
+    transform: none !important;
+    -webkit-transform: none !important;
+  }
+  
+  .faq-tab.active {
+    transform: none !important;
+    -webkit-transform: none !important;
   }
   
   .service-cta-content h2 {
@@ -1403,4 +1411,15 @@
 .process-card p {
   color: rgba(255, 255, 255, 0.85);
   font-size: 0.95rem;
+}
+
+/* Ensure FAQ items are visible when tab is active */
+.faq-content.active .faq-item {
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+/* Brighten helper text below FAQ */
+.faq-cta p {
+  color: #ffffff !important;
 }
