@@ -79,7 +79,7 @@ useEffect(() => {
   };
 }, [visibleProcessSteps]);
   
-  // Simple navigation functions with improved circular navigation
+  // Simple navigation functions
   const goToPrevTestimonial = () => {
     const newIndex = currentTestimonial === 0 ? testimonials.length - 1 : currentTestimonial - 1;
     setCurrentTestimonial(newIndex);
@@ -90,73 +90,6 @@ useEffect(() => {
     const newIndex = (currentTestimonial + 1) % testimonials.length;
     setCurrentTestimonial(newIndex);
     console.log("Next button clicked, new index:", newIndex);
-  };
-
-  // State for touch/swipe handling
-  const [touchStartTime, setTouchStartTime] = useState(0);
-  const [isTouching, setIsTouching] = useState(false);
-  const [touchStartX, setTouchStartX] = useState(0);
-  const [touchEndX, setTouchEndX] = useState(0);
-  const [touchingButton, setTouchingButton] = useState(null);
-
-  const handleTouchStart = (e, direction) => {
-    e.stopPropagation(); // Stop event propagation to prevent conflicts
-    setTouchStartTime(Date.now());
-    setIsTouching(true);
-    setTouchingButton(direction);
-    setTouchStartX(e.touches[0].clientX);
-    // Don't prevent default here as it can interfere with some mobile browsers
-  };
-
-  const handleTouchEnd = (e, direction) => {
-    e.stopPropagation(); // Stop event propagation
-    // Only trigger if touch was short (not a scroll attempt)
-    const touchDuration = Date.now() - touchStartTime;
-    if (touchDuration < 300) {
-      console.log(`Button ${direction} touched, executing navigation`);
-      if (direction === 'prev') {
-        goToPrevTestimonial();
-      } else if (direction === 'next') {
-        goToNextTestimonial();
-      }
-      // Prevent default to avoid any unwanted behaviors
-      e.preventDefault();
-    }
-    setIsTouching(false);
-    setTouchingButton(null);
-  };
-
-  // Handle swipe gestures on testimonial content with improved responsiveness
-  const handleContentTouchStart = (e) => {
-    setTouchStartX(e.touches[0].clientX);
-    setTouchStartTime(Date.now()); // Track start time for swipe speed calculation
-  };
-
-  const handleContentTouchMove = (e) => {
-    setTouchEndX(e.touches[0].clientX);
-  };
-
-  const handleContentTouchEnd = (e) => {
-    const swipeThreshold = 40; // Reduced threshold for more responsive swipes
-    const swipeTime = Date.now() - touchStartTime;
-    const swipeDistance = Math.abs(touchEndX - touchStartX);
-    
-    // Check if it's a valid swipe (not too slow)
-    if (swipeTime < 500 && swipeDistance > swipeThreshold) {
-      if (touchStartX - touchEndX > swipeThreshold) {
-        // Swipe left - go to next
-        goToNextTestimonial();
-        console.log("Swipe left detected, going to next");
-      } else if (touchEndX - touchStartX > swipeThreshold) {
-        // Swipe right - go to previous
-        goToPrevTestimonial();
-        console.log("Swipe right detected, going to previous");
-      }
-    }
-    
-    // Reset values
-    setTouchStartX(0);
-    setTouchEndX(0);
   };
   
   // Mouse move effect for hero section
@@ -654,12 +587,7 @@ useEffect(() => {
 
           <div className="testimonials-container">
             <div className="testimonial-slider">
-              <div 
-                className="testimonial-content"
-                onTouchStart={handleContentTouchStart}
-                onTouchMove={handleContentTouchMove}
-                onTouchEnd={handleContentTouchEnd}
-              >
+              <div className="testimonial-content">
                 <div className="testimonial-text">
                   <div className="quote-icon">
                     <i className="fa-solid fa-quote-left"></i>
@@ -682,19 +610,15 @@ useEffect(() => {
             {/* Small navigation buttons */}
             <div className="testimonial-small-buttons">
               <button 
-                className={`small-nav-button prev ${touchingButton === 'prev' ? 'touching' : ''}`}
+                className="small-nav-button prev"
                 onClick={goToPrevTestimonial}
-                onTouchStart={(e) => handleTouchStart(e, 'prev')}
-                onTouchEnd={(e) => handleTouchEnd(e, 'prev')}
                 aria-label="Previous testimonial"
               >
                 <i className="fa-solid fa-chevron-left"></i>
               </button>
               <button 
-                className={`small-nav-button next ${touchingButton === 'next' ? 'touching' : ''}`}
+                className="small-nav-button next"
                 onClick={goToNextTestimonial}
-                onTouchStart={(e) => handleTouchStart(e, 'next')}
-                onTouchEnd={(e) => handleTouchEnd(e, 'next')}
                 aria-label="Next testimonial"
               >
                 <i className="fa-solid fa-chevron-right"></i>

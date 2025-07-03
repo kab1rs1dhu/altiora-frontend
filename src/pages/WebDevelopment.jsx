@@ -22,6 +22,25 @@ const WebDevelopment = () => {
   const portfolioRef = useRef(null)
   const approachRef = useRef(null)
   
+  // Dedicated handler functions for technology tab switching
+  const handleTechTabSwitch = (tabName) => {
+    // Prevent default to ensure event bubbling doesn't interfere
+    setActiveTechTab(tabName);
+    
+    // Force reset visible items to ensure proper animation
+    setVisibleTechItems([]);
+    
+    // Make sure the animation is triggered after state update
+    setTimeout(() => {
+      if (techRef.current) {
+        const techItems = techRef.current.querySelectorAll('.technology-category');
+        techItems.forEach((_, index) => {
+          setVisibleTechItems(prev => Array.from(new Set([...prev, index])));
+        });
+      }
+    }, 50);
+  };
+  
   // Animation states
   const [visibleProcessSteps, setVisibleProcessSteps] = useState([])
   const [visibleResults, setVisibleResults] = useState([])
@@ -142,20 +161,6 @@ const WebDevelopment = () => {
   };
 }, [visibleProcessSteps, visibleResults, visibleFaqs, visibleTechItems, visibleApproachItems, visibleWhyChooseItems, visiblePortfolioItems]);
 
-  useEffect(() => {
-  // Reset visible tech items when tab changes
-  setVisibleTechItems([]);
-  
-  // Trigger animation for new tab items
-  setTimeout(() => {
-    if (techRef.current) {
-      const techItems = techRef.current.querySelectorAll('.technology-category');
-      techItems.forEach((_, index) => {
-        setVisibleTechItems(prev => [...prev, index]);
-      });
-    }
-  }, 100);
-}, [activeTechTab]);
   // Auto-rotate testimonials
   useEffect(() => {
     const interval = setInterval(() => {
@@ -755,103 +760,123 @@ const WebDevelopment = () => {
             {technologiesDescription}
           </p>
           
-          <div className="faq-tabs">
+          <div className="technology-tabs">
             <button 
-              className={`faq-tab ${activeTechTab === 'frontend' ? 'active' : ''}`} 
-              onClick={() => setActiveTechTab('frontend')}
+              type="button"
+              className={`technology-tab ${activeTechTab === 'frontend' ? 'active' : ''}`} 
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                handleTechTabSwitch('frontend');
+              }}
             >
               Frontend
             </button>
             <button 
-              className={`faq-tab ${activeTechTab === 'backend' ? 'active' : ''}`} 
-              onClick={() => setActiveTechTab('backend')}
+              type="button"
+              className={`technology-tab ${activeTechTab === 'backend' ? 'active' : ''}`} 
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                handleTechTabSwitch('backend');
+              }}
             >
               Backend
             </button>
             <button 
-              className={`faq-tab ${activeTechTab === 'database' ? 'active' : ''}`} 
-              onClick={() => setActiveTechTab('database')}
+              type="button"
+              className={`technology-tab ${activeTechTab === 'database' ? 'active' : ''}`} 
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                handleTechTabSwitch('database');
+              }}
             >
               Database
             </button>
             <button 
-              className={`faq-tab ${activeTechTab === 'cms' ? 'active' : ''}`} 
-              onClick={() => setActiveTechTab('cms')}
+              type="button"
+              className={`technology-tab ${activeTechTab === 'cms' ? 'active' : ''}`} 
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                handleTechTabSwitch('cms');
+              }}
             >
               CMS
             </button>
           </div>
 
-
-<div className="technology-grid">
-  {activeTechTab === 'frontend' && (
-    <>
-      {technologies.frontend.map((tech, index) => (
-        <div 
-          key={index}
-          className={`technology-category ${visibleTechItems.includes(index) ? 'visible' : ''}`}
-          style={{ transitionDelay: `${index * 0.1}s` }}
-        >
-          <h3>{tech}</h3>
-          <div className="technology-progress">
-            <div className="progress-bar" style={{ width: `${Math.random() * 30 + 70}%` }}></div>
+          {/* Technology Content */}
+          <div className="technology-grid">
+            {activeTechTab === 'frontend' && (
+              <>
+                {technologies.frontend.map((tech, index) => (
+                  <div 
+                    key={index}
+                    className={`technology-category ${visibleTechItems.includes(index) ? 'visible' : ''}`}
+                    style={{ transitionDelay: `${index * 0.1}s` }}
+                  >
+                    <h3>{tech}</h3>
+                    <div className="technology-progress">
+                      <div className="progress-bar" style={{ width: `${Math.random() * 30 + 70}%` }}></div>
+                    </div>
+                  </div>
+                ))}
+              </>
+            )}
+            
+            {activeTechTab === 'backend' && (
+              <>
+                {technologies.backend.map((tech, index) => (
+                  <div 
+                    key={index}
+                    className={`technology-category ${visibleTechItems.includes(index) ? 'visible' : ''}`}
+                    style={{ transitionDelay: `${index * 0.1}s` }}
+                  >
+                    <h3>{tech}</h3>
+                    <div className="technology-progress">
+                      <div className="progress-bar" style={{ width: `${Math.random() * 30 + 70}%` }}></div>
+                    </div>
+                  </div>
+                ))}
+              </>
+            )}
+            
+            {activeTechTab === 'database' && (
+              <>
+                {technologies.database.map((tech, index) => (
+                  <div 
+                    key={index}
+                    className={`technology-category ${visibleTechItems.includes(index) ? 'visible' : ''}`}
+                    style={{ transitionDelay: `${index * 0.1}s` }}
+                  >
+                    <h3>{tech}</h3>
+                    <div className="technology-progress">
+                      <div className="progress-bar" style={{ width: `${Math.random() * 30 + 70}%` }}></div>
+                    </div>
+                  </div>
+                ))}
+              </>
+            )}
+            
+            {activeTechTab === 'cms' && (
+              <>
+                {technologies.cms.map((tech, index) => (
+                  <div 
+                    key={index}
+                    className={`technology-category ${visibleTechItems.includes(index) ? 'visible' : ''}`}
+                    style={{ transitionDelay: `${index * 0.1}s` }}
+                  >
+                    <h3>{tech}</h3>
+                    <div className="technology-progress">
+                      <div className="progress-bar" style={{ width: `${Math.random() * 30 + 70}%` }}></div>
+                    </div>
+                  </div>
+                ))}
+              </>
+            )}
           </div>
-        </div>
-      ))}
-    </>
-  )}
-  
-  {activeTechTab === 'backend' && (
-    <>
-      {technologies.backend.map((tech, index) => (
-        <div 
-          key={index}
-          className={`technology-category ${visibleTechItems.includes(index) ? 'visible' : ''}`}
-          style={{ transitionDelay: `${index * 0.1}s` }}
-        >
-          <h3>{tech}</h3>
-          <div className="technology-progress">
-            <div className="progress-bar" style={{ width: `${Math.random() * 30 + 70}%` }}></div>
-          </div>
-        </div>
-      ))}
-    </>
-  )}
-  
-  {activeTechTab === 'database' && (
-    <>
-      {technologies.database.map((tech, index) => (
-        <div 
-          key={index}
-          className={`technology-category ${visibleTechItems.includes(index) ? 'visible' : ''}`}
-          style={{ transitionDelay: `${index * 0.1}s` }}
-        >
-          <h3>{tech}</h3>
-          <div className="technology-progress">
-            <div className="progress-bar" style={{ width: `${Math.random() * 30 + 70}%` }}></div>
-          </div>
-        </div>
-      ))}
-    </>
-  )}
-  
-  {activeTechTab === 'cms' && (
-    <>
-      {technologies.cms.map((tech, index) => (
-        <div 
-          key={index}
-          className={`technology-category ${visibleTechItems.includes(index) ? 'visible' : ''}`}
-          style={{ transitionDelay: `${index * 0.1}s` }}
-        >
-          <h3>{tech}</h3>
-          <div className="technology-progress">
-            <div className="progress-bar" style={{ width: `${Math.random() * 30 + 70}%` }}></div>
-          </div>
-        </div>
-      ))}
-    </>
-  )}
-</div>
         </div>
       </section>
 
