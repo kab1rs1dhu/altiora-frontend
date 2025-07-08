@@ -47,66 +47,62 @@ const LeadGeneration = () => {
     loadContent()
   }, [fetchPageContent])
   
+  // Helper function for animating elements on scroll
+  const animateElements = (elements, visibleArray, setVisibleFunc) => {
+    elements.forEach((el, index) => {
+      const rect = el.getBoundingClientRect()
+      const windowHeight = window.innerHeight || document.documentElement.clientHeight
+      if (rect.top < windowHeight * 0.85 && !visibleArray.includes(index)) {
+        setVisibleFunc(prev => [...prev, index])
+      }
+    })
+  }
+  
   // Handle scroll animations
   useEffect(() => {
     const handleScroll = () => {
       // Process steps animation
       if (processRef.current) {
-        const processSteps = processRef.current.querySelectorAll('.process-step')
-        processSteps.forEach((step, index) => {
-          const rect = step.getBoundingClientRect()
-          if (rect.top < window.innerHeight * 0.8 && !visibleProcessSteps.includes(index)) {
-            setVisibleProcessSteps(prev => [...prev, index])
-          }
-        })
+        animateElements(
+          processRef.current.querySelectorAll('.process-card'),
+          visibleProcessSteps,
+          setVisibleProcessSteps
+        )
       }
       
       // Results animation
       if (resultsRef.current) {
-        const resultCards = resultsRef.current.querySelectorAll('.result-card')
-        resultCards.forEach((card, index) => {
-          const rect = card.getBoundingClientRect()
-          if (rect.top < window.innerHeight * 0.8 && !visibleResults.includes(index)) {
-            setVisibleResults(prev => [...prev, index])
-          }
-        })
+        animateElements(
+          resultsRef.current.querySelectorAll('.result-card'),
+          visibleResults,
+          setVisibleResults
+        )
       }
       
       // Channels animation
       if (channelsRef.current) {
-        const channelCards = channelsRef.current.querySelectorAll('.channel-card')
-        channelCards.forEach((card, index) => {
-          const rect = card.getBoundingClientRect()
-          if (rect.top < window.innerHeight * 0.8 && !visibleChannels.includes(index)) {
-            setVisibleChannels(prev => [...prev, index])
-          }
-        })
+        animateElements(
+          channelsRef.current.querySelectorAll('.channel-card'),
+          visibleChannels,
+          setVisibleChannels
+        )
       }
       
       // FAQ animation
       if (faqRef.current) {
-        const faqItems = faqRef.current.querySelectorAll('.faq-item')
-        faqItems.forEach((item, index) => {
-          const rect = item.getBoundingClientRect()
-          if (rect.top < window.innerHeight * 0.8 && !visibleFaqs.includes(index)) {
-            setVisibleFaqs(prev => [...prev, index])
-          }
-        })
+        animateElements(
+          faqRef.current.querySelectorAll('.faq-item'),
+          visibleFaqs,
+          setVisibleFaqs
+        )
       }
 
+      // Services animation
       if (servicesRef.current) {
         animateElements(
           servicesRef.current.querySelectorAll('.service-detail-card'),
           visibleServiceCards,
           setVisibleServiceCards
-        )
-      }
-
-      if (processRef.current) {
-        animateElements(
-          processRef.current.querySelectorAll('.process-step'),
-          visibleProcessSteps,
-          setVisibleProcessSteps
         )
       }
     }
@@ -504,10 +500,6 @@ const LeadGeneration = () => {
         </div>
       </section>
 
-      {/* Services Section removed as per design requirements */}
-
-      {/* Results Section removed as per design requirements */}
-
       {/* Our Process – simplified 4-step overview */}
       <section className="section leadgen-process-simple" ref={processRef}>
         <div className="container">
@@ -516,11 +508,22 @@ const LeadGeneration = () => {
             <h2 className="section-title">
               <span className="text-gradient">Our Process</span>
             </h2>
+            <p className="section-description" style={{ maxWidth: '800px', margin: '0 auto', marginBottom: '20px' }}>
+              We follow a proven methodology to generate quality leads that convert into customers
+            </p>
           </div>
 
           <div className="process-card-grid">
             {simpleProcessSteps.map((step, index) => (
-              <div className="process-card" key={index} style={{ transitionDelay: `${index * 0.1}s` }}>
+              <div 
+                className={`process-card ${visibleProcessSteps.includes(index) ? 'visible' : ''}`} 
+                key={index} 
+                style={{ 
+                  transitionDelay: `${index * 0.15}s`,
+                  opacity: visibleProcessSteps.includes(index) ? 1 : 0,
+                  transform: visibleProcessSteps.includes(index) ? 'translateY(0)' : 'translateY(20px)'
+                }}
+              >
                 <div className="process-number">{step.number}</div>
                 <h3>{step.title}</h3>
                 <p>{step.description}</p>
@@ -623,7 +626,7 @@ const LeadGeneration = () => {
             <div className="faq-grid">
               {technicalFaqs.map((item, index) => (
                 <div 
-                  className={`faq-item ${visibleFaqs.includes(index) ? 'visible' : ''}`} 
+                  className={`faq-item ${visibleFaqs.includes(index) ? 'visible' : ''}`}
                   key={index}
                   style={{ transitionDelay: `${index * 0.15}s` }}
                 >
@@ -638,7 +641,7 @@ const LeadGeneration = () => {
             <div className="faq-grid">
               {strategicFaqs.map((item, index) => (
                 <div 
-                  className={`faq-item ${visibleFaqs.includes(index) ? 'visible' : ''}`} 
+                  className={`faq-item ${visibleFaqs.includes(index) ? 'visible' : ''}`}
                   key={index}
                   style={{ transitionDelay: `${index * 0.15}s` }}
                 >
@@ -687,4 +690,3 @@ const LeadGeneration = () => {
 }
 
 export default LeadGeneration
-         
